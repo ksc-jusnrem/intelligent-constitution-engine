@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KSC.JUSNREM — Intelligent Constitution Engine</title>
+<meta name="description" content="KSC.JUSNREM Intelligent Constitution Engine — the constitutional history of Pakistan from the Government of India Act 1858 to today, plus a statute library. Time travel, diffs, timeline, lineage and search. jusnrem.digital">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23123524'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='%23e8d5a3' font-family='Georgia'>⚖</text></svg>">
+<style>
+:root{
+  --green:#123524; --green-2:#1d4d36; --green-3:#2a6b4a;
+  --gold:#c9a648; --gold-soft:#e8d5a3;
+  --ivory:#faf6ee; --paper:#fffdf8; --ink:#22281f; --ink-soft:#5a6055;
+  --line:#e3dcc9; --red:#9c3328; --red-bg:#fbe9e6; --add:#1d6b3a; --add-bg:#e3f2e6;
+  --mono:"SF Mono",Consolas,Menlo,monospace;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--ivory);color:var(--ink);line-height:1.6}
+
+/* ---------- header ---------- */
+header{background:var(--green);color:var(--ivory);padding:0 1.25rem;position:sticky;top:0;z-index:50;box-shadow:0 2px 12px rgba(0,0,0,.25)}
+.hdr-top{display:flex;align-items:center;gap:.9rem;padding:.8rem 0;max-width:1300px;margin:0 auto}
+.crest{width:42px;height:42px;border-radius:10px;background:var(--green-2);display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--gold-soft);border:1px solid var(--green-3);flex:none}
+.brand h1{font-family:var(--serif);font-size:1.15rem;letter-spacing:.04em;color:var(--gold-soft);font-weight:600;white-space:nowrap}
+.brand small{display:block;font-size:.68rem;color:#b9c7b6;letter-spacing:.12em;text-transform:uppercase}
+.hdr-spacer{flex:1}
+.domain{font-family:var(--mono);font-size:.72rem;color:var(--gold);opacity:.9}
+nav{display:flex;gap:.25rem;max-width:1300px;margin:0 auto;overflow-x:auto}
+nav button{background:none;border:none;color:#cdd8c9;font-size:.85rem;padding:.55rem 1rem;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;font-family:var(--sans)}
+nav button:hover{color:var(--ivory)}
+nav button.active{color:var(--gold-soft);border-bottom-color:var(--gold)}
+
+/* ---------- time machine bar ---------- */
+.timebar{background:var(--paper);border-bottom:1px solid var(--line);padding:.6rem 1.25rem;position:sticky;top:97px;z-index:40}
+.timebar-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;gap:.9rem;flex-wrap:wrap}
+.timebar label{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-soft);white-space:nowrap}
+.timebar input[type=range]{flex:1;min-width:180px;accent-color:var(--green-2)}
+.era-chip{font-family:var(--serif);background:var(--green);color:var(--gold-soft);padding:.25rem .8rem;border-radius:999px;font-size:.82rem;white-space:nowrap;cursor:pointer;border:none}
+.era-date{font-family:var(--mono);font-size:.72rem;color:var(--ink-soft);white-space:nowrap}
+
+main{max-width:1300px;margin:0 auto;padding:1.25rem}
+.hidden{display:none!important}
+
+/* ---------- browse (shared by constitution + statutes) ---------- */
+.browse{display:grid;grid-template-columns:300px 1fr;gap:1.25rem;align-items:start}
+.sidebar{background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden;position:sticky;top:160px;max-height:calc(100vh - 180px);display:flex;flex-direction:column}
+.sidebar input{margin:.7rem;padding:.5rem .75rem;border:1px solid var(--line);border-radius:8px;font-size:.85rem;background:var(--ivory);outline:none}
+.sidebar input:focus{border-color:var(--green-3)}
+.art-list{overflow-y:auto;flex:1}
+.art-item{display:flex;gap:.6rem;padding:.45rem .9rem;cursor:pointer;border-left:3px solid transparent;font-size:.82rem;align-items:baseline}
+.art-item:hover{background:var(--ivory)}
+.art-item.sel{background:#eef3ea;border-left-color:var(--green-2)}
+.art-item.ghost{opacity:.38}
+.art-num{font-family:var(--mono);font-size:.72rem;color:var(--green-2);min-width:2.6rem;font-weight:700}
+.art-title{color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.reader{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:2rem 2.4rem;min-height:400px}
+.reader-head{border-bottom:2px solid var(--gold);padding-bottom:1rem;margin-bottom:1.4rem}
+.reader-head .kicker{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--green-2);font-weight:700}
+.reader-head h2{font-family:var(--serif);font-size:1.7rem;line-height:1.25;margin:.2rem 0 .5rem}
+.vchips{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.6rem}
+.vchip{font-size:.7rem;font-family:var(--mono);padding:.18rem .6rem;border-radius:999px;border:1px solid var(--line);background:var(--ivory);cursor:pointer;color:var(--ink-soft)}
+.vchip.cur{background:var(--green);color:var(--gold-soft);border-color:var(--green)}
+.vchip.future{opacity:.45;text-decoration:line-through}
+.art-body{font-family:var(--serif);font-size:1.02rem;line-height:1.85;white-space:pre-wrap;word-wrap:break-word}
+.art-body .omit,.omit{color:var(--ink-soft);font-style:italic}
+.not-enacted{padding:2.5rem;text-align:center;color:var(--ink-soft);font-style:italic;font-family:var(--serif)}
+.reader-actions{margin-top:1.6rem;padding-top:1rem;border-top:1px dashed var(--line);display:flex;gap:.6rem;flex-wrap:wrap}
+.btn{background:var(--green-2);color:var(--ivory);border:none;border-radius:8px;padding:.45rem 1rem;font-size:.8rem;cursor:pointer}
+.btn:hover{background:var(--green-3)}
+.btn.ghost{background:transparent;color:var(--green-2);border:1px solid var(--green-2)}
+
+/* ---------- statutes ---------- */
+.stat-tabs{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.stat-tab{font-family:var(--serif);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.55rem 1.1rem;cursor:pointer;font-size:.9rem;color:var(--ink)}
+.stat-tab.active{background:var(--green);color:var(--gold-soft);border-color:var(--green)}
+.provenance{font-size:.74rem;color:var(--ink-soft);background:#f6f1e4;border:1px dashed var(--gold);border-radius:8px;padding:.5rem .8rem;margin-top:.8rem}
+
+/* ---------- timeline ---------- */
+.tl{position:relative;padding-left:2.2rem;max-width:880px}
+.tl::before{content:"";position:absolute;left:.55rem;top:0;bottom:0;width:3px;background:linear-gradient(var(--gold),var(--green-2))}
+.tl-item{position:relative;margin-bottom:1.1rem}
+.tl-item::before{content:"";position:absolute;left:-2.06rem;top:1.15rem;width:13px;height:13px;border-radius:50%;background:var(--gold);border:3px solid var(--ivory);box-shadow:0 0 0 2px var(--gold)}
+.tl-card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:1.1rem 1.4rem;cursor:pointer;transition:box-shadow .15s}
+.tl-card:hover{box-shadow:0 3px 14px rgba(18,53,36,.12)}
+.tl-meta{display:flex;gap:.8rem;align-items:baseline;flex-wrap:wrap}
+.tl-date{font-family:var(--mono);font-size:.75rem;color:var(--green-2);font-weight:700}
+.tl-card h3{font-family:var(--serif);font-size:1.15rem;flex:1}
+.tl-pres{font-size:.74rem;color:var(--ink-soft)}
+.tl-stats{font-size:.72rem;font-family:var(--mono);color:var(--ink-soft);background:var(--ivory);border:1px solid var(--line);border-radius:999px;padding:.1rem .6rem}
+.tl-summary{margin-top:.7rem;font-size:.9rem;color:var(--ink);display:none;white-space:pre-wrap}
+.tl-files{margin-top:.8rem;display:none;flex-wrap:wrap;gap:.35rem}
+.tl-item.open .tl-files{display:flex}
+.tl-item.open .tl-summary{display:block}
+.file-pill{font-family:var(--mono);font-size:.68rem;padding:.15rem .55rem;border-radius:999px;border:1px solid var(--line);background:var(--ivory);cursor:pointer}
+.file-pill:hover{background:#eef3ea;border-color:var(--green-3)}
+.file-pill.add{color:var(--add)}.file-pill.del{color:var(--red)}
+
+/* ---------- lineage ---------- */
+.lin-intro{max-width:880px;margin:0 auto 1.6rem;background:var(--green);color:#dde7d9;border-radius:14px;padding:1.6rem 2rem}
+.lin-intro h2{font-family:var(--serif);color:var(--gold-soft);margin-bottom:.5rem}
+.lin-intro p{font-size:.9rem;line-height:1.7}
+.lin-era{max-width:880px;margin:0 auto 1.4rem}
+.lin-era-head{display:flex;align-items:baseline;gap:.8rem;border-bottom:2px solid var(--gold);padding:.4rem .2rem;margin-bottom:.9rem;position:sticky;top:148px;background:var(--ivory);z-index:5}
+.lin-era-head h3{font-family:var(--serif);font-size:1.2rem;color:var(--green)}
+.lin-era-head .span{font-family:var(--mono);font-size:.75rem;color:var(--gold);font-weight:700}
+.lin-era-blurb{font-size:.85rem;color:var(--ink-soft);margin:-.3rem .2rem .9rem;font-style:italic}
+.lin{position:relative;padding-left:2.2rem}
+.lin::before{content:"";position:absolute;left:.55rem;top:0;bottom:0;width:3px;background:var(--line)}
+.lin-item{position:relative;margin-bottom:.9rem}
+.lin-item::before{content:"";position:absolute;left:-2.04rem;top:1.1rem;width:11px;height:11px;border-radius:50%;background:var(--green-3);border:3px solid var(--ivory);box-shadow:0 0 0 2px var(--green-3)}
+.lin-item.t-martial::before{background:var(--red);box-shadow:0 0 0 2px var(--red)}
+.lin-item.t-constitution::before{background:var(--gold);box-shadow:0 0 0 2px var(--gold)}
+.lin-item.t-case::before{background:#3a5a8c;box-shadow:0 0 0 2px #3a5a8c}
+.lin-card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:1rem 1.3rem;cursor:pointer;transition:box-shadow .15s}
+.lin-card:hover{box-shadow:0 3px 14px rgba(18,53,36,.12)}
+.lin-meta{display:flex;gap:.7rem;align-items:baseline;flex-wrap:wrap}
+.lin-date{font-family:var(--mono);font-size:.74rem;color:var(--green-2);font-weight:700;min-width:5.6rem}
+.lin-card h4{font-family:var(--serif);font-size:1.05rem;flex:1}
+.tag{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:.12rem .55rem;border-radius:999px;border:1px solid var(--line);color:var(--ink-soft);background:var(--ivory)}
+.tag.t-statute{color:var(--green-2);border-color:var(--green-3)}
+.tag.t-constitution{color:#8a6d1f;border-color:var(--gold);background:#faf3df}
+.tag.t-martial{color:var(--red);border-color:var(--red);background:var(--red-bg)}
+.tag.t-case{color:#3a5a8c;border-color:#3a5a8c;background:#e8eef7}
+.tag.t-order{color:var(--ink-soft)}
+.tag.t-milestone{color:var(--green);border-color:var(--green);background:#e8f0e9}
+.tag.t-precursor{color:var(--ink-soft)}
+.lin-body{display:none;margin-top:.7rem;font-size:.89rem}
+.lin-item.open .lin-body{display:block}
+.lin-body .sum{margin-bottom:.6rem}
+.lin-body ul{margin:.3rem 0 .6rem 1.2rem}
+.lin-body li{margin-bottom:.25rem}
+.lin-body .kp{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green-2);font-weight:700}
+.lin-body .demise{border-left:3px solid var(--gold);padding:.3rem .7rem;background:var(--ivory);border-radius:0 8px 8px 0;font-size:.84rem;color:var(--ink-soft)}
+.lin-cta{max-width:880px;margin:0 auto;text-align:center;padding:1rem}
+
+/* ---------- compare ---------- */
+.cmp-controls{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:1rem 1.4rem;display:flex;gap:1rem;flex-wrap:wrap;align-items:end;margin-bottom:1.2rem}
+.cmp-controls .fld{display:flex;flex-direction:column;gap:.25rem}
+.cmp-controls label{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-soft)}
+.cmp-controls select{padding:.45rem .6rem;border:1px solid var(--line);border-radius:8px;background:var(--ivory);font-size:.85rem;max-width:330px}
+.diff-pane{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:2rem 2.4rem}
+.diff-body{font-family:var(--serif);font-size:1rem;line-height:1.9;white-space:pre-wrap}
+.diff-body del{background:var(--red-bg);color:var(--red);text-decoration:line-through;padding:0 .12em;border-radius:3px}
+.diff-body ins{background:var(--add-bg);color:var(--add);text-decoration:none;padding:0 .12em;border-radius:3px}
+.diff-legend{display:flex;gap:1.2rem;font-size:.75rem;color:var(--ink-soft);margin-bottom:1rem}
+.diff-legend ins,.diff-legend del{padding:0 .4em;border-radius:3px}
+.diff-legend ins{background:var(--add-bg);color:var(--add);text-decoration:none}
+.diff-legend del{background:var(--red-bg);color:var(--red)}
+
+/* ---------- search ---------- */
+.search-box{display:flex;gap:.6rem;max-width:720px;margin:0 auto 1.4rem}
+.search-box input{flex:1;padding:.8rem 1.1rem;border:2px solid var(--green-2);border-radius:12px;font-size:1rem;background:var(--paper);outline:none}
+.search-scope{display:flex;gap:1rem;justify-content:center;font-size:.8rem;color:var(--ink-soft);margin-bottom:1.4rem;flex-wrap:wrap}
+.hit{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:1rem 1.4rem;margin:0 auto .8rem;max-width:880px;cursor:pointer}
+.hit:hover{box-shadow:0 3px 12px rgba(18,53,36,.12)}
+.hit .where{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green-2);font-weight:700}
+.hit h4{font-family:var(--serif);margin:.15rem 0 .3rem}
+.hit p{font-size:.86rem;color:var(--ink-soft)}
+.hit mark{background:var(--gold-soft);border-radius:3px;padding:0 .1em}
+.muted-center{text-align:center;color:var(--ink-soft);padding:2rem;font-style:italic}
+
+/* ---------- about ---------- */
+.about{max-width:760px;margin:0 auto;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:2.2rem 2.6rem;font-size:.95rem}
+.about h2{font-family:var(--serif);color:var(--green);margin-bottom:.8rem}
+.about p{margin-bottom:.9rem}
+.about code{font-family:var(--mono);font-size:.82rem;background:var(--ivory);border:1px solid var(--line);border-radius:4px;padding:.05rem .35rem}
+.stats-row{display:flex;gap:1rem;margin:1.2rem 0;flex-wrap:wrap}
+.stat{flex:1;min-width:130px;background:var(--ivory);border:1px solid var(--line);border-radius:10px;padding:.9rem;text-align:center}
+.stat b{display:block;font-family:var(--serif);font-size:1.6rem;color:var(--green-2)}
+.stat span{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-soft)}
+
+footer{text-align:center;padding:2rem 1rem 3rem;font-size:.75rem;color:var(--ink-soft)}
+footer a{color:var(--green-2)}
+
+@media(max-width:860px){
+  .browse{grid-template-columns:1fr}
+  .sidebar{position:static;max-height:300px}
+  .reader{padding:1.3rem}
+  .timebar{top:auto;position:static}
+  .lin-era-head{position:static}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-top">
+    <div class="crest">⚖</div>
+    <div class="brand">
+      <h1>KSC.JUSNREM</h1>
+      <small>Intelligent Constitution Engine</small>
+    </div>
+    <div class="hdr-spacer"></div>
+    <div class="domain">jusnrem.digital</div>
+  </div>
+  <nav id="nav">
+    <button data-view="browse" class="active">📖 Browse</button>
+    <button data-view="lineage">🏛 Lineage 1773–1973</button>
+    <button data-view="timeline">🕰 Amendment Timeline</button>
+    <button data-view="statutes">§ Statute Library</button>
+    <button data-view="compare">⇄ Compare Versions</button>
+    <button data-view="search">🔍 Search</button>
+    <button data-view="about">ℹ About</button>
+  </nav>
+</header>
+
+<div class="timebar" id="timebar">
+  <div class="timebar-inner">
+    <label>Constitution as of</label>
+    <input type="range" id="eraSlider" min="0" max="24" value="24">
+    <button class="era-chip" id="eraChip" title="Jump to this amendment in the timeline"></button>
+    <span class="era-date" id="eraDate"></span>
+  </div>
+</div>
+
+<main>
+  <!-- BROWSE -->
+  <section id="view-browse" class="browse">
+    <aside class="sidebar">
+      <input type="text" id="artFilter" placeholder="Filter articles… (e.g. 6, judiciary)">
+      <div class="art-list" id="artList"></div>
+    </aside>
+    <article class="reader" id="reader"></article>
+  </section>
+
+  <!-- LINEAGE -->
+  <section id="view-lineage" class="hidden">
+    <div class="lin-intro">
+      <h2>Constitutional Lineage of Pakistan</h2>
+      <p>Every framework that governed these territories before the 1973 Constitution — from the first
+         parliamentary statutes over the East India Company, through the first Government of India Act (1858)
+         and the Crown-rule reforms, the Dominion interim order (1947–56), the 1956 Constitution and the first
+         martial law, the 1962 Constitution and the second martial law, and the provisional instruments that
+         led to 14 August 1973 — where the engine's article-by-article history begins.</p>
+    </div>
+    <div id="linList"></div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section id="view-timeline" class="hidden">
+    <div class="tl" id="tlList"></div>
+  </section>
+
+  <!-- STATUTES -->
+  <section id="view-statutes" class="hidden">
+    <div class="stat-tabs" id="statTabs"></div>
+    <div class="browse">
+      <aside class="sidebar">
+        <input type="text" id="secFilter" placeholder="Filter sections… (e.g. 302, theft)">
+        <div class="art-list" id="secList"></div>
+      </aside>
+      <article class="reader" id="secReader"></article>
+    </div>
+  </section>
+
+  <!-- COMPARE -->
+  <section id="view-compare" class="hidden">
+    <div class="cmp-controls">
+      <div class="fld"><label>Article</label><select id="cmpArt"></select></div>
+      <div class="fld"><label>From version</label><select id="cmpA"></select></div>
+      <div class="fld"><label>To version</label><select id="cmpB"></select></div>
+    </div>
+    <div class="diff-pane">
+      <div class="diff-legend"><span><ins>added text</ins></span><span><del>removed text</del></span></div>
+      <div class="diff-body" id="diffBody"></div>
+    </div>
+  </section>
+
+  <!-- SEARCH -->
+  <section id="view-search" class="hidden">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search the constitution, amendments, frameworks and statutes…">
+    </div>
+    <div class="search-scope">
+      <label><input type="checkbox" id="scopeArts" checked> Articles (at selected era)</label>
+      <label><input type="checkbox" id="scopeSums" checked> Amendment summaries</label>
+      <label><input type="checkbox" id="scopeLin" checked> Pre-1973 frameworks</label>
+      <label><input type="checkbox" id="scopeStat" checked> Statutes (PPC / CrPC)</label>
+    </div>
+    <div id="searchResults"><p class="muted-center">Type at least 3 characters to search.</p></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="view-about" class="hidden">
+    <div class="about">
+      <h2>KSC.JUSNREM — Intelligent Constitution Engine</h2>
+      <p>The Constitution of the Islamic Republic of Pakistan, 1973 — not as a static PDF, but as a living,
+         version-controlled body of law. Every article is a discrete document; every enacted amendment is a
+         recorded change, dated to its actual day of assent and attributed to the President who signed it.</p>
+      <div class="stats-row" id="statsRow"></div>
+      <p>Use the <b>time machine bar</b> to read the constitution exactly as it stood after any amendment from
+         1973 to the present. The <b>timeline</b> narrates each amendment in plain language and lists every article
+         it touched. <b>Compare</b> shows precise word-level differences between any two versions of any article.
+         <b>Search</b> spans the full constitutional text, all amendment summaries, the pre-1973 frameworks,
+         and the statute library.</p>
+      <p>The <b>Lineage</b> view traces the full constitutional ancestry: the Company-era statutes (1773–1853),
+         the first Government of India Act (1858) and the Crown-rule reform acts up to the Government of India Act 1935,
+         the Dominion interim framework (1947–1956), the 1956 Constitution and the first martial law (1958),
+         the 1962 Constitution and the second martial law (1969), and the provisional instruments — LFO 1970,
+         Interim Constitution 1972 — that led to the 1973 Constitution, including the landmark cases
+         (Tamizuddin, Dosso, Asma Jilani) that defined each rupture.</p>
+      <p>The <b>Statute Library</b> holds the great codes that operate beneath the constitution — the Pakistan
+         Penal Code, 1860 and the Code of Criminal Procedure, 1898 — browsable section by section. These texts
+         come from automated extraction of official PDF compilations; each page carries its provenance and a
+         pointer to the Pakistan Code for the authoritative text.</p>
+      <p>The 9th, 11th and 15th Amendments were proposed but never passed, and therefore do not appear in the
+         enacted history.</p>
+      <p>Data source: <code>github.com/ksc-jusnrem/legalize-pk</code> — the legislative texts are in the public
+         domain. Engine and interface © KSC.JUSNREM, published at <code>jusnrem.digital</code>. Structure and
+         format under the MIT License. Original dataset concept by Umer Butt, inspired by legalize-es.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  KSC.JUSNREM — Intelligent Constitution Engine · <a href="https://jusnrem.digital">jusnrem.digital</a> ·
+  Texts in the public domain · Built from the version-controlled Constitution of Pakistan 🇵🇰
+</footer>
+
+<script src="data.js"></script>
+<script src="lineage.js"></script>
+<script src="statutes.js"></script>
+<script src="router.js"></script>
+<script>
+"use strict";
+const D = window.CONSTITUTION_DATA;
+const $ = s => document.querySelector(s);
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const ORD = ["Original","1st","2nd","3rd","4th","5th","6th","7th","8th","10th","12th","13th","14th","16th","17th","18th","19th","20th","21st","22nd","23rd","24th","25th","26th","27th"];
+
+// natural ordering of article keys: preamble first, then numeric+suffix
+const artKeys = Object.keys(D.articles).sort((a,b)=>{
+  if(a==="preamble") return -1; if(b==="preamble") return 1;
+  const pa=a.match(/article-0*(\d+)([A-Za-z]*)/), pb=b.match(/article-0*(\d+)([A-Za-z]*)/);
+  return (+pa[1]-+pb[1]) || pa[2].localeCompare(pb[2]);
+});
+
+const state = { era: D.commits.length-1, view: "browse", article: "article-001",
+                statute: (window.STATUTES&&window.STATUTES[0])?window.STATUTES[0].id:null, section: null };
+
+// ---------- helpers ----------
+function versionAt(key, era){
+  const vs = D.articles[key].versions;
+  let out = null;
+  for(const v of vs){ if(v.commit <= era) out = v; else break; }
+  return out; // null = not yet enacted at this era
+}
+function commitLabel(i){
+  const c = D.commits[i];
+  return i===0 ? "Original Constitution (1973)" : `${c.title} (${c.date.slice(0,4)})`;
+}
+function shortLabel(i){ return ORD[i] ? (i===0?"1973":ORD[i]+" Amdt") : commitLabel(i); }
+
+// ---------- word-level diff (LCS) ----------
+function tokenize(t){ return t.split(/(\s+)/).filter(x=>x.length); }
+function diffWords(a, b){
+  const A = tokenize(a), B = tokenize(b), n=A.length, m=B.length;
+  const L = new Uint32Array((n+1)*(m+1));
+  for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)
+    L[i*(m+1)+j] = A[i]===B[j] ? L[(i+1)*(m+1)+j+1]+1 : Math.max(L[(i+1)*(m+1)+j], L[i*(m+1)+j+1]);
+  const out=[]; let i=0,j=0;
+  while(i<n && j<m){
+    if(A[i]===B[j]){ out.push(["=",A[i]]); i++; j++; }
+    else if(L[(i+1)*(m+1)+j] >= L[i*(m+1)+j+1]){ out.push(["-",A[i]]); i++; }
+    else { out.push(["+",B[j]]); j++; }
+  }
+  while(i<n) out.push(["-",A[i++]]);
+  while(j<m) out.push(["+",B[j++]]);
+  const merged=[];
+  for(const pair of out){
+    if(merged.length && merged[merged.length-1][0]===pair[0]) merged[merged.length-1][1]+=pair[1];
+    else merged.push([pair[0],pair[1]]);
+  }
+  return merged;
+}
+function renderDiff(a,b){
+  const sizeGuard = 36000000;
+  if(tokenize(a).length*tokenize(b).length > sizeGuard)
+    return "<p class='omit'>Text too large for word diff — showing new version.</p>"+esc(b);
+  return diffWords(a,b).map(([op,t])=>{
+    const e=esc(t);
+    return op==="=" ? e : op==="-" ? `<del>${e}</del>` : `<ins>${e}</ins>`;
+  }).join("");
+}
+
+// ---------- era / time machine ----------
+const slider = $("#eraSlider");
+slider.max = D.commits.length-1;
+slider.value = state.era;
+function setEra(i, rerender){
+  if(rerender===undefined) rerender=true;
+  state.era = +i;
+  slider.value = state.era;
+  const c = D.commits[state.era];
+  $("#eraChip").textContent = commitLabel(state.era);
+  $("#eraDate").textContent = c.date + " · assent: " + c.president;
+  if(rerender){ renderArtList(); renderReader(); if(state.view==="search") runSearch(); }
+}
+slider.addEventListener("input", e=>setEra(e.target.value));
+$("#eraChip").addEventListener("click", ()=>{ switchView("timeline"); openTl(state.era); });
+
+// ---------- navigation ----------
+function switchView(v){
+  state.view=v;
+  document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active", b.dataset.view===v));
+  ["browse","lineage","timeline","statutes","compare","search","about"].forEach(x=>
+    $("#view-"+x).classList.toggle("hidden", x!==v));
+  $("#timebar").style.display = (v==="browse"||v==="timeline"||v==="search") ? "" : "none";
+}
+$("#nav").addEventListener("click", e=>{ if(e.target.dataset.view) switchView(e.target.dataset.view); });
+
+// ---------- browse: sidebar ----------
+function renderArtList(){
+  const q = $("#artFilter").value.trim().toLowerCase();
+  const frag = document.createDocumentFragment();
+  for(const key of artKeys){
+    const a = D.articles[key];
+    const label = key==="preamble" ? "Preamble" : "Art "+a.num;
+    if(q && !(String(a.num).toLowerCase().includes(q) || a.title.toLowerCase().includes(q) || label.toLowerCase().includes(q))) continue;
+    const v = versionAt(key, state.era);
+    const div = document.createElement("div");
+    div.className = "art-item" + (key===state.article?" sel":"") + (v?"":" ghost");
+    div.innerHTML = `<span class="art-num">${key==="preamble"?"§":a.num}</span><span class="art-title">${esc(a.title)}</span>`;
+    div.title = a.title + (v ? "" : " — not yet enacted at the selected era");
+    div.onclick = ()=>{ state.article=key; renderArtList(); renderReader(); $("#reader").scrollIntoView({block:"start"}); };
+    frag.appendChild(div);
+  }
+  const list = $("#artList"); list.innerHTML=""; list.appendChild(frag);
+}
+$("#artFilter").addEventListener("input", renderArtList);
+
+// ---------- browse: reader ----------
+function renderReader(){
+  const key = state.article, a = D.articles[key];
+  const v = versionAt(key, state.era);
+  const chips = a.versions.map(ver=>{
+    const cur = v && ver.commit===v.commit;
+    const future = ver.commit > state.era;
+    return `<button class="vchip ${cur?"cur":""} ${future?"future":""}" data-c="${ver.commit}"
+      title="${esc(commitLabel(ver.commit))} — click to set era">${shortLabel(ver.commit)}</button>`;
+  }).join("");
+  const heading = key==="preamble" ? "Preamble" : "Article "+a.num;
+  let bodyHtml;
+  if(!v){
+    const first = a.versions[0];
+    bodyHtml = `<div class="not-enacted">This provision did not exist at the selected point in constitutional time.<br>
+      It first appears with the <b>${esc(commitLabel(first.commit))}</b>.</div>`;
+  } else if(/^\[Omitted\]\.?$/i.test(v.text.trim())){
+    bodyHtml = `<p class="omit">[Omitted — this article was removed from the constitution as of ${esc(commitLabel(v.commit))}.]</p>`;
+  } else {
+    bodyHtml = esc(v.text);
+  }
+  const idx = v ? a.versions.findIndex(x=>x.commit===v.commit) : -1;
+  const hasPrev = idx > 0;
+  $("#reader").innerHTML = `
+    <div class="reader-head">
+      <div class="kicker">Constitution of Pakistan · as amended through ${esc(commitLabel(state.era))}</div>
+      <h2>${heading} — ${esc(a.title)}</h2>
+      <div class="vchips">${chips}</div>
+    </div>
+    <div class="art-body">${bodyHtml}</div>
+    <div class="reader-actions">
+      ${hasPrev?`<button class="btn" id="btnDiffPrev">⇄ What changed in ${shortLabel(v.commit)}?</button>`:""}
+      <button class="btn ghost" id="btnCompare">Open in Compare</button>
+    </div>`;
+  document.querySelectorAll("#reader .vchip").forEach(ch=>ch.onclick=()=>setEra(+ch.dataset.c));
+  const bc=$("#btnCompare"); if(bc) bc.onclick=()=>openCompare(key, hasPrev?a.versions[idx-1].commit:null, v?v.commit:null);
+  const bd=$("#btnDiffPrev"); if(bd) bd.onclick=()=>openCompare(key, a.versions[idx-1].commit, v.commit);
+}
+
+// ---------- timeline ----------
+function renderTimeline(){
+  const frag = document.createDocumentFragment();
+  for(let i=D.commits.length-1;i>=0;i--){
+    const c = D.commits[i];
+    const adds=c.changes.filter(x=>x.status==="A").length,
+          mods=c.changes.filter(x=>x.status==="M").length,
+          dels=c.changes.filter(x=>x.status==="D").length;
+    const item=document.createElement("div");
+    item.className="tl-item"; item.id="tl-"+i;
+    const pills=c.changes.map(ch=>{
+      const a=D.articles[ch.file]; if(!a) return "";
+      const cls=ch.status==="A"?"add":ch.status==="D"?"del":"";
+      const lab=ch.file==="preamble"?"Preamble":"Art "+a.num;
+      return `<button class="file-pill ${cls}" data-f="${ch.file}" data-c="${i}"
+        title="${esc(a.title)} (${ch.status==="A"?"added":ch.status==="D"?"omitted":"amended"})">${lab}</button>`;
+    }).join("");
+    item.innerHTML=`<div class="tl-card">
+      <div class="tl-meta">
+        <span class="tl-date">${c.date}</span>
+        <h3>${esc(c.title)}</h3>
+        <span class="tl-pres">assent: ${esc(c.president)}</span>
+        <span class="tl-stats">${i===0?`${adds} articles enacted`:`${mods} amended · ${adds} added · ${dels} omitted`}</span>
+      </div>
+      <div class="tl-summary">${esc(c.summary)}</div>
+      <div class="tl-files">${pills}</div>
+    </div>`;
+    item.querySelector(".tl-card").addEventListener("click", e=>{
+      if(e.target.classList.contains("file-pill")) return;
+      item.classList.toggle("open");
+    });
+    frag.appendChild(item);
+  }
+  const tl=$("#tlList"); tl.innerHTML=""; tl.appendChild(frag);
+  tl.addEventListener("click", e=>{
+    const p=e.target.closest(".file-pill"); if(!p) return;
+    state.article=p.dataset.f;
+    setEra(+p.dataset.c);
+    switchView("browse");
+    window.scrollTo({top:0});
+  });
+}
+function openTl(i){ const el=$("#tl-"+i); if(el){ el.classList.add("open"); el.scrollIntoView({block:"center"});} }
+
+// ---------- lineage ----------
+const LIN = window.CONSTITUTION_LINEAGE;
+function fmtLinDate(d){ return d.length===7 ? d.replace("-"," · ") : d; }
+function renderLineage(){
+  const box = $("#linList"); box.innerHTML = "";
+  for(const era of LIN.eras){
+    const eraDiv = document.createElement("div");
+    eraDiv.className = "lin-era";
+    eraDiv.innerHTML = `<div class="lin-era-head"><h3>${esc(era.name)}</h3><span class="span">${esc(era.span)}</span></div>
+      <p class="lin-era-blurb">${esc(era.blurb)}</p><div class="lin"></div>`;
+    const track = eraDiv.querySelector(".lin");
+    for(const f of era.frameworks){
+      const it = document.createElement("div");
+      it.className = "lin-item t-"+f.type; it.id = "lin-"+f.id;
+      const kp = f.provisions && f.provisions.length
+        ? `<div class="kp">Key provisions &amp; effects</div><ul>${f.provisions.map(p=>`<li>${esc(p)}</li>`).join("")}</ul>` : "";
+      const demise = f.demise ? `<div class="demise"><b>How it ended:</b> ${esc(f.demise)}</div>` : "";
+      it.innerHTML = `<div class="lin-card">
+        <div class="lin-meta">
+          <span class="lin-date">${esc(fmtLinDate(f.date))}</span>
+          <h4>${esc(f.name)}</h4>
+          <span class="tag t-${f.type}">${f.type==="martial"?"martial law":f.type}</span>
+        </div>
+        <div class="lin-body"><p class="sum">${esc(f.summary)}</p>${kp}${demise}</div>
+      </div>`;
+      it.querySelector(".lin-card").addEventListener("click", ()=>{
+        if(f.id==="const1973"){ setEra(0); switchView("browse"); window.scrollTo({top:0}); return; }
+        it.classList.toggle("open");
+      });
+      track.appendChild(it);
+    }
+    box.appendChild(eraDiv);
+  }
+  const cta = document.createElement("div");
+  cta.className = "lin-cta";
+  cta.innerHTML = `<button class="btn" id="linToTl">Continue into the 1973 Constitution → Amendment Timeline (1974–2025)</button>`;
+  box.appendChild(cta);
+  cta.querySelector("#linToTl").onclick = ()=>{ switchView("timeline"); window.scrollTo({top:0}); };
+}
+function openLin(id){
+  switchView("lineage");
+  const el = $("#lin-"+id);
+  if(el){ el.classList.add("open"); el.scrollIntoView({block:"center"}); }
+}
+
+// ---------- statutes ----------
+const STAT = window.STATUTES || [];
+function curStatute(){ return STAT.find(s=>s.id===state.statute) || STAT[0]; }
+function renderStatTabs(){
+  $("#statTabs").innerHTML = STAT.map(s=>
+    `<button class="stat-tab ${s.id===state.statute?"active":""}" data-s="${s.id}">${esc(s.name)}</button>`).join("");
+  document.querySelectorAll(".stat-tab").forEach(t=>t.onclick=()=>{
+    state.statute=t.dataset.s; state.section=null;
+    renderStatTabs(); renderSecList(); renderSecReader();
+  });
+}
+function renderSecList(){
+  const st = curStatute(); if(!st){ return; }
+  const q = $("#secFilter").value.trim().toLowerCase();
+  if(state.section===null && st.sections.length) state.section = st.sections[0].num;
+  const frag = document.createDocumentFragment();
+  for(const s of st.sections){
+    if(q && !(s.num.toLowerCase().includes(q) || s.title.toLowerCase().includes(q))) continue;
+    const div = document.createElement("div");
+    div.className = "art-item" + (s.num===state.section?" sel":"");
+    div.innerHTML = `<span class="art-num">${esc(s.num)}</span><span class="art-title">${esc(s.title)}</span>`;
+    div.title = s.title;
+    div.onclick = ()=>{ state.section=s.num; renderSecList(); renderSecReader(); $("#secReader").scrollIntoView({block:"start"}); };
+    frag.appendChild(div);
+  }
+  const list=$("#secList"); list.innerHTML=""; list.appendChild(frag);
+}
+$("#secFilter") && $("#secFilter").addEventListener("input", renderSecList);
+function renderSecReader(){
+  const st = curStatute(); if(!st){ $("#secReader").innerHTML="<p class='muted-center'>No statutes loaded.</p>"; return; }
+  const s = st.sections.find(x=>x.num===state.section) || st.sections[0];
+  $("#secReader").innerHTML = `
+    <div class="reader-head">
+      <div class="kicker">${esc(st.name)} · ${esc(st.cite)} · ${esc(st.note)}</div>
+      <h2>Section ${esc(s.num)} — ${esc(s.title)}</h2>
+    </div>
+    <div class="art-body">${esc(s.text)}</div>
+    <div class="provenance">⚠ ${esc(st.disclaimer)}</div>`;
+}
+function openSection(statuteId, num){
+  state.statute=statuteId; state.section=num;
+  switchView("statutes");
+  renderStatTabs(); renderSecList(); renderSecReader();
+  window.scrollTo({top:0});
+}
+
+// ---------- compare ----------
+const selArt=$("#cmpArt"), selA=$("#cmpA"), selB=$("#cmpB");
+function initCompare(){
+  selArt.innerHTML = artKeys.map(k=>{
+    const a=D.articles[k];
+    const lab = k==="preamble" ? "Preamble" : `Art ${a.num} — ${a.title}`;
+    return `<option value="${k}">${esc(lab.length>60?lab.slice(0,57)+"…":lab)} (${a.versions.length} ver)</option>`;
+  }).join("");
+  selArt.value="article-001";
+  selArt.onchange=fillVersions; selA.onchange=renderCompare; selB.onchange=renderCompare;
+  fillVersions();
+}
+function fillVersions(){
+  const vs=D.articles[selArt.value].versions;
+  const opts=vs.map(v=>`<option value="${v.commit}">${esc(commitLabel(v.commit))}</option>`).join("");
+  selA.innerHTML=opts; selB.innerHTML=opts;
+  selA.value=vs[Math.max(0,vs.length-2)].commit;
+  selB.value=vs[vs.length-1].commit;
+  renderCompare();
+}
+function renderCompare(){
+  const vs=D.articles[selArt.value].versions;
+  const va=vs.find(v=>v.commit==+selA.value), vb=vs.find(v=>v.commit==+selB.value);
+  if(!va||!vb) return;
+  if(va.commit===vb.commit){ $("#diffBody").innerHTML="<p class='omit'>Same version selected on both sides — pick two different versions to see changes.</p>"; return; }
+  $("#diffBody").innerHTML = renderDiff(va.text, vb.text);
+}
+function openCompare(key, ca, cb){
+  switchView("compare");
+  selArt.value=key; fillVersions();
+  if(ca!==null && ca!==undefined) selA.value=ca;
+  if(cb!==null && cb!==undefined) selB.value=cb;
+  renderCompare();
+  window.scrollTo({top:0});
+}
+
+// ---------- search ----------
+let searchTimer=null;
+$("#searchInput").addEventListener("input", ()=>{ clearTimeout(searchTimer); searchTimer=setTimeout(runSearch,200); });
+["scopeArts","scopeSums","scopeLin","scopeStat"].forEach(id=>$("#"+id).addEventListener("change",runSearch));
+function snippet(text,q){
+  const i=text.toLowerCase().indexOf(q);
+  const s=Math.max(0,i-70), e=Math.min(text.length,i+q.length+90);
+  const frag=(s>0?"…":"")+text.slice(s,e)+(e<text.length?"…":"");
+  return esc(frag).replace(new RegExp("("+q.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+")","ig"),"<mark>$1</mark>");
+}
+function runSearch(){
+  const q=$("#searchInput").value.trim().toLowerCase();
+  const box=$("#searchResults");
+  if(q.length<3){ box.innerHTML="<p class='muted-center'>Type at least 3 characters to search.</p>"; return; }
+  const hits=[];
+  if($("#scopeArts").checked){
+    for(const key of artKeys){
+      const a=D.articles[key], v=versionAt(key,state.era);
+      if(!v) continue;
+      const inTitle=a.title.toLowerCase().includes(q);
+      const idx=v.text.toLowerCase().indexOf(q);
+      if(inTitle||idx>=0){
+        hits.push({type:"art",key:key,
+          head:(key==="preamble"?"Preamble":"Article "+a.num)+" — "+a.title,
+          snip: idx>=0 ? snippet(v.text,q) : esc(v.text.slice(0,150))+"…"});
+        if(hits.length>80) break;
+      }
+    }
+  }
+  if($("#scopeSums").checked){
+    for(const c of D.commits){
+      const idx=c.summary.toLowerCase().indexOf(q);
+      if(idx>=0||c.title.toLowerCase().includes(q))
+        hits.push({type:"sum",commit:c.i,head:c.title+" ("+c.date+")",
+                   snip: idx>=0 ? snippet(c.summary,q) : esc(c.summary.slice(0,150))+"…"});
+    }
+  }
+  if($("#scopeLin").checked){
+    for(const era of LIN.eras){
+      for(const f of era.frameworks){
+        const hay=(f.name+" "+f.summary+" "+(f.provisions||[]).join(" ")+" "+(f.demise||"")).toLowerCase();
+        if(hay.indexOf(q)>=0){
+          const src=f.summary.toLowerCase().includes(q)?f.summary:(f.name+". "+(f.provisions||[]).join(" · ")+" "+(f.demise||""));
+          hits.push({type:"lin",lin:f.id,head:f.name+" ("+f.date.slice(0,4)+")",
+                     snip: src.toLowerCase().includes(q)?snippet(src,q):esc(f.summary.slice(0,150))+"…"});
+        }
+      }
+    }
+  }
+  if($("#scopeStat").checked){
+    let nstat=0;
+    for(const st of STAT){
+      for(const s of st.sections){
+        const inTitle=s.title.toLowerCase().includes(q);
+        const idx=s.text.toLowerCase().indexOf(q);
+        if((inTitle||idx>=0) && nstat<60){
+          nstat++;
+          hits.push({type:"stat",statute:st.id,sec:s.num,
+            head:st.name+" · s. "+s.num+" — "+s.title,
+            snip: idx>=0 ? snippet(s.text,q) : esc(s.text.slice(0,150))+"…"});
+        }
+      }
+    }
+  }
+  if(!hits.length){ box.innerHTML="<p class='muted-center'>No matches for “"+esc(q)+"” at the selected era.</p>"; return; }
+  box.innerHTML=hits.map((h,i)=>`<div class="hit" data-i="${i}">
+    <div class="where">${h.type==="art"?"Constitutional text":h.type==="sum"?"Amendment summary":h.type==="lin"?"Pre-1973 framework":"Statute"}</div>
+    <h4>${esc(h.head)}</h4><p>${h.snip}</p></div>`).join("");
+  box.querySelectorAll(".hit").forEach(el=>el.onclick=()=>{
+    const h=hits[+el.dataset.i];
+    if(h.type==="art"){ state.article=h.key; switchView("browse"); renderArtList(); renderReader(); }
+    else if(h.type==="sum"){ switchView("timeline"); openTl(h.commit); }
+    else if(h.type==="lin"){ openLin(h.lin); return; }
+    else { openSection(h.statute, h.sec); return; }
+    window.scrollTo({top:0});
+  });
+}
+
+// ---------- about stats ----------
+function renderStats(){
+  const nv=Object.values(D.articles).reduce((s,a)=>s+a.versions.length,0);
+  const nlin=LIN.eras.reduce((s,e)=>s+e.frameworks.length,0);
+  const nsec=STAT.reduce((s,st)=>s+st.sections.length,0);
+  $("#statsRow").innerHTML=`
+    <div class="stat"><b>${D.meta.articleCount}</b><span>Articles tracked</span></div>
+    <div class="stat"><b>${D.commits.length-1}</b><span>Enacted amendments</span></div>
+    <div class="stat"><b>${nv}</b><span>Text versions</span></div>
+    <div class="stat"><b>${nlin}</b><span>Pre-1973 frameworks</span></div>
+    <div class="stat"><b>${nsec}</b><span>Statute sections</span></div>`;
+}
+
+// ---------- boot ----------
+setEra(state.era,false);
+renderArtList(); renderReader(); renderTimeline(); renderLineage();
+renderStatTabs(); renderSecList(); renderSecReader();
+initCompare(); renderStats();
+setEra(state.era);
+</script>
+</body>
+</html>
