@@ -1,4 +1,4 @@
-/* KSC.JUSNREM — Intelligent Constitution Engine · jusnrem.digital
+/* KSC.JUSNREM — Constitutional Intelligence Engine · jusnrem.digital
    Hash router: shareable deep links for every view.
      #art-6            Article 6 (current era)
      #art-58@8         Article 58 as it stood after the 8th commit (Eighth Amendment era)

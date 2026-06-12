@@ -1,4 +1,4 @@
-# KSC.JUSNREM — Intelligent Constitution Engine
+# KSC.JUSNREM — Constitutional Intelligence Engine
 
 **Live at: [jusnrem.digital](https://jusnrem.digital)**
 
@@ -57,4 +57,4 @@ The pre-1973 lineage (`lineage.js`) is hand-curated and edited directly. The sta
 The legislative texts are in the public domain. Engine, interface, structure and format under the MIT License.
 
 ---
-KSC.JUSNREM — Intelligent Constitution Engine · jusnrem.digital
+KSC.JUSNREM — Constitutional Intelligence Engine · jusnrem.digital
