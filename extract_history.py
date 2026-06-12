@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-KSC.JUSNREM - Intelligent Constitution Engine
+KSC.JUSNREM - Constitutional Intelligence Engine
 Data extractor: walks the full git history of the version-controlled
 Constitution of Pakistan and emits a single JSON dataset that powers
 the static web interface on jusnrem.digital.
@@ -93,7 +93,7 @@ for f in files:
 # ---- 4. write -------------------------------------------------------------
 data = {
     "meta": {
-        "name": "KSC.JUSNREM - Intelligent Constitution Engine",
+        "name": "KSC.JUSNREM - Constitutional Intelligence Engine",
         "domain": "jusnrem.digital",
         "generated": datetime.date.today().isoformat(),
         "source": "https://github.com/ksc-jusnrem/legalize-pk",

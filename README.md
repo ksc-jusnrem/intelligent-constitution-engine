@@ -1,6 +1,6 @@
-# KSC.JUSNREM — Intelligent Constitution Engine
+# KSC.JUSNREM — Constitutional Intelligence Engine
 
-**Live at: [jusnrem.digital](https://jusnrem.digital)**
+**Live at: [constitution.codes](https://constitution.codes)**
 
 The constitutional history of Pakistan as a living, version-controlled body of law — from the first Government of India Act (1858) and its Company-era precursors, through every framework that governed these territories, to the 1973 Constitution tracked article-by-article through all 24 enacted amendments (1974–2025), plus a section-by-section library of the great codes.
 
@@ -17,9 +17,9 @@ The constitutional history of Pakistan as a living, version-controlled body of l
 
 **Time machine** — read the entire 1973 constitution exactly as it stood after any amendment. Articles not yet enacted at the selected era are dimmed; omitted articles are marked.
 
-**Amendment timeline** — all 24 enacted amendments with date of assent, signing President, a plain-English summary, and a clickable list of every article each one added, amended, or omitted. (The 9th, 11th, and 15th were proposed but never passed.)
+**Constitutional history** — all 24 enacted amendments with date of assent, signing President, a plain-English summary, and a clickable list of every article each one added, amended, or omitted. (The 9th, 11th, and 15th were proposed but never passed.)
 
-**Statute Library** — the Pakistan Penal Code, 1860 (314 sections) and the Code of Criminal Procedure, 1898 (260 sections), browsable section by section with filtering. Texts come from automated extraction of official PDF compilations; every page carries a provenance notice pointing to the Pakistan Code (pakistancode.gov.pk) for the authoritative text.
+**Digital Repository** — the Pakistan Penal Code, 1860 (314 sections) and the Code of Criminal Procedure, 1898 (260 sections), browsable section by section with filtering. Texts come from automated extraction of official PDF compilations; every page carries a provenance notice pointing to the Pakistan Code (pakistancode.gov.pk) for the authoritative text.
 
 **Compare versions** — word-level diff between any two versions of any constitutional article.
 
@@ -32,10 +32,10 @@ The constitutional history of Pakistan as a living, version-controlled body of l
 | `index.html` | The complete interface — single file, zero dependencies, no build step |
 | `data.js` | The 1973-onward dataset (314 articles, 580 text versions, 25 commits) as a JS global |
 | `lineage.js` | Pre-1973 constitutional lineage: 30 framework dossiers across 6 eras, 1773–1973 |
-| `statutes.js` | Statute Library: PPC 1860 + CrPC 1898, 574 sections with provenance metadata |
+| `statutes.js` | Digital Repository: PPC 1860 + CrPC 1898, 574 sections with provenance metadata |
 | `data.json` | The 1973-onward dataset as raw JSON, for programmatic / AI use |
 | `extract_history.py` | Regenerates `data.json` from the source git repository |
-| `DEPLOY.md` | How to publish on jusnrem.digital |
+| `DEPLOY.md` | How to publish on constitution.codes |
 | `source-data/` | Full clone of the source repo, `legalize-pk-full-history.bundle` (complete git history), and `statutes/` (raw PPC/CrPC extraction JSON) |
 
 ## Regenerating the data
@@ -57,4 +57,4 @@ The pre-1973 lineage (`lineage.js`) is hand-curated and edited directly. The sta
 The legislative texts are in the public domain. Engine, interface, structure and format under the MIT License.
 
 ---
-KSC.JUSNREM — Intelligent Constitution Engine · jusnrem.digital
+KSC.JUSNREM — Constitutional Intelligence Engine · constitution.codes

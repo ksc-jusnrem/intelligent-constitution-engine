@@ -1,4 +1,4 @@
-/* KSC.JUSNREM — Intelligent Constitution Engine · jusnrem.digital
+/* KSC.JUSNREM — Constitutional Intelligence Engine · constitution.codes
    Constitutional Lineage 1773–1973: every framework that governed the
    territories of Pakistan before the 1973 Constitution took effect.
    types: precursor | statute | constitution | order | martial | case | milestone */

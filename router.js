@@ -1,9 +1,9 @@
-/* KSC.JUSNREM — Intelligent Constitution Engine · jusnrem.digital
+/* KSC.JUSNREM — Constitutional Intelligence Engine · constitution.codes
    Hash router: shareable deep links for every view.
      #art-6            Article 6 (current era)
      #art-58@8         Article 58 as it stood after the 8th commit (Eighth Amendment era)
      #preamble         The Preamble
-     #amdt-15          Amendment timeline, card 15 open (Eighteenth Amendment)
+     #amdt-15          Constitutional history, card 15 open (Eighteenth Amendment)
      #lin-goi1858      Lineage card (Government of India Act 1858)
      #ppc-302          Pakistan Penal Code s.302
      #crpc-497         Code of Criminal Procedure s.497
