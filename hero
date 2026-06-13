@@ -1,0 +1,62 @@
+<!-- ==================== IMPROVED HERO ==================== -->
+<section id="home" class="bg-[#0A1628] text-white pt-16 pb-20">
+  <div class="max-w-5xl mx-auto px-6">
+    
+    <!-- Top Badge -->
+    <div class="flex justify-center mb-6">
+      <div class="inline-flex items-center gap-x-2 px-4 py-1.5 rounded-full bg-white/10 text-sm font-medium tracking-wider">
+        <span class="text-[#D4AF37]">PAKISTAN</span>
+        <span class="text-white/40">•</span>
+        <span>1773 — 2026</span>
+      </div>
+    </div>
+
+    <!-- Headline -->
+    <div class="text-center max-w-4xl mx-auto">
+      <h1 class="text-5xl md:text-6xl font-semibold tracking-tighter leading-[1.05]">
+        Pakistan’s Constitutional History,<br>
+        Finally Understandable.
+      </h1>
+      
+      <!-- Subheadline -->
+      <p class="mt-6 text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
+        Explore 250+ years of constitutional evolution with a living time machine.<br>
+        Every amendment. Every version. Every article.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#time-machine" 
+           class="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-white text-[#0A1628] font-semibold text-lg hover:bg-white/90 transition-all active:scale-[0.985]">
+          Launch Time Machine
+        </a>
+        
+        <a href="#compare" 
+           class="inline-flex items-center justify-center px-8 py-4 rounded-xl border border-white/30 hover:bg-white/5 font-medium text-lg transition-all">
+          Compare Versions
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-y-8 text-center">
+        <div>
+          <div class="text-4xl font-semibold tracking-tighter">314</div>
+          <div class="text-white/60 text-sm tracking-wider mt-1">ARTICLES TRACKED</div>
+        </div>
+        <div>
+          <div class="text-4xl font-semibold tracking-tighter">24</div>
+          <div class="text-white/60 text-sm tracking-wider mt-1">AMENDMENTS</div>
+        </div>
+        <div>
+          <div class="text-4xl font-semibold tracking-tighter">1773–2026</div>
+          <div class="text-white/60 text-sm tracking-wider mt-1">FULL LINEAGE</div>
+        </div>
+        <div>
+          <div class="text-4xl font-semibold tracking-tighter">Law as Code</div>
+          <div class="text-white/60 text-sm tracking-wider mt-1">VERSION CONTROLLED</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
