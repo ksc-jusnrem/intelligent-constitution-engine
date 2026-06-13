@@ -1,0 +1,4 @@
+/* Auto-generated chunk for article-087. */
+if (window.CONSTITUTION_DATA && window.CONSTITUTION_DATA.articles['article-087']) {
+  window.CONSTITUTION_DATA.articles['article-087'].versions = [{"commit":0,"text":"(1) Each House shall have a separate Secretariat :\nProvided that nothing in this clause shall be construed as preventing the creation of posts common to both Houses.\n(2) Parliament may by law regulate the recruitment\n\nand the conditions of service of persons appointed to the secretarial staff of either House.\n\n(3) Until provision is made by Parliament under clause (2), the Speaker or, as the case may be, the Chairman may, with the approval of the President, make rules regulating the recruitment, and the conditions of service, of persons appointed to the secretarial staff of the National Assembly or the Senate."}];
+}

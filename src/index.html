@@ -265,6 +265,7 @@ footer a{color:var(--green-2)}
       <a href="#lineage" class="hover:text-white transition-colors">Lineage</a>
       <a href="#time-machine" class="hover:text-white transition-colors">Time Machine</a>
       <a href="#amendments" class="hover:text-white transition-colors">Amendments</a>
+      <a href="#cases" class="hover:text-white transition-colors">Cases</a>
       <a href="#statutes" class="hover:text-white transition-colors">Statutes</a>
       <a href="#compare" class="hover:text-white transition-colors">Compare</a>
       <a href="#search" class="hover:text-white transition-colors">Search</a>
@@ -299,6 +300,7 @@ footer a{color:var(--green-2)}
       <a href="#lineage" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Lineage</a>
       <a href="#time-machine" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Time Machine</a>
       <a href="#amendments" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Amendments</a>
+      <a href="#cases" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Cases</a>
       <a href="#statutes" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Statutes</a>
       <a href="#compare" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Compare</a>
       <a href="#search" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Search</a>
@@ -650,6 +652,38 @@ footer a{color:var(--green-2)}
     </div>
   </section>
 
+  <!-- LANDMARK CASES -->
+  <section id="view-cases" class="hidden">
+    <!-- Hero Banner -->
+    <div class="max-w-4xl mx-auto text-center mb-10 mt-6">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-[10px] tracking-[2px] mb-4 border border-emerald-500/20 text-emerald-400 font-semibold font-mono">
+        JURISPRUDENTIAL CASE MAPPER
+      </div>
+      <h2 class="text-4xl font-semibold tracking-tight text-white mb-3">Landmark Constitutional Cases</h2>
+      <p class="text-sm text-zinc-400 max-w-xl mx-auto">
+        Explore landmark judicial decisions that shaped Pakistan's constitutional lineage. Click on affected articles and amendments to view them in the temporal time machine.
+      </p>
+    </div>
+
+    <!-- Search/Filter Controls -->
+    <div class="max-w-4xl mx-auto mb-8">
+      <div class="relative">
+        <input type="text" id="caseSearchInput" placeholder="Search cases by name, citation, holding, article or amendment..."
+          class="w-full pl-12 pr-4 py-3 border-2 border-zinc-800 focus:border-[#00A36C] rounded-xl text-sm bg-zinc-950 text-zinc-100 placeholder-zinc-500 outline-none transition-all">
+        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 text-base"></i>
+      </div>
+    </div>
+
+    <!-- Cases List / Timeline -->
+    <div class="max-w-4xl mx-auto relative pl-4 sm:pl-8" id="casesTimeline">
+      <!-- timeline line -->
+      <div class="absolute left-1 sm:left-3.5 top-2 bottom-6 w-0.5 bg-zinc-800"></div>
+      
+      <!-- Dynamically rendered cases cards -->
+      <div id="casesContainer" class="flex flex-col gap-6"></div>
+    </div>
+  </section>
+
   <!-- ABOUT -->
   <section id="view-about" class="hidden">
     <div class="about">
@@ -743,12 +777,97 @@ footer a{color:var(--green-2)}
 <script src="../data/constitution/data.js"></script>
 <script src="../data/lineage.js"></script>
 <script src="js/statutes.js"></script>
+<script src="js/cases.js"></script>
 <script>
 "use strict";
 const D = window.CONSTITUTION_DATA;
 const $ = s => document.querySelector(s);
 const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 const ORD = ["Original","1st","2nd","3rd","4th","5th","6th","7th","8th","10th","12th","13th","14th","16th","17th","18th","19th","20th","21st","22nd","23rd","24th","25th","26th","27th"];
+
+const loadedArticles = {};
+let fullTextDatabaseLoaded = false;
+let fullTextDatabaseLoading = false;
+
+function ensureArticleLoaded(key, callback) {
+  if (!key || (key === "preamble" && !D.articles["preamble"])) {
+    if (callback) callback();
+    return;
+  }
+  const art = D.articles[key];
+  if (art && art.versions && art.versions[0] && art.versions[0].text !== undefined) {
+    if (callback) callback();
+    return;
+  }
+  if (loadedArticles[key] === "loading") {
+    const checkInterval = setInterval(() => {
+      if (D.articles[key] && D.articles[key].versions && D.articles[key].versions[0] && D.articles[key].versions[0].text !== undefined) {
+        clearInterval(checkInterval);
+        if (callback) callback();
+      }
+    }, 30);
+    return;
+  }
+  loadedArticles[key] = "loading";
+  const script = document.createElement("script");
+  script.src = `../data/constitution/articles/${key}.js`;
+  script.onload = () => {
+    loadedArticles[key] = "loaded";
+    document.head.removeChild(script);
+    if (callback) callback();
+  };
+  script.onerror = () => {
+    loadedArticles[key] = "error";
+    document.head.removeChild(script);
+    console.error(`Failed to load article chunk: ${key}`);
+    if (state.article === key && state.view === "browse") {
+      const artName = key === "preamble" ? "Preamble" : "Article " + art.num;
+      $("#reader").innerHTML = `<div class="not-enacted text-rose-600">Error loading ${esc(artName)} data. Please check your connection.</div>`;
+    }
+  };
+  document.head.appendChild(script);
+}
+
+function ensureFullTextLoaded(callback) {
+  if (fullTextDatabaseLoaded) {
+    if (callback) callback();
+    return;
+  }
+  if (fullTextDatabaseLoading) {
+    const checkInterval = setInterval(() => {
+      if (fullTextDatabaseLoaded) {
+        clearInterval(checkInterval);
+        if (callback) callback();
+      }
+    }, 100);
+    return;
+  }
+  fullTextDatabaseLoading = true;
+  const script = document.createElement("script");
+  script.src = "../data/constitution/data_full.js";
+  script.onload = () => {
+    fullTextDatabaseLoaded = true;
+    fullTextDatabaseLoading = false;
+    document.head.removeChild(script);
+    if (window.CONSTITUTION_DATA_FULL && window.CONSTITUTION_DATA_FULL.articles) {
+      for (const key in window.CONSTITUTION_DATA_FULL.articles) {
+        const fullArt = window.CONSTITUTION_DATA_FULL.articles[key];
+        const targetArt = D.articles[key];
+        if (targetArt && fullArt) {
+          targetArt.versions = fullArt.versions;
+        }
+      }
+    }
+    if (callback) callback();
+  };
+  script.onerror = () => {
+    fullTextDatabaseLoading = false;
+    document.head.removeChild(script);
+    console.error("Failed to load full-text database");
+    $("#searchResults").innerHTML = `<p class="muted-center text-rose-600">Failed to load the full constitutional text search database. Please check your connection.</p>`;
+  };
+  document.head.appendChild(script);
+}
 
 // natural ordering of article keys: preamble first, then numeric+suffix
 const artKeys = Object.keys(D.articles).sort((a,b)=>{
@@ -847,7 +966,7 @@ function switchView(v){
       else { a.removeAttribute("aria-current"); }
     }
   });
-  ["home","browse","lineage","timeline","statutes","compare","search","about","relay"].forEach(x=> {
+  ["home","browse","lineage","timeline","cases","statutes","compare","search","about","relay"].forEach(x=> {
     const el = $("#view-"+x);
     if (el) el.classList.toggle("hidden", x!==v);
   });
@@ -855,6 +974,7 @@ function switchView(v){
   if (tb) {
     tb.style.display = (v==="browse"||v==="timeline"||v==="search") ? "" : "none";
   }
+  if (v === "cases") renderCasesList();
 }
 
 // ---------- browse: sidebar ----------
@@ -885,6 +1005,26 @@ $("#artFilter").addEventListener("input", renderArtList);
 // ---------- browse: reader ----------
 function renderReader(){
   const key = state.article, a = D.articles[key];
+  const hasText = a && a.versions && a.versions[0] && a.versions[0].text !== undefined;
+  if (!hasText) {
+    const heading = key==="preamble" ? "Preamble" : "Article "+a.num;
+    $("#reader").innerHTML = `
+      <div class="reader-head">
+        <div class="kicker">Constitution of Pakistan · loading…</div>
+        <h2>${heading} — ${esc(a.title)}</h2>
+      </div>
+      <div class="flex flex-col items-center justify-center py-20 text-zinc-400">
+        <i class="fa-solid fa-spinner animate-spin text-2xl text-emerald-500 mb-3"></i>
+        <p class="text-xs font-mono uppercase tracking-wider">Retrieving article transcript...</p>
+      </div>
+    `;
+    ensureArticleLoaded(key, () => {
+      if (state.article === key) {
+        renderReader();
+      }
+    });
+    return;
+  }
   const v = versionAt(key, state.era);
   const chips = a.versions.map(ver=>{
     const cur = v && ver.commit===v.commit;
@@ -1159,7 +1299,35 @@ function initCompare(){
   fillVersions();
 }
 function fillVersions(){
-  const vs=D.articles[selArt.value].versions;
+  const key = selArt.value;
+  const a = D.articles[key];
+  const hasText = a && a.versions && a.versions[0] && a.versions[0].text !== undefined;
+  if (!hasText) {
+    const bodyInline = $("#diffBody");
+    const leftPane = $("#diffLeftBody");
+    const rightPane = $("#diffRightBody");
+    const statsEl = $("#diffStats");
+    const bodySplit = $("#diffSplitBody");
+    const loadingMsg = `
+      <div class="flex flex-col items-center justify-center py-20 text-zinc-400">
+        <i class="fa-solid fa-spinner animate-spin text-2xl text-emerald-500 mb-3"></i>
+        <p class="text-xs font-mono uppercase tracking-wider">Retrieving versions for comparison...</p>
+      </div>
+    `;
+    if (bodyInline) bodyInline.innerHTML = loadingMsg;
+    if (leftPane) leftPane.innerHTML = "";
+    if (rightPane) rightPane.innerHTML = "";
+    if (bodyInline) bodyInline.classList.remove("hidden");
+    if (bodySplit) bodySplit.classList.add("hidden");
+    if (statsEl) statsEl.textContent = "Loading...";
+    ensureArticleLoaded(key, () => {
+      if (selArt.value === key) {
+        fillVersions();
+      }
+    });
+    return;
+  }
+  const vs=a.versions;
   const opts=vs.map(v=>`<option value="${v.commit}">${esc(commitLabel(v.commit))}</option>`).join("");
   selA.innerHTML=opts; selB.innerHTML=opts;
   selA.value=vs[Math.max(0,vs.length-2)].commit;
@@ -1259,6 +1427,19 @@ function runSearch(){
   const q=$("#searchInput").value.trim().toLowerCase();
   const box=$("#searchResults");
   if(q.length<3){ box.innerHTML="<p class='muted-center'>Type at least 3 characters to search.</p>"; return; }
+  if($("#scopeArts").checked && !fullTextDatabaseLoaded){
+    box.innerHTML = `
+      <div class="flex flex-col items-center justify-center py-20 text-zinc-400">
+        <i class="fa-solid fa-spinner animate-spin text-2xl text-emerald-500 mb-3"></i>
+        <p class="text-xs font-mono uppercase tracking-wider">Loading full constitutional text search database (~770KB)...</p>
+        <p class="text-[10px] text-zinc-500 mt-1">This only happens once to enable deep full-text searching.</p>
+      </div>
+    `;
+    ensureFullTextLoaded(() => {
+      runSearch();
+    });
+    return;
+  }
   const hits=[];
   if($("#scopeArts").checked){
     for(const key of artKeys){
@@ -1615,6 +1796,121 @@ function renderRelayReport(data, depth){
   contentEl.innerHTML = html;
 }
 
+// ---------- landmark cases ----------
+function renderCasesList() {
+  const q = ($("#caseSearchInput").value || "").trim().toLowerCase();
+  const container = $("#casesContainer");
+  if (!container) return;
+  
+  const filtered = window.LANDMARK_CASES.filter(c => {
+    if (!q) return true;
+    return c.name.toLowerCase().includes(q) || 
+           c.citation.toLowerCase().includes(q) ||
+           c.impact.toLowerCase().includes(q) ||
+           c.summary.toLowerCase().includes(q) ||
+           c.bench.toLowerCase().includes(q) ||
+           c.year.toString().includes(q);
+  });
+  
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div class="text-center py-12 text-zinc-500">
+        <i class="fa-solid fa-folder-open text-3xl mb-3 block text-zinc-700"></i>
+        No landmark cases match your search query.
+      </div>
+    `;
+    return;
+  }
+  
+  container.innerHTML = filtered.map(c => {
+    let borderAccent = "border-l-emerald-600";
+    let badgeColor = "bg-emerald-500/10 text-emerald-400 border-emerald-500/25";
+    
+    if (c.id === "bhutto1977" || c.id === "dosso1958" || c.id === "musharraf2000") {
+      borderAccent = "border-l-rose-700";
+      badgeColor = "bg-rose-500/10 text-rose-400 border-rose-500/25";
+    } else if (c.id === "aljehad1996" || c.id === "panama2017" || c.id === "art63a2022") {
+      borderAccent = "border-l-amber-500";
+      badgeColor = "bg-amber-500/10 text-amber-400 border-amber-500/25";
+    }
+    
+    const articlesHtml = c.articles.map(artKey => {
+      if (artKey === "precursor") {
+        return `<a href="#lineage" onclick="switchView('lineage')" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-zinc-900 border border-zinc-800 text-[10px] text-zinc-300 font-mono hover:bg-zinc-800 transition-colors">Pre-1973 Lineage</a>`;
+      }
+      const art = D.articles[artKey];
+      if (!art) return "";
+      return `<button onclick="goToCaseArticle('${artKey}')" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#123524]/40 border border-[#2a6b4a]/30 text-[10px] text-emerald-400 font-mono hover:bg-[#123524]/80 transition-colors"><i class="fa-solid fa-scroll text-[9px]"></i>Art. ${art.num}</button>`;
+    }).join(" ");
+    
+    const amendmentsHtml = c.amendments.map(commitIdx => {
+      const commit = D.commits[commitIdx];
+      if (!commit) return "";
+      return `<button onclick="goToCaseAmendment(${commitIdx})" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-[10px] text-amber-400 font-mono hover:bg-amber-500/25 transition-colors"><i class="fa-solid fa-clock-rotate-left text-[9px]"></i>${esc(shortLabel(commitIdx))}</button>`;
+    }).join(" ");
+    
+    return `
+      <div class="bg-zinc-950/60 backdrop-blur-md border border-zinc-800 rounded-2xl p-6 transition-all duration-300 hover:border-zinc-700 shadow-xl relative border-l-4 ${borderAccent}">
+        <div class="absolute -left-[25px] sm:-left-[41px] top-7 w-3 h-3 rounded-full bg-zinc-800 border-2 border-zinc-950 flex items-center justify-center">
+          <div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+        </div>
+        
+        <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-3">
+          <div>
+            <div class="text-[10px] text-zinc-500 uppercase tracking-widest font-mono mb-1">${esc(c.citation)}</div>
+            <h3 class="text-base sm:text-lg font-bold text-white leading-snug">${esc(c.name)}</h3>
+          </div>
+          <div class="flex flex-col items-end gap-1.5 text-right flex-none">
+            <span class="inline-block px-2.5 py-0.5 rounded-full text-xs font-mono border font-semibold ${badgeColor}">${c.year}</span>
+            <span class="text-[9px] text-zinc-500 font-mono max-w-[200px] leading-tight hidden sm:inline-block">${esc(c.bench)}</span>
+          </div>
+        </div>
+        
+        <div class="p-3 bg-[#123524]/10 border border-[#2a6b4a]/20 rounded-xl mb-4">
+          <div class="text-[9px] uppercase tracking-wider text-emerald-400 font-bold mb-1">Doctrinal Impact</div>
+          <p class="text-xs text-zinc-300 leading-relaxed font-semibold">${esc(c.impact)}</p>
+        </div>
+        
+        <p class="text-xs text-zinc-400 leading-relaxed mb-4">${esc(c.summary)}</p>
+        
+        <div class="flex flex-wrap items-center gap-3 pt-3 border-t border-zinc-900">
+          <span class="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold font-mono">Affected:</span>
+          <div class="flex flex-wrap gap-1.5">
+            ${articlesHtml}
+            ${amendmentsHtml}
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+function goToCaseArticle(key) {
+  state.article = key;
+  switchView("browse");
+  renderArtList();
+  renderReader();
+  const readerEl = $("#reader");
+  if (readerEl) readerEl.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function goToCaseAmendment(commitIdx) {
+  setEra(commitIdx);
+  switchView("timeline");
+  openTl(commitIdx);
+}
+
+function initCases() {
+  const input = $("#caseSearchInput");
+  if (input) {
+    let caseTimer = null;
+    input.addEventListener("input", () => {
+      clearTimeout(caseTimer);
+      caseTimer = setTimeout(renderCasesList, 150);
+    });
+  }
+}
+
 // ---------- boot ----------
 window.setEra = setEra;
 setEra(state.era,false);
@@ -1625,6 +1921,10 @@ setEra(state.era);
 renderEraMarkers();
 initOnboarding();
 initRelay();
+window.goToCaseArticle = goToCaseArticle;
+window.goToCaseAmendment = goToCaseAmendment;
+window.renderCasesList = renderCasesList;
+initCases();
 </script>
 <script src="js/router.js"></script>
 

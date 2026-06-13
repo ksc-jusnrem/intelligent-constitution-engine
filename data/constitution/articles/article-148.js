@@ -1,0 +1,4 @@
+/* Auto-generated chunk for article-148. */
+if (window.CONSTITUTION_DATA && window.CONSTITUTION_DATA.articles['article-148']) {
+  window.CONSTITUTION_DATA.articles['article-148'].versions = [{"commit":0,"text":"(1) The executive authority of every Province shall be so exercised as to secure compliance with Federal laws which apply in that Province.\n\n(2) Without prejudice to any other provision of this Chapter, in the exercise of the executive authority of the Federation in any Province regard shall be had to the interests of that Province.\n\n(3) It shall be the duty of the Federation to protect every Province against external aggression and internal disturbances and to ensure that the Government of every Province is carried on in accordance with the provisions of the Constitution."}];
+}

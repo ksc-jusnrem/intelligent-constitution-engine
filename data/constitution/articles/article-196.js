@@ -1,0 +1,4 @@
+/* Auto-generated chunk for article-196. */
+if (window.CONSTITUTION_DATA && window.CONSTITUTION_DATA.articles['article-196']) {
+  window.CONSTITUTION_DATA.articles['article-196'].versions = [{"commit":0,"text":"At any time when—\n(a) the office of Chief Justice of a High Court is vacant, or\n(b) the Chief Justice of a High Court is absent or is unable to perform the functions of his office due to any other cause,\nthe President shall appoint the most senior of the other Judges of the High Court to act as Chief Justice."},{"commit":5,"text":"At any time when—\n(a) the office of Chief Justice of a High Court is vacant, or\n(b) the Chief Justice of a High Court is absent or is unable to perform the functions of his office due to any other cause,\nthe President shall appoint one of the Judges of the High Court who have not previously held the office of Chief Justice of the High Court otherwise than under this Article to act as Chief Justice."}];
+}

@@ -1,0 +1,4 @@
+/* Auto-generated chunk for article-012. */
+if (window.CONSTITUTION_DATA && window.CONSTITUTION_DATA.articles['article-012']) {
+  window.CONSTITUTION_DATA.articles['article-012'].versions = [{"commit":0,"text":"(1) No law shall authorize the punishment of a person—\n(a) for an act or omission that was not punishable by law at the time of the act or omission; or\n(b) for an offence by a penalty greater than, or of a kind different from, the penalty prescribed by law for that offence at the time the offence was committed.\n(2) Nothing in clause (1) or in Article 270 shall apply to any law making acts of abrogation or subversion of a Constitution in force in Pakistan at any time since the twenty-third day of March, one thousand nine hundred and fifty-six, an offence."}];
+}

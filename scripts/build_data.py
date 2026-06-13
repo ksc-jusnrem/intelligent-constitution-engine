@@ -62,6 +62,19 @@ def main():
         print("Error: extract_history.py not found in scripts/.")
         sys.exit(1)
 
+    # 4. Run split_database.py
+    print("\n--- Step 4: Splitting database into chunks ---")
+    split_script = os.path.join("scripts", "split_database.py")
+    if os.path.exists(split_script):
+        result = subprocess.run([sys.executable, split_script], capture_output=True, encoding="utf-8")
+        print(result.stdout)
+        if result.returncode != 0:
+            print(f"Error splitting database:\n{result.stderr}")
+            sys.exit(1)
+    else:
+        print("Error: split_database.py not found in scripts/.")
+        sys.exit(1)
+
     print("====================================================")
     print("BUILD COMPLETE: All data artifacts successfully generated!")
     print("====================================================")

@@ -1,0 +1,4 @@
+/* Auto-generated chunk for article-252. */
+if (window.CONSTITUTION_DATA && window.CONSTITUTION_DATA.articles['article-252']) {
+  window.CONSTITUTION_DATA.articles['article-252'].versions = [{"commit":0,"text":"(1) Notwithstanding anything contained in the Constitution or in any law, the President may, by public notification, direct that, for a period not exceeding three months from a specified date, a specified law, whether a Federal law or a Provincial law, shall not apply to a specified major port or major aerodrome, or shall apply to a specified major port or major aerodrome subject to specified exceptions or modifications.\n\n(2) The giving of a direction under this Article in relation to any law shall not affect the operation of the law prior to the date specified in the direction."}];
+}

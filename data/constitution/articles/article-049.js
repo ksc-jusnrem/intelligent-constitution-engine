@@ -1,0 +1,4 @@
+/* Auto-generated chunk for article-049. */
+if (window.CONSTITUTION_DATA && window.CONSTITUTION_DATA.articles['article-049']) {
+  window.CONSTITUTION_DATA.articles['article-049'].versions = [{"commit":0,"text":"(1) If the office of President becomes vacant by reason of death, resignation or removal of the President, the Chairman or, if he is unable to perform the functions of the office of President, the Speaker of the National Assembly shall act as President until a President is elected in accordance with clause (3) of Article 41.\n\n(2) When the President, by reason of absence from Pakistan or any other cause, is unable to perform his functions, the Chairman or, if he too is absent or unable to perform the functions of the office of President, the Speaker of the National Assembly shall perform the\n\nfunctions of President until the President returns to Pakistan or, as the case may be, resumes his functions."}];
+}

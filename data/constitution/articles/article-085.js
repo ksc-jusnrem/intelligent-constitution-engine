@@ -1,0 +1,4 @@
+/* Auto-generated chunk for article-085. */
+if (window.CONSTITUTION_DATA && window.CONSTITUTION_DATA.articles['article-085']) {
+  window.CONSTITUTION_DATA.articles['article-085'].versions = [{"commit":0,"text":"Notwithstanding anything contained in the foregoing provisions relating to financial matters, the National Assembly shall have power to make any grant in advance in respect of the estimated expenditure for a part of any financial year, not exceeding four months, pending completion of the procedure prescribed in Article 82 for the voting of such grant and the authentication of the schedule of authorized expenditure in accordance with the provisions of Article 83 in relation to the expenditure."}];
+}

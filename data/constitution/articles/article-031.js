@@ -1,0 +1,4 @@
+/* Auto-generated chunk for article-031. */
+if (window.CONSTITUTION_DATA && window.CONSTITUTION_DATA.articles['article-031']) {
+  window.CONSTITUTION_DATA.articles['article-031'].versions = [{"commit":0,"text":"(1) Steps shall be taken to enable the Muslims of Pakistan, individually and collectively, to order their lives in accordance with the fundamental principles and basic concepts of Islam and to provide facilities whereby they may be enabled to understand the meaning of life according to the Holy Quran and Sunnah.\n\n(2) The State shall endeavour, as respects the Muslims of Pakistan,—\n\n(a) to make the teaching of the Holy Quran and Islamiat compulsory, to encourage and facilitate the learning of Arabic language and to secure correct and exact printing and publishing of the Holy Quran;\n\n(b) to promote unity and the observance of the Islamic moral standards; and\n\n(c) to secure the proper organisation of zakat, auqaf and mosques."}];
+}

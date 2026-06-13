@@ -1,0 +1,4 @@
+/* Auto-generated chunk for article-194. */
+if (window.CONSTITUTION_DATA && window.CONSTITUTION_DATA.articles['article-194']) {
+  window.CONSTITUTION_DATA.articles['article-194'].versions = [{"commit":0,"text":"Before entering upon office, the Chief Justice of a High Court shall make before the Governor, and any other Judge of the Court shall make before the Chief Justice, oath in the form set out in the Third Schedule."},{"commit":15,"text":"Before entering upon office, the Chief Justice of a High Court shall make before the Governor, and any other Judge of the Court shall make before the Chief Justice, oath in the form set out in the Third Schedule:  \n\"Provided that the Chief Justice of the Islamabad High Court shall make oath before the President and other Judges of that Court shall make oath before the Chief Justice of the Islamabad High Court.\""}];
+}

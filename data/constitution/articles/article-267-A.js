@@ -1,0 +1,4 @@
+/* Auto-generated chunk for article-267-A. */
+if (window.CONSTITUTION_DATA && window.CONSTITUTION_DATA.articles['article-267-A']) {
+  window.CONSTITUTION_DATA.articles['article-267-A'].versions = [{"commit":15,"text":"(1) If any difficulty arises in giving effect to the provisions of the Constitution (Eighteenth Amendment) Act, 2010, hereinafter in this Article referred as the Act, or for bringing the provisions of the Act into effective operation, the matter shall be laid before both Houses in a joint sitting which may by a resolution direct that the provisions of the Act shall, during such period as may be specified in the resolution, have effet, subject to such adaptations, whether by way of modification, addition or omission, as may be deemed necessary or expedient:\nProvided that this power shall be available for a period of one year from the commencement of the Act."}];
+}

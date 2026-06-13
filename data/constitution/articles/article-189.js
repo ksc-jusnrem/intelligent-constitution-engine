@@ -1,0 +1,4 @@
+/* Auto-generated chunk for article-189. */
+if (window.CONSTITUTION_DATA && window.CONSTITUTION_DATA.articles['article-189']) {
+  window.CONSTITUTION_DATA.articles['article-189'].versions = [{"commit":0,"text":"Any decision of the Supreme Court shall, to the extent that it decides a question of law or is based upon or enunciates a principle of law, be binding on all other courts in Pakistan."},{"commit":24,"text":"(1) Any decision of the Federal Constitutional Court shall, to the extent that it decides a question of law or is based upon or enunciates a principle of law, be binding on all other courts in Pakistan including the Supreme Court.\n\n(2) Any decision of the Supreme Court shall, to the extent that it decides a question of law or is based upon or enunciates a principle of law, be binding on all other courts in Pakistan except the Federal Constitutional Court."}];
+}

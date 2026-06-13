@@ -1,0 +1,4 @@
+/* Auto-generated chunk for article-176. */
+if (window.CONSTITUTION_DATA && window.CONSTITUTION_DATA.articles['article-176']) {
+  window.CONSTITUTION_DATA.articles['article-176'].versions = [{"commit":0,"text":"The Supreme Court shall consist of a Chief Justice to be known as the Chief Justice of Pakistan and so many other Judges as may be determined by Act of Parliament or, until so determined, as may be fixed by the President."},{"commit":24,"text":"The Supreme Court shall consist of a Chief Justice to be known as the Chief Justice of Supreme Court and so many other Judges as may be determined by Act of Parliament or, until so determined, as may be fixed by the President."}];
+}

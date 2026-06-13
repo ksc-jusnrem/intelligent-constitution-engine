@@ -1,0 +1,4 @@
+/* Auto-generated chunk for article-018. */
+if (window.CONSTITUTION_DATA && window.CONSTITUTION_DATA.articles['article-018']) {
+  window.CONSTITUTION_DATA.articles['article-018'].versions = [{"commit":0,"text":"Subject to such qualifications, if any, as may be prescribed by law, every citizen shall have the right to enter upon any lawful profession or occupation, and to conduct any lawful trade or business:\n\nProvided that nothing in this Article shall prevent—\n(a) the regulation of any trade or profession by a licensing system; or\n(b) the regulation of trade, commerce or industry in the interest of free competition therein ; or\n(c) the carrying on, by the Federal Government or a Provincial Government, or by a corporation controlled by any such Government, of any trade, business, industry or service, to the exclusion, complete or partial, of other persons."}];
+}

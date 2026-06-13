@@ -1,0 +1,4 @@
+/* Auto-generated chunk for article-080. */
+if (window.CONSTITUTION_DATA && window.CONSTITUTION_DATA.articles['article-080']) {
+  window.CONSTITUTION_DATA.articles['article-080'].versions = [{"commit":0,"text":"(1) The Federal Government shall, in respect of every financial year, cause to be laid before the National Assembly a statement of the estimated receipts and expenditure of the Federal Government for that year, in this Part referred to as the Annual Budget Statement.\n\n(2) The Annual Budget Statement shall show separately—\n\n(a) the sums required to meet expenditure described by the Constitution as expenditure charged upon the Federal Consolidated Fund ; and\n\n(b) the sums required to meet other expenditure proposed to be made from the Federal Consolidated Fund ;\n\nand shall distinguish expenditure on revenue account from other expenditure."}];
+}

@@ -1,0 +1,4 @@
+/* Auto-generated chunk for article-240. */
+if (window.CONSTITUTION_DATA && window.CONSTITUTION_DATA.articles['article-240']) {
+  window.CONSTITUTION_DATA.articles['article-240'].versions = [{"commit":0,"text":"Subject to the Constitution, the appointments to and the conditions of service of persons in the service of Pakistan shall be determined—\n\n(a) in the case of the services of the Federation, posts in connection with the affairs of the Federation and All-Pakistan Services, by or under Act of Parliament ; and\n\n(b) in the case of the services of a Province and posts in connection with the affairs of a Province, by or under Act of the Provincial Assembly.\n\nExplanation.—In this Article, “All-Pakistan Service” means a service common to the Federation and the Provinces, which was in existence immediately before the commencing day or which may be created by Act of Parliament."}];
+}

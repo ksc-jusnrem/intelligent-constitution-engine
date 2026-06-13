@@ -1,0 +1,4 @@
+/* Auto-generated chunk for article-119. */
+if (window.CONSTITUTION_DATA && window.CONSTITUTION_DATA.articles['article-119']) {
+  window.CONSTITUTION_DATA.articles['article-119'].versions = [{"commit":0,"text":"The custody of the Provincial Consolidated Fund, the payment of moneys into that Fund, the withdrawal of moneys therefrom, the custody of other moneys received by or on behalf of the Provincial Government, their payment into, and withdrawal from, the Public Account of the Province, and all matters connected with or ancillary to the matters aforesaid, shall be regulated by Act of the Provincial Assembly or, until provision in that behalf is so made, by rules made by the Governor."}];
+}

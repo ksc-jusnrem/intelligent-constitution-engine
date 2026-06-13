@@ -1,0 +1,4 @@
+/* Auto-generated chunk for article-205. */
+if (window.CONSTITUTION_DATA && window.CONSTITUTION_DATA.articles['article-205']) {
+  window.CONSTITUTION_DATA.articles['article-205'].versions = [{"commit":0,"text":"| Title        | Remuneration,\netc., of Judges.                                                              |\n\nThe remuneration and other terms and conditions of service of a Judge of the Supreme Court or of a High Court shall be as provided in the Fifth Schedule."},{"commit":24,"text":"| Title        | Remuneration,\netc., of Judges.                                                              |\n\nThe remuneration and other terms and conditions of service of a Judge of the Federal Constitutional Court or Supreme Court or of a High Court shall be as provided in the Fifth Schedule."}];
+}

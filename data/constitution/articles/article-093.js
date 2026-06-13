@@ -1,0 +1,4 @@
+/* Auto-generated chunk for article-093. */
+if (window.CONSTITUTION_DATA && window.CONSTITUTION_DATA.articles['article-093']) {
+  window.CONSTITUTION_DATA.articles['article-093'].versions = [{"commit":0,"text":"(1) The Prime Minister shall continue to hold office until his successor enters upon the office of Prime Minister.\n\n(2) Nothing in Article 91 or Article 92 shall be construed to disqualify the Prime Minister or a Federal Minister or a Minister of State from continuing in office during the period the National Assembly stands dissolved."},{"commit":24,"text":"(1) The Prime Minister shall continue to hold office until his successor enters upon the office of Prime Minister.\n\n(2) Nothing in Article 91 or Article 92 shall be construed to disqualify the Prime Minister or a Federal Minister or a Minister of State from continuing in office during the period the National Assembly stands dissolved."}];
+}

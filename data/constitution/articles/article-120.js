@@ -1,0 +1,4 @@
+/* Auto-generated chunk for article-120. */
+if (window.CONSTITUTION_DATA && window.CONSTITUTION_DATA.articles['article-120']) {
+  window.CONSTITUTION_DATA.articles['article-120'].versions = [{"commit":0,"text":"(1) The Provincial Government shall, in respect of every financial year, cause to be laid before the Provincial Assembly a statement of the estimated receipts and expenditure of the Provincial Government for that year, in this Chapter referred to as the Annual Budget Statement.\n\n(2) The Annual Budget Statement shall show separately—\n(a) the sums required to meet expenditure described by the Constitution as expenditure charged upon the Provincial Consolidated Fund ; and\n(b) the sums required to meet other expenditure proposed to be made from the Provincial Consolidated Fund;\nand shall distinguish expenditure on revenue account from other expenditure."}];
+}

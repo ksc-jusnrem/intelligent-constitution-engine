@@ -1,0 +1,4 @@
+/* Auto-generated chunk for article-011. */
+if (window.CONSTITUTION_DATA && window.CONSTITUTION_DATA.articles['article-011']) {
+  window.CONSTITUTION_DATA.articles['article-011'].versions = [{"commit":0,"text":"(1) Slavery is non-existent and forbidden and no law shall permit or facilitate its introduction into Pakistan in any form.\n\n(2) All forms of forced labour and traffic in human beings are prohibited.\n\n(3) No child below the age of fourteen years shall be engaged in any factory or mine or any other hazardous employment.\n\n(4) Nothing in this Article shall be deemed to affect compulsory service—\n\n(a) by any person undergoing punishment for an offence against any law ; or\n\n(b) required by any law for public purpose :\nProvided that no compulsory service shall be of a cruel nature or incompatible with human dignity."}];
+}
