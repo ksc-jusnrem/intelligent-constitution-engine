@@ -282,9 +282,25 @@ footer a{color:var(--green-2)}
       <a href="#time-machine" class="hover:text-white transition-colors">Time Machine</a>
       <a href="#amendments" class="hover:text-white transition-colors">Amendments</a>
       <a href="#cases" class="hover:text-white transition-colors">Cases</a>
-      <a href="#comparative" class="hover:text-white transition-colors">Comparative</a>
-      <a href="#judgments" class="hover:text-white transition-colors">Judgments</a>
-      <a href="#statutes" class="hover:text-white transition-colors">Statutes</a>
+      
+      <!-- Repository Dropdown -->
+      <div class="relative group py-2">
+        <button class="hover:text-white transition-colors flex items-center gap-1 focus:outline-none">
+          Repository <i class="fa-solid fa-chevron-down text-[8px] opacity-70"></i>
+        </button>
+        <div class="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-48 rounded-xl bg-zinc-950/95 backdrop-blur-md border border-zinc-800 p-1.5 hidden group-hover:flex flex-col gap-0.5 shadow-2xl z-50">
+          <a href="#comparative" class="px-3 py-1.5 text-xs rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-900 transition-colors flex items-center gap-2">
+            <i class="fa-solid fa-earth-americas text-blue-500 text-[10px] w-3.5"></i> Constitutions
+          </a>
+          <a href="#judgments" class="px-3 py-1.5 text-xs rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-900 transition-colors flex items-center gap-2">
+            <i class="fa-solid fa-scale-balanced text-emerald-500 text-[10px] w-3.5"></i> Climate Cases
+          </a>
+          <a href="#statutes" class="px-3 py-1.5 text-xs rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-900 transition-colors flex items-center gap-2">
+            <i class="fa-solid fa-book-bookmark text-amber-500 text-[10px] w-3.5"></i> Statutes Library
+          </a>
+        </div>
+      </div>
+
       <a href="#compare" class="hover:text-white transition-colors">Compare</a>
       <a href="#search" class="hover:text-white transition-colors">Search</a>
       <a href="#relay" class="text-amber-500 hover:text-white transition-colors font-semibold flex items-center gap-1.5"><i class="fa-solid fa-brain text-xs"></i>JUS.smart</a>
@@ -319,9 +335,15 @@ footer a{color:var(--green-2)}
       <a href="#time-machine" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Time Machine</a>
       <a href="#amendments" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Amendments</a>
       <a href="#cases" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Cases</a>
-      <a href="#comparative" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Comparative</a>
-      <a href="#judgments" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Judgments</a>
-      <a href="#statutes" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Statutes</a>
+      
+      <!-- Mobile Repository Section -->
+      <div class="border-l border-zinc-800 pl-4 py-0.5 flex flex-col gap-2.5 my-1">
+        <div class="text-[9px] uppercase tracking-widest text-zinc-600 font-bold font-mono">Repository</div>
+        <a href="#comparative" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white text-zinc-400 flex items-center gap-2 text-xs"><i class="fa-solid fa-earth-americas text-blue-500 text-[10px]"></i> Constitutions</a>
+        <a href="#judgments" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white text-zinc-400 flex items-center gap-2 text-xs"><i class="fa-solid fa-scale-balanced text-emerald-500 text-[10px]"></i> Climate Cases</a>
+        <a href="#statutes" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white text-zinc-400 flex items-center gap-2 text-xs"><i class="fa-solid fa-book-bookmark text-amber-500 text-[10px]"></i> Statutes Library</a>
+      </div>
+
       <a href="#compare" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Compare</a>
       <a href="#search" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Search</a>
       <a href="#relay" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="text-amber-400 font-semibold flex items-center gap-1.5"><i class="fa-solid fa-brain text-xs"></i>JUS.smart</a>
@@ -752,8 +774,8 @@ footer a{color:var(--green-2)}
         <div class="flex flex-col gap-2 max-h-[500px] overflow-y-auto pr-1" id="judgmentsList"></div>
       </div>
 
-      <!-- Right Main Panel: Detail Viewer -->
-      <div class="lg:col-span-2 bg-[#fffdf8] border border-[#e3dcc9] rounded-2xl p-6 min-h-[600px] text-[#22281f] shadow-lg relative" id="judgmentViewer"></div>
+      <!-- Right Main Panel: Detail Viewer (Dark casing, premium parchment text sheet inside) -->
+      <div class="lg:col-span-2 bg-zinc-950 border border-zinc-800 rounded-2xl p-6 min-h-[600px] text-zinc-300 shadow-2xl relative" id="judgmentViewer"></div>
     </div>
   </section>
 
@@ -2087,14 +2109,14 @@ function renderJudgmentDetail() {
   const articlesHtml = j.articles.map(artKey => {
     const art = D.articles[artKey];
     if (!art) return "";
-    return `<button onclick="goToCaseArticle('${artKey}')" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#123524] text-xs text-white font-mono hover:bg-[#2a6b4a] transition-all"><i class="fa-solid fa-scroll text-[9px] text-emerald-400"></i>Art. ${art.num}</button>`;
+    return `<button onclick="goToCaseArticle('${artKey}')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/40 border border-emerald-900/60 text-[11px] text-emerald-400 font-mono hover:bg-emerald-900/40 transition-all"><i class="fa-solid fa-scroll text-[9px]"></i>Art. ${art.num}</button>`;
   }).join(" ");
   
   const t = activeJudgmentTab;
   const tabBtn = (name, label) => {
     const cur = t === name;
     return `<button onclick="selectJudgmentTab('${name}')"
-      class="px-3 py-1.5 text-xs font-semibold rounded-lg border transition-all ${cur ? 'bg-[#123524] text-white border-[#123524]' : 'bg-[#faf6ee] text-[#5a6055] border-[#e3dcc9] hover:bg-[#eef3ea]' }">${label}</button>`;
+      class="px-3.5 py-2 text-xs font-semibold rounded-lg border transition-all ${cur ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400' : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700' }">${label}</button>`;
   };
   
   let tabBodyHtml = "";
@@ -2103,15 +2125,15 @@ function renderJudgmentDetail() {
       <div class="space-y-4">
         <div>
           <h4 class="text-xs font-bold uppercase tracking-wider text-[#5a6055] mb-1">Deciding Bench & Court</h4>
-          <p class="text-sm font-semibold">${esc(j.court)} — Decided by ${esc(j.judge)} on ${j.date}</p>
+          <p class="text-sm font-bold text-[#22281f]">${esc(j.court)} — Decided by ${esc(j.judge)} on ${j.date}</p>
         </div>
         <div>
-          <h4 class="text-xs font-bold uppercase tracking-wider text-[#5a6055] mb-1">Case Holding Summary</h4>
-          <p class="text-sm italic leading-relaxed text-[#22281f] font-serif">${esc(j.factual_background)}</p>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-[#5a6055] mb-1.5">Case Holding Summary</h4>
+          <p class="text-sm italic leading-relaxed text-[#22281f] font-serif pl-3 border-l-2 border-emerald-600/40">${esc(j.factual_background)}</p>
         </div>
         <div>
           <h4 class="text-xs font-bold uppercase tracking-wider text-[#5a6055] mb-2">Detailed Legal Decisions</h4>
-          <ul class="list-disc pl-5 space-y-2 text-sm leading-relaxed">
+          <ul class="list-disc pl-5 space-y-2 text-sm leading-relaxed text-[#22281f]">
             ${j.holdings.map(h => `<li>${esc(h)}</li>`).join("")}
           </ul>
         </div>
@@ -2123,10 +2145,10 @@ function renderJudgmentDetail() {
         <h4 class="text-xs font-bold uppercase tracking-wider text-[#5a6055] mb-2">Checklist of Key Precedents Established</h4>
         <div class="space-y-3">
           ${j.holdings.map((h, idx) => `
-            <div class="flex items-start gap-3 p-3 rounded-lg bg-[#faf6ee] border border-[#e3dcc9]">
-              <span class="flex items-center justify-center w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold mt-0.5 flex-none"><i class="fa-solid fa-check text-[10px]"></i></span>
+            <div class="flex items-start gap-3 p-3.5 rounded-xl bg-[#faf6ee] border border-[#e3dcc9]">
+              <span class="flex items-center justify-center w-5 h-5 rounded-full bg-emerald-100 border border-emerald-200 text-emerald-700 text-xs font-bold mt-0.5 flex-none"><i class="fa-solid fa-check text-[9px]"></i></span>
               <div>
-                <div class="text-[9px] uppercase tracking-wider font-mono font-bold text-zinc-500">Holdings #${idx+1}</div>
+                <div class="text-[9px] uppercase tracking-wider font-mono font-bold text-[#5a6055]">Holding #${idx+1}</div>
                 <p class="text-xs text-[#22281f] leading-relaxed font-serif mt-0.5">${esc(h)}</p>
               </div>
             </div>
@@ -2138,7 +2160,7 @@ function renderJudgmentDetail() {
     tabBodyHtml = `
       <div class="space-y-4">
         <h4 class="text-xs font-bold uppercase tracking-wider text-[#5a6055] mb-1">Extracted Text Paragraphs (from Original Court Transcripts)</h4>
-        <div class="p-4 rounded-xl bg-[#faf6ee] border border-[#e3dcc9] font-serif text-sm leading-loose whitespace-pre-wrap max-h-[400px] overflow-y-auto pr-2" style="font-family: var(--serif);">
+        <div class="p-4 rounded-xl bg-[#faf6ee] border border-[#e3dcc9] font-serif text-sm leading-loose whitespace-pre-wrap max-h-[400px] overflow-y-auto pr-2 text-[#22281f]" style="font-family: var(--serif);">
 ${esc(j.raw_extracts)}
         </div>
       </div>
@@ -2147,7 +2169,7 @@ ${esc(j.raw_extracts)}
     tabBodyHtml = `
       <div class="space-y-4">
         <h4 class="text-xs font-bold uppercase tracking-wider text-[#5a6055] mb-1">Strategic Legal Intelligence Analysis (KSC Review Note)</h4>
-        <div class="p-4 rounded-xl bg-[#faf6ee] border border-[#e3dcc9] font-serif text-sm leading-loose whitespace-pre-wrap max-h-[400px] overflow-y-auto pr-2" style="font-family: var(--serif);">
+        <div class="p-4 rounded-xl bg-[#faf6ee] border border-[#e3dcc9] font-serif text-sm leading-loose whitespace-pre-wrap max-h-[400px] overflow-y-auto pr-2 text-[#22281f]" style="font-family: var(--serif);">
 ${esc(j.commentary)}
         </div>
       </div>
@@ -2155,30 +2177,30 @@ ${esc(j.commentary)}
   }
   
   viewer.innerHTML = `
-    <div class="reader-head mb-6 pb-4 border-b border-[#e3dcc9]">
+    <div class="reader-head mb-6 pb-5 border-b border-zinc-800">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-        <div class="kicker text-[10px] uppercase font-bold tracking-widest text-[#5a6055] font-mono">${esc(j.court)} · ${esc(j.citation)}</div>
-        <div class="text-[10px] text-[#5a6055] font-mono font-bold">Decided: ${j.date}</div>
+        <div class="kicker text-[10px] uppercase font-bold tracking-widest text-zinc-500 font-mono">${esc(j.court)} · ${esc(j.citation)}</div>
+        <div class="text-[10px] text-zinc-500 font-mono">Decided: ${j.date}</div>
       </div>
-      <h2 class="text-2xl font-serif text-[#22281f] leading-snug mt-2 mb-4" style="font-family: var(--serif);">${esc(j.name)}</h2>
+      <h2 class="text-2xl font-serif text-white leading-snug mt-2 mb-4" style="font-family: var(--serif);">${esc(j.name)}</h2>
       
       <!-- Affected Provisions -->
-      <div class="flex flex-wrap items-center gap-2 mt-2">
+      <div class="flex flex-wrap items-center gap-3 mt-2">
         <span class="text-[10px] uppercase tracking-wider text-zinc-500 font-bold font-mono">Fundamental Rights Affected:</span>
         <div class="flex flex-wrap gap-1.5">${articlesHtml}</div>
       </div>
     </div>
     
     <!-- Tab Controls -->
-    <div class="flex flex-wrap gap-2 mb-6 border-b border-[#e3dcc9] pb-4">
+    <div class="flex flex-wrap gap-2 mb-6 border-b border-zinc-800 pb-4">
       ${tabBtn("review", "Review & Holdings")}
       ${tabBtn("holdings", "Key Decisions Checklist")}
       ${tabBtn("extracts", "Extracted Transcripts")}
       ${tabBtn("commentary", "KSC Intelligence Review")}
     </div>
     
-    <!-- Tab Body -->
-    <div class="judgment-tab-content">
+    <!-- Tab Body (Bounded Parchment Paper) -->
+    <div class="p-6 rounded-xl bg-[#fffdf8] border border-[#e3dcc9] shadow-inner font-serif">
       ${tabBodyHtml}
     </div>
   `;
