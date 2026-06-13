@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "name": "KSC.JUSNREM — Pre-1973 Constitutional Lineage",
+    "total_frameworks": 29,
+    "last_updated": "2026-06-12",
+    "description": "Complete structured repository of every constitutional and legal framework that governed the territories of Pakistan before 14 August 1973."
+  },
+  "eras": [
+    {
+      "id": "era0",
+      "name": "Company Rule — Precursor Statutes (1773–1853)",
+      "count": 5,
+      "frameworks": [
+        "reg1773",
+        "pitt1784",
+        "charter1813",
+        "charter1833",
+        "charter1853"
+      ]
+    },
+    {
+      "id": "era1",
+      "name": "Crown Rule — Constitutional Frameworks of British India (1858–1947)",
+      "count": 7,
+      "frameworks": [
+        "goi1858",
+        "ica1861",
+        "ica1892",
+        "ica1909",
+        "goi1919",
+        "goi1935",
+        "lahore1940"
+      ]
+    },
+    {
+      "id": "era2",
+      "name": "Dominion of Pakistan — the Interim Framework (1947–1956)",
+      "count": 6,
+      "frameworks": [
+        "iia1947",
+        "ppco1947",
+        "objres1949",
+        "dissolution1954",
+        "tamizuddin1955",
+        "oneunit1955"
+      ]
+    },
+    {
+      "id": "era3",
+      "name": "The 1956 Constitution and the First Martial Law (1956–1962)",
+      "count": 4,
+      "frameworks": [
+        "const1956",
+        "ml1958",
+        "lcfo1958",
+        "dosso1958"
+      ]
+    },
+    {
+      "id": "era4",
+      "name": "The 1962 Constitution and the Second Martial Law (1962–1969)",
+      "count": 2,
+      "frameworks": [
+        "const1962",
+        "ml1969"
+      ]
+    },
+    {
+      "id": "era5",
+      "name": "Transition — From Martial Law to the 1973 Constitution (1969–1973)",
+      "count": 5,
+      "frameworks": [
+        "pco1969",
+        "lfo1970",
+        "secession1971",
+        "asmajilani1972",
+        "interim1972"
+      ]
+    }
+  ]
+}

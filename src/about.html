@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About • constitution.codes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="bg-zinc-950 text-white min-h-screen flex flex-col justify-between">
+
+    <!-- Navbar -->
+    <nav class="bg-zinc-950 border-b border-zinc-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="index.html#home" class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-white rounded flex items-center justify-center">
+                    <span class="text-zinc-950 font-bold text-xl tracking-tighter">KSC</span>
+                </div>
+                <div>
+                    <div class="font-semibold tracking-tight text-white">KSC.JUSNREM</div>
+                    <div class="text-[10px] text-zinc-500 -mt-1 uppercase tracking-wider">Constitutional Intelligence</div>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <div class="hidden md:flex items-center gap-8 text-sm" id="nav-links">
+                <a href="index.html#home" class="hover:text-white transition-colors">Home</a>
+                <a href="index.html#lineage" class="hover:text-white transition-colors">Lineage</a>
+                <a href="index.html#time-machine" class="hover:text-white transition-colors">Time Machine</a>
+                <a href="index.html#amendments" class="hover:text-white transition-colors">Amendments</a>
+                <a href="index.html#statutes" class="hover:text-white transition-colors">Statutes</a>
+                <a href="index.html#compare" class="hover:text-white transition-colors">Compare</a>
+                <a href="index.html#search" class="hover:text-white transition-colors">Search</a>
+                <a href="about.html" class="text-[#00A36C] hover:text-white transition-colors">About</a>
+            </div>
+
+            <!-- External Ecosystem Links -->
+            <div class="flex items-center gap-4">
+                <a href="https://jus-automica.digital" target="_blank"
+                   class="px-4 py-2 text-sm rounded-full border border-white/20 hover:bg-white/5 transition-colors">
+                    JUS.Automica
+                </a>
+                <a href="https://budget-codes.vercel.app" target="_blank"
+                   class="px-4 py-2 text-sm rounded-full bg-white text-zinc-950 font-medium hover:bg-white/90 transition-colors">
+                    Fiscal Engine
+                </a>
+                <!-- Mobile menu trigger -->
+                <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden text-zinc-400 hover:text-white focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-zinc-800 bg-zinc-950">
+            <div class="px-6 py-4 flex flex-col gap-4 text-zinc-400 text-sm">
+                <a href="index.html#home" class="hover:text-white">Home</a>
+                <a href="index.html#lineage" class="hover:text-white">Lineage</a>
+                <a href="index.html#time-machine" class="hover:text-white">Time Machine</a>
+                <a href="index.html#amendments" class="hover:text-white">Amendments</a>
+                <a href="index.html#statutes" class="hover:text-white">Statutes</a>
+                <a href="index.html#compare" class="hover:text-white">Compare</a>
+                <a href="index.html#search" class="hover:text-white">Search</a>
+                <a href="about.html" class="hover:text-white">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main About Content -->
+    <main class="max-w-4xl mx-auto px-6 pt-16 pb-20 flex-grow text-left">
+        <div class="max-w-3xl">
+            <div class="uppercase tracking-[3px] text-xs text-[#00A36C] font-semibold mb-4">The Vision</div>
+            <h1 class="text-5xl md:text-6xl font-semibold tracking-tighter leading-none mb-8">
+                Why This Engine Exists
+            </h1>
+
+            <div class="prose prose-invert max-w-none text-zinc-300 space-y-6 leading-relaxed">
+                <p>
+                    Pakistan’s constitutional history is rich but fragmented. Laws evolve, amendments are passed, 
+                    and legal interpretations shift — yet most of this evolution remains trapped in static documents.
+                </p>
+
+                <p>
+                    The <strong>Constitutional Intelligence Engine</strong> changes that. It transforms constitutional law 
+                    into a <strong>living, version-controlled system</strong> — precise, searchable, and traceable across time.
+                </p>
+
+                <h2 class="text-3xl font-semibold tracking-tight mt-12 mb-4 text-white">Our Purpose</h2>
+                <p>
+                    We believe constitutional law should be treated as infrastructure — auditable, machine-readable, 
+                    and open to reasoned analysis. This engine preserves the full lineage of Pakistan’s constitutional 
+                    development while enabling deep exploration of how rules have changed.
+                </p>
+
+                <h2 class="text-3xl font-semibold tracking-tight mt-12 mb-4 text-white">Part of a Larger Vision</h2>
+                <p>
+                    This project is a core component of <strong>KSC.JUSNREM</strong> and sits within the 
+                    <strong>JUS.Automica</strong> Uniform Reference Architecture. It forms the foundational 
+                    layer for <strong>Constitutional Cybernetics</strong> — the study of how constitutional 
+                    principles interact with digital systems, smart contracts, and algorithmic governance.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-zinc-950 border-t border-zinc-800 text-zinc-400 mt-auto">
+        <div class="max-w-7xl mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-y-10">
+                <!-- Brand -->
+                <div class="text-left">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-7 h-7 bg-white rounded flex items-center justify-center">
+                            <span class="text-zinc-950 font-bold text-lg tracking-tighter">KSC</span>
+                        </div>
+                        <span class="font-semibold text-white tracking-tight">KSC.JUSNREM</span>
+                    </div>
+                    <p class="text-sm">Constitutional Intelligence Engine</p>
+                    <p class="text-xs mt-1">Part of JUS.Automica</p>
+                </div>
+
+                <!-- Explore -->
+                <div class="text-left">
+                    <div class="font-medium text-white mb-4 text-sm tracking-wider uppercase">Explore</div>
+                    <div class="space-y-2 text-sm">
+                        <a href="index.html#lineage" class="block hover:text-white transition-colors">Pre-1973 Lineage</a>
+                        <a href="index.html#time-machine" class="block hover:text-white transition-colors">Time Machine</a>
+                        <a href="index.html#amendments" class="block hover:text-white transition-colors">Amendment History</a>
+                        <a href="index.html#statutes" class="block hover:text-white transition-colors">Statute Library</a>
+                    </div>
+                </div>
+
+                <!-- Ecosystem -->
+                <div class="text-left">
+                    <div class="font-medium text-white mb-4 text-sm tracking-wider uppercase">Ecosystem</div>
+                    <div class="space-y-2 text-sm">
+                        <a href="https://budget-codes.vercel.app" target="_blank" class="block hover:text-white transition-colors">Fiscal Intelligence Engine</a>
+                        <a href="https://jus-automica.digital" target="_blank" class="block hover:text-white transition-colors">JUS.Automica</a>
+                        <a href="about.html" class="block hover:text-white transition-colors">About KSC.JUSNREM</a>
+                    </div>
+                </div>
+
+                <!-- Status -->
+                <div class="text-left">
+                    <div class="font-medium text-white mb-4 text-sm tracking-wider uppercase">Status</div>
+                    <div class="text-sm space-y-1">
+                        <div>Connected to JUS.Automica</div>
+                        <div class="text-emerald-400 font-medium">● Data Current</div>
+                        <div class="text-xs mt-3 text-zinc-500">Last updated: June 2026</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-zinc-800 text-xs flex flex-col md:flex-row justify-between gap-y-2 text-zinc-500">
+                <div>© 2026 KSC.JUSNREM — Constitutional Intelligence Engine · constitution.codes</div>
+                <div class="flex gap-x-6">
+                    <span>Aligned with JUS.Automica URA</span>
+                    <span>Constitutional Cybernetics</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -65,8 +65,12 @@
         switchView("timeline"); openTl(i);
       } else if((m = h.match(/^lin-(.+)$/))){
         openLin(m[1]);
-      } else if(["timeline","lineage","compare","search","about","statutes"].indexOf(h) >= 0){
+      } else if(["timeline","lineage","compare","search","about","statutes","browse","home"].indexOf(h) >= 0){
         switchView(h);
+      } else if(h === "time-machine") {
+        switchView("browse");
+      } else if(h === "amendments") {
+        switchView("timeline");
       } else {
         for(const st of S){
           const mm = h.match(new RegExp("^" + st.id + "-(.+)$"));

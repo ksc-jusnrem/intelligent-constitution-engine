@@ -18,12 +18,13 @@ Output schema (data.json):
 """
 import json, re, subprocess, sys, datetime
 
+import os
 REPO = sys.argv[1] if len(sys.argv) > 1 else "/tmp/legalize-pk"
-OUT  = sys.argv[2] if len(sys.argv) > 2 else "data.json"
+OUT  = sys.argv[2] if len(sys.argv) > 2 else os.path.join("data", "constitution", "data.json")
 
 def git(*args):
     return subprocess.run(["git", "-C", REPO, *args],
-                          capture_output=True, text=True, check=True).stdout
+                          capture_output=True, encoding="utf-8", check=True).stdout
 
 # ---- 1. commits, oldest first -------------------------------------------
 rows = git("log", "--reverse", "--format=%H|%ad|%an|%s", "--date=short").strip().splitlines()
@@ -103,9 +104,18 @@ data = {
     "commits": commits,
     "articles": articles,
 }
+os.makedirs(os.path.dirname(OUT), exist_ok=True)
 with open(OUT, "w", encoding="utf-8") as fp:
     json.dump(data, fp, ensure_ascii=False, separators=(",", ":"))
+
+out_js = OUT.replace(".json", ".js")
+with open(out_js, "w", encoding="utf-8") as fp:
+    fp.write("/* Auto-generated from git history. Do not edit manually. */\n")
+    fp.write("window.CONSTITUTION_DATA = ")
+    json.dump(data, fp, ensure_ascii=False, separators=(",", ":"))
+    fp.write(";\n")
 
 n_versions = sum(len(a["versions"]) for a in articles.values())
 print(f"commits={len(commits)} articles={len(articles)} versions={n_versions}")
 print(f"wrote {OUT}")
+print(f"wrote {out_js}")

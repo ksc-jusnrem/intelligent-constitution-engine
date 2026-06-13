@@ -6,6 +6,8 @@
 <title>KSC.JUSNREM — Constitutional Intelligence Engine</title>
 <meta name="description" content="KSC.JUSNREM Constitutional Intelligence Engine — the constitutional history of Pakistan from the Government of India Act 1858 to today, plus a digital repository of statutes. Time travel, diffs, timeline, lineage and search. constitution.codes">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23123524'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='%23e8d5a3' font-family='Georgia'>⚖</text></svg>">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 :root{
   --green:#123524; --green-2:#1d4d36; --green-3:#2a6b4a;
@@ -18,7 +20,8 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--sans);background:var(--ivory);color:var(--ink);line-height:1.6}
+body{font-family:var(--sans);background:#09090b;color:#f4f4f5;line-height:1.6}
+
 
 /* ---------- header ---------- */
 header{background:var(--green);color:var(--ivory);padding:0 1.25rem;position:sticky;top:0;z-index:50;box-shadow:0 2px 12px rgba(0,0,0,.25)}
@@ -187,28 +190,65 @@ footer a{color:var(--green-2)}
 </head>
 <body>
 
-<header>
-  <div class="hdr-top">
-    <div class="crest">⚖</div>
-    <div class="brand">
-      <h1>KSC.JUSNREM</h1>
-      <small>Constitutional Intelligence Engine</small>
-    </div>
-    <div class="hdr-spacer"></div>
-    <div class="domain">constitution.codes</div>
-  </div>
-  <nav id="nav">
-    <button data-view="browse" class="active">📖 Browse</button>
-    <button data-view="lineage">🏛 Lineage 1773–1973</button>
-    <button data-view="timeline">🕰 Constitutional History</button>
-    <button data-view="statutes">§ Digital Repository</button>
-    <button data-view="compare">⇄ Compare Versions</button>
-    <button data-view="search">🔍 Search</button>
-    <button data-view="about">ℹ About</button>
-  </nav>
-</header>
+<!-- Navbar -->
+<nav class="bg-zinc-950 border-b border-zinc-800 sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#home" class="flex items-center gap-3">
+      <div class="w-8 h-8 bg-white rounded flex items-center justify-center">
+        <span class="text-zinc-950 font-bold text-xl tracking-tighter">KSC</span>
+      </div>
+      <div>
+        <div class="font-semibold tracking-tight text-white">KSC.JUSNREM</div>
+        <div class="text-[10px] text-zinc-500 -mt-1 uppercase tracking-wider">Constitutional Intelligence</div>
+      </div>
+    </a>
 
-<div class="timebar" id="timebar">
+    <!-- Navigation Links -->
+    <div class="hidden md:flex items-center gap-8 text-sm" id="nav-links">
+      <a href="#home" class="text-[#00A36C] hover:text-white transition-colors">Home</a>
+      <a href="#lineage" class="hover:text-white transition-colors">Lineage</a>
+      <a href="#time-machine" class="hover:text-white transition-colors">Time Machine</a>
+      <a href="#amendments" class="hover:text-white transition-colors">Amendments</a>
+      <a href="#statutes" class="hover:text-white transition-colors">Statutes</a>
+      <a href="#compare" class="hover:text-white transition-colors">Compare</a>
+      <a href="#search" class="hover:text-white transition-colors">Search</a>
+      <a href="about.html" class="hover:text-white transition-colors">About</a>
+    </div>
+
+    <!-- External Ecosystem Links -->
+    <div class="flex items-center gap-4">
+      <a href="https://jus-automica.digital" target="_blank"
+         class="px-4 py-2 text-sm rounded-full border border-white/20 hover:bg-white/5 transition-colors">
+        JUS.Automica
+      </a>
+      <a href="https://budget-codes.vercel.app" target="_blank"
+         class="px-4 py-2 text-sm rounded-full bg-white text-zinc-950 font-medium hover:bg-white/90 transition-colors">
+        Fiscal Engine
+      </a>
+      <!-- Mobile menu trigger -->
+      <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden text-zinc-400 hover:text-white focus:outline-none">
+        <i class="fa-solid fa-bars text-xl"></i>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-zinc-800 bg-zinc-950">
+    <div class="px-6 py-4 flex flex-col gap-4 text-zinc-400 text-sm">
+      <a href="#home" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Home</a>
+      <a href="#lineage" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Lineage</a>
+      <a href="#time-machine" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Time Machine</a>
+      <a href="#amendments" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Amendments</a>
+      <a href="#statutes" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Statutes</a>
+      <a href="#compare" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Compare</a>
+      <a href="#search" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Search</a>
+      <a href="about.html" class="hover:text-white">About</a>
+    </div>
+  </div>
+</nav>
+
+<div class="timebar" id="timebar" style="display: none;">
   <div class="timebar-inner">
     <label>Constitution as of</label>
     <input type="range" id="eraSlider" min="0" max="24" value="24">
@@ -218,8 +258,144 @@ footer a{color:var(--green-2)}
 </div>
 
 <main>
+  <!-- HOME -->
+  <section id="view-home" class="block">
+    <!-- Hero Section -->
+    <div class="max-w-5xl mx-auto px-6 pt-20 pb-16 text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-white/5 text-xs tracking-[2px] mb-6 border border-white/10">
+        CONSTITUTIONAL INTELLIGENCE • LAW AS INFRASTRUCTURE
+      </div>
+
+      <h1 class="text-6xl md:text-7xl font-semibold tracking-tighter leading-none mb-6">
+        Constitutional<br>Intelligence Engine
+      </h1>
+      
+      <p class="max-w-2xl mx-auto text-xl text-zinc-400 mb-10">
+        A living, version-controlled archive of Pakistan’s constitutional law from 1773 to the present. 
+        Built for precision, transparency, and the future of Constitutional Cybernetics.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#time-machine" 
+           class="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-white text-zinc-950 font-medium hover:bg-white/90 transition-all">
+          Open Time Machine
+        </a>
+        <a href="about.html" 
+           class="inline-flex items-center justify-center px-8 py-4 rounded-2xl border border-white/20 hover:bg-white/5 transition-all">
+          Learn More
+        </a>
+      </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="border-y border-zinc-800 bg-zinc-900/50 mb-16">
+      <div class="max-w-5xl mx-auto px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-sm">
+        <div>
+          <div class="text-3xl font-semibold tracking-tighter text-[#c9a648]">1773–2026</div>
+          <div class="text-zinc-400 mt-1">Full Constitutional Lineage</div>
+        </div>
+        <div>
+          <div class="text-3xl font-semibold tracking-tighter text-[#c9a648]">314</div>
+          <div class="text-zinc-400 mt-1">Articles Tracked</div>
+        </div>
+        <div>
+          <div class="text-3xl font-semibold tracking-tighter text-[#c9a648]">24</div>
+          <div class="text-zinc-400 mt-1">Amendments Documented</div>
+        </div>
+        <div>
+          <div class="text-3xl font-semibold tracking-tighter text-[#c9a648]">Law as Code</div>
+          <div class="text-zinc-400 mt-1">Version-Controlled</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature Cards -->
+    <div class="max-w-5xl mx-auto px-6 mb-20 text-left">
+      <h3 class="text-2xl font-semibold tracking-tight mb-8 text-zinc-300 uppercase tracking-widest text-xs text-[#00A36C]">Engine Capabilities</h3>
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Card 1 -->
+        <a href="#lineage" class="block border border-zinc-800 rounded-3xl p-8 hover:border-zinc-700 hover:bg-zinc-900/30 transition-all group">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-zinc-500 font-mono text-xs">MODULE 01</span>
+            <i class="fa-solid fa-arrow-right text-zinc-600 group-hover:text-white group-hover:translate-x-1 transition-all"></i>
+          </div>
+          <h4 class="text-2xl font-semibold tracking-tight mb-2 text-white">Pre-1973 Lineage</h4>
+          <p class="text-zinc-400 text-sm leading-relaxed">Explore six historical eras of constitutional development from the Regulating Act 1773 to the Interim Constitution 1972.</p>
+        </a>
+
+        <!-- Card 2 -->
+        <a href="#time-machine" class="block border border-zinc-800 rounded-3xl p-8 hover:border-zinc-700 hover:bg-zinc-900/30 transition-all group">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-zinc-500 font-mono text-xs">MODULE 02</span>
+            <i class="fa-solid fa-arrow-right text-zinc-600 group-hover:text-white group-hover:translate-x-1 transition-all"></i>
+          </div>
+          <h4 class="text-2xl font-semibold tracking-tight mb-2 text-white">Constitutional Time Machine</h4>
+          <p class="text-zinc-400 text-sm leading-relaxed">View the 1973 Constitution exactly as it stood after any amendment. Drag the time range slider to travel through legal history.</p>
+        </a>
+
+        <!-- Card 3 -->
+        <a href="#amendments" class="block border border-zinc-800 rounded-3xl p-8 hover:border-zinc-700 hover:bg-zinc-900/30 transition-all group">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-zinc-500 font-mono text-xs">MODULE 03</span>
+            <i class="fa-solid fa-arrow-right text-zinc-600 group-hover:text-white group-hover:translate-x-1 transition-all"></i>
+          </div>
+          <h4 class="text-2xl font-semibold tracking-tight mb-2 text-white">Amendment History</h4>
+          <p class="text-zinc-400 text-sm leading-relaxed">Track all 24 amendments with dates, summaries, and affected articles in a clear, chronological narrative view.</p>
+        </a>
+
+        <!-- Card 4 -->
+        <a href="#statutes" class="block border border-zinc-800 rounded-3xl p-8 hover:border-zinc-700 hover:bg-zinc-900/30 transition-all group">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-zinc-500 font-mono text-xs">MODULE 04</span>
+            <i class="fa-solid fa-arrow-right text-zinc-600 group-hover:text-white group-hover:translate-x-1 transition-all"></i>
+          </div>
+          <h4 class="text-2xl font-semibold tracking-tight mb-2 text-white">Digital Repository</h4>
+          <p class="text-zinc-400 text-sm leading-relaxed">Browse the statutes operating beneath the constitution, including the Pakistan Penal Code 1860 and CrPC 1898.</p>
+        </a>
+      </div>
+    </div>
+
+    <!-- Profile Section -->
+    <div class="max-w-5xl mx-auto px-6 py-16 border-t border-zinc-800 grid md:grid-cols-12 gap-x-12 gap-y-8 text-left">
+      <div class="md:col-span-5">
+        <span class="text-[#00A36C] text-xs font-mono tracking-[3px] uppercase">The Institution</span>
+        <h2 class="text-4xl font-light tracking-tight mt-3 leading-none">KSC.<span class="font-semibold text-white">JUSNREM</span></h2>
+        <p class="text-zinc-500 text-xs mt-2 uppercase tracking-wider">Strategic Legal Intelligence</p>
+      </div>
+      <div class="md:col-span-7 space-y-4 text-zinc-400 text-sm leading-relaxed">
+        <p>
+          KSC.JUSNREM is a strategic legal intelligence firm specializing in anticipatory governance systems. 
+          We engineer sovereign AI infrastructure that enables governments and institutions to navigate complex legal, regulatory, and geopolitical environments with precision and foresight.
+        </p>
+        <p>
+          Our work sits at the intersection of constitutional law, algorithmic accountability, and statecraft. 
+          We believe the future of governance will be shaped not just by laws, but by the intelligent systems that interpret and apply them.
+        </p>
+      </div>
+    </div>
+
+    <!-- Founder Section -->
+    <div class="max-w-5xl mx-auto px-6 py-16 border-t border-zinc-800 grid md:grid-cols-12 gap-x-12 gap-y-8 mb-16 text-left">
+      <div class="md:col-span-5">
+        <span class="text-xs font-mono tracking-[3px] text-[#00A36C]">THE ARCHITECT</span>
+        <h3 class="text-4xl font-light tracking-tight mt-2 text-white">Khurram Shehzad Chughtai</h3>
+        <p class="text-zinc-500 text-xs mt-1">Founder & Principal Architect</p>
+      </div>
+      <div class="md:col-span-7 space-y-4 text-zinc-400 text-sm leading-relaxed">
+        <p>
+          Khurram Shehzad Chughtai is a legal technologist and strategic thinker focused on the future of institutional intelligence. 
+          With deep expertise in constitutional law and emerging technologies, he founded KSC.JUSNREM to build the next generation of sovereign legal systems.
+        </p>
+        <p>
+          His work explores the convergence of law, AI, and state power — designing systems that are not only intelligent, but accountable, sovereign, and aligned with human governance values.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- BROWSE -->
-  <section id="view-browse" class="browse">
+  <section id="view-browse" class="browse hidden">
+
     <aside class="sidebar">
       <input type="text" id="artFilter" placeholder="Filter articles… (e.g. 6, judiciary)">
       <div class="art-list" id="artList"></div>
@@ -316,14 +492,67 @@ footer a{color:var(--green-2)}
   </section>
 </main>
 
-<footer>
-  KSC.JUSNREM — Constitutional Intelligence Engine · <a href="https://constitution.codes">constitution.codes</a> ·
-  Texts in the public domain · Built from the version-controlled Constitution of Pakistan 🇵🇰
+<!-- Footer -->
+<footer class="bg-zinc-950 border-t border-zinc-800 text-zinc-400">
+  <div class="max-w-7xl mx-auto px-6 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-y-10">
+      <!-- Brand -->
+      <div class="text-left">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-7 h-7 bg-white rounded flex items-center justify-center">
+            <span class="text-zinc-950 font-bold text-lg tracking-tighter">KSC</span>
+          </div>
+          <span class="font-semibold text-white tracking-tight">KSC.JUSNREM</span>
+        </div>
+        <p class="text-sm">Constitutional Intelligence Engine</p>
+        <p class="text-xs mt-1">Part of JUS.Automica</p>
+      </div>
+
+      <!-- Explore -->
+      <div class="text-left">
+        <div class="font-medium text-white mb-4 text-sm tracking-wider uppercase">Explore</div>
+        <div class="space-y-2 text-sm">
+          <a href="#lineage" class="block hover:text-white transition-colors">Pre-1973 Lineage</a>
+          <a href="#time-machine" class="block hover:text-white transition-colors">1973 Constitution</a>
+          <a href="#amendments" class="block hover:text-white transition-colors">Amendment History</a>
+          <a href="#statutes" class="block hover:text-white transition-colors">Statute Library</a>
+        </div>
+      </div>
+
+      <!-- Ecosystem -->
+      <div class="text-left">
+        <div class="font-medium text-white mb-4 text-sm tracking-wider uppercase">Ecosystem</div>
+        <div class="space-y-2 text-sm">
+          <a href="https://budget-codes.vercel.app" target="_blank" class="block hover:text-white transition-colors">Fiscal Intelligence Engine</a>
+          <a href="https://jus-automica.digital" target="_blank" class="block hover:text-white transition-colors">JUS.Automica</a>
+          <a href="about.html" class="block hover:text-white transition-colors">About KSC.JUSNREM</a>
+        </div>
+      </div>
+
+      <!-- Status -->
+      <div class="text-left">
+        <div class="font-medium text-white mb-4 text-sm tracking-wider uppercase">Status</div>
+        <div class="text-sm space-y-1">
+          <div>Connected to JUS.Automica</div>
+          <div class="text-emerald-400 font-medium">● Data Current</div>
+          <div class="text-xs mt-3 text-zinc-500">Last updated: June 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 pt-8 border-t border-zinc-800 text-xs flex flex-col md:flex-row justify-between gap-y-2 text-zinc-500">
+      <div>© 2026 KSC.JUSNREM — Constitutional Intelligence Engine · constitution.codes</div>
+      <div class="flex gap-x-6">
+        <span>Aligned with JUS.Automica URA</span>
+        <span>Constitutional Cybernetics</span>
+      </div>
+    </div>
+  </div>
 </footer>
 
-<script src="data.js"></script>
-<script src="lineage.js"></script>
-<script src="statutes.js"></script>
+<script src="../data/constitution/data.js"></script>
+<script src="../data/lineage.js"></script>
+<script src="js/statutes.js"></script>
 <script>
 "use strict";
 const D = window.CONSTITUTION_DATA;
@@ -338,7 +567,7 @@ const artKeys = Object.keys(D.articles).sort((a,b)=>{
   return (+pa[1]-+pb[1]) || pa[2].localeCompare(pb[2]);
 });
 
-const state = { era: D.commits.length-1, view: "browse", article: "article-001",
+const state = { era: D.commits.length-1, view: "home", article: "article-001",
                 statute: (window.STATUTES&&window.STATUTES[0])?window.STATUTES[0].id:null, section: null };
 
 // ---------- helpers ----------
@@ -405,12 +634,24 @@ $("#eraChip").addEventListener("click", ()=>{ switchView("timeline"); openTl(sta
 // ---------- navigation ----------
 function switchView(v){
   state.view=v;
-  document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active", b.dataset.view===v));
-  ["browse","lineage","timeline","statutes","compare","search","about"].forEach(x=>
-    $("#view-"+x).classList.toggle("hidden", x!==v));
-  $("#timebar").style.display = (v==="browse"||v==="timeline"||v==="search") ? "" : "none";
+  document.querySelectorAll("#nav-links a, #mobile-menu a").forEach(a => {
+    const href = a.getAttribute("href");
+    if (href && href.startsWith("#")) {
+      const viewName = href.slice(1);
+      const mappedView = viewName === "time-machine" ? "browse" : (viewName === "amendments" ? "timeline" : viewName);
+      a.classList.toggle("text-[#00A36C]", mappedView === v);
+      a.classList.toggle("text-white", mappedView !== v);
+    }
+  });
+  ["home","browse","lineage","timeline","statutes","compare","search","about"].forEach(x=> {
+    const el = $("#view-"+x);
+    if (el) el.classList.toggle("hidden", x!==v);
+  });
+  const tb = $("#timebar");
+  if (tb) {
+    tb.style.display = (v==="browse"||v==="timeline"||v==="search") ? "" : "none";
+  }
 }
-$("#nav").addEventListener("click", e=>{ if(e.target.dataset.view) switchView(e.target.dataset.view); });
 
 // ---------- browse: sidebar ----------
 function renderArtList(){
@@ -740,6 +981,6 @@ renderStatTabs(); renderSecList(); renderSecReader();
 initCompare(); renderStats();
 setEra(state.era);
 </script>
-<script src="router.js"></script>
+<script src="js/router.js"></script>
 </body>
 </html>
