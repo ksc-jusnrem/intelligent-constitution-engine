@@ -14,12 +14,28 @@
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
             <!-- Logo -->
             <a href="index.html#home" class="flex items-center gap-3">
-                <div class="w-8 h-8 bg-white rounded flex items-center justify-center">
-                    <span class="text-zinc-950 font-bold text-xl tracking-tighter">KSC</span>
-                </div>
+                <svg class="w-8 h-8 flex-none" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logo-grey" x1="20" y1="20" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#f4f4f5" />
+                            <stop offset="30%" stop-color="#a1a1aa" />
+                            <stop offset="70%" stop-color="#52525b" />
+                            <stop offset="100%" stop-color="#27272a" />
+                        </linearGradient>
+                        <linearGradient id="logo-white" x1="30" y1="80" x2="70" y2="20" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#ffffff" />
+                            <stop offset="60%" stop-color="#ffffff" />
+                            <stop offset="100%" stop-color="#e4e4e7" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M 26 24 H 46 C 54 24 54 36 46 36 H 40 V 62 C 40 70 46 72 50 68 L 72 50" 
+                          stroke="url(#logo-grey)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M 38 72 C 46 72 46 60 52 50 L 72 26" 
+                          stroke="url(#logo-white)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
                 <div>
                     <div class="font-semibold tracking-tight text-white">KSC.JUSNREM</div>
-                    <div class="text-[10px] text-zinc-500 -mt-1 uppercase tracking-wider">Constitutional Intelligence</div>
+                    <div class="text-[9px] text-zinc-500 -mt-1 uppercase tracking-wider font-mono">Strategic Legal Intelligence</div>
                 </div>
             </a>
 
@@ -29,7 +45,26 @@
                 <a href="index.html#lineage" class="hover:text-white transition-colors">Lineage</a>
                 <a href="index.html#time-machine" class="hover:text-white transition-colors">Time Machine</a>
                 <a href="index.html#amendments" class="hover:text-white transition-colors">Amendments</a>
-                <a href="index.html#statutes" class="hover:text-white transition-colors">Statutes</a>
+                <a href="index.html#cases" class="hover:text-white transition-colors">Cases</a>
+                
+                <!-- Repository Dropdown -->
+                <div class="relative group py-2">
+                    <button class="hover:text-white transition-colors flex items-center gap-1 focus:outline-none">
+                        Repository <i class="fa-solid fa-chevron-down text-[8px] opacity-70"></i>
+                    </button>
+                    <div class="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-48 rounded-xl bg-zinc-950/95 backdrop-blur-md border border-zinc-800 p-1.5 hidden group-hover:flex flex-col gap-0.5 shadow-2xl z-50">
+                        <a href="index.html#comparative" class="px-3 py-1.5 text-xs rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-900 transition-colors flex items-center gap-2">
+                            <i class="fa-solid fa-earth-americas text-blue-500 text-[10px] w-3.5"></i> Constitutions
+                        </a>
+                        <a href="index.html#judgments" class="px-3 py-1.5 text-xs rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-900 transition-colors flex items-center gap-2">
+                            <i class="fa-solid fa-scale-balanced text-emerald-500 text-[10px] w-3.5"></i> Climate Cases
+                        </a>
+                        <a href="index.html#statutes" class="px-3 py-1.5 text-xs rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-900 transition-colors flex items-center gap-2">
+                            <i class="fa-solid fa-book-bookmark text-amber-500 text-[10px] w-3.5"></i> Statutes Library
+                        </a>
+                    </div>
+                </div>
+
                 <a href="index.html#compare" class="hover:text-white transition-colors">Compare</a>
                 <a href="index.html#search" class="hover:text-white transition-colors">Search</a>
                 <a href="about.html" class="text-[#00A36C] hover:text-white transition-colors">About</a>
@@ -59,10 +94,19 @@
                 <a href="index.html#lineage" class="hover:text-white">Lineage</a>
                 <a href="index.html#time-machine" class="hover:text-white">Time Machine</a>
                 <a href="index.html#amendments" class="hover:text-white">Amendments</a>
-                <a href="index.html#statutes" class="hover:text-white">Statutes</a>
+                <a href="index.html#cases" class="hover:text-white">Cases</a>
+                
+                <!-- Mobile Repository Section -->
+                <div class="border-l border-zinc-800 pl-4 py-0.5 flex flex-col gap-2.5 my-1">
+                    <div class="text-[9px] uppercase tracking-widest text-zinc-600 font-bold font-mono">Repository</div>
+                    <a href="index.html#comparative" class="hover:text-white text-zinc-400 flex items-center gap-2 text-xs"><i class="fa-solid fa-earth-americas text-blue-500 text-[10px]"></i> Constitutions</a>
+                    <a href="index.html#judgments" class="hover:text-white text-zinc-400 flex items-center gap-2 text-xs"><i class="fa-solid fa-scale-balanced text-emerald-500 text-[10px]"></i> Climate Cases</a>
+                    <a href="index.html#statutes" class="hover:text-white text-zinc-400 flex items-center gap-2 text-xs"><i class="fa-solid fa-book-bookmark text-amber-500 text-[10px]"></i> Statutes Library</a>
+                </div>
+
                 <a href="index.html#compare" class="hover:text-white">Compare</a>
                 <a href="index.html#search" class="hover:text-white">Search</a>
-                <a href="about.html" class="hover:text-white">About</a>
+                <a href="about.html" class="hover:text-white text-[#00A36C] font-semibold">About</a>
             </div>
         </div>
     </nav>
@@ -111,9 +155,12 @@
                 <!-- Brand -->
                 <div class="text-left">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-7 h-7 bg-white rounded flex items-center justify-center">
-                            <span class="text-zinc-950 font-bold text-lg tracking-tighter">KSC</span>
-                        </div>
+                        <svg class="w-7 h-7 flex-none" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M 26 24 H 46 C 54 24 54 36 46 36 H 40 V 62 C 40 70 46 72 50 68 L 72 50" 
+                                  stroke="url(#logo-grey)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M 38 72 C 46 72 46 60 52 50 L 72 26" 
+                                  stroke="url(#logo-white)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
                         <span class="font-semibold text-white tracking-tight">KSC.JUSNREM</span>
                     </div>
                     <p class="text-sm">Constitutional Intelligence Engine</p>
@@ -127,6 +174,9 @@
                         <a href="index.html#lineage" class="block hover:text-white transition-colors">Pre-1973 Lineage</a>
                         <a href="index.html#time-machine" class="block hover:text-white transition-colors">Time Machine</a>
                         <a href="index.html#amendments" class="block hover:text-white transition-colors">Amendment History</a>
+                        <a href="index.html#cases" class="block hover:text-white transition-colors">Landmark Cases</a>
+                        <a href="index.html#comparative" class="block hover:text-white transition-colors">Global Constitutions</a>
+                        <a href="index.html#judgments" class="block hover:text-white transition-colors">Climate Cases</a>
                         <a href="index.html#statutes" class="block hover:text-white transition-colors">Statute Library</a>
                     </div>
                 </div>
