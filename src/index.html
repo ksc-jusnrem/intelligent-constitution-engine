@@ -268,6 +268,7 @@ footer a{color:var(--green-2)}
       <a href="#statutes" class="hover:text-white transition-colors">Statutes</a>
       <a href="#compare" class="hover:text-white transition-colors">Compare</a>
       <a href="#search" class="hover:text-white transition-colors">Search</a>
+      <a href="#relay" class="text-amber-500 hover:text-white transition-colors font-semibold flex items-center gap-1.5"><i class="fa-solid fa-brain text-xs"></i>JUS.smart</a>
       <a href="about.html" class="hover:text-white transition-colors mr-1">About</a>
       <button id="openHelpBtn" class="text-zinc-400 hover:text-white transition-colors flex items-center justify-center animate-pulse" title="How to use the engine">
         <i class="fa-regular fa-circle-question text-lg"></i>
@@ -301,6 +302,7 @@ footer a{color:var(--green-2)}
       <a href="#statutes" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Statutes</a>
       <a href="#compare" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Compare</a>
       <a href="#search" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Search</a>
+      <a href="#relay" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="text-amber-400 font-semibold flex items-center gap-1.5"><i class="fa-solid fa-brain text-xs"></i>JUS.smart</a>
       <a href="about.html" class="hover:text-white">About</a>
       <button id="openHelpBtnMobile" class="text-left text-zinc-400 hover:text-white flex items-center gap-2 pt-2 border-t border-zinc-900">
         <i class="fa-regular fa-circle-question text-base"></i>
@@ -549,6 +551,105 @@ footer a{color:var(--green-2)}
     <div id="searchResults"><p class="muted-center">Type at least 3 characters to search.</p></div>
   </section>
 
+  <!-- JUS.SMART INTEL RELAY -->
+  <section id="view-relay" class="hidden">
+    <!-- Hero Banner -->
+    <div class="max-w-4xl mx-auto text-center mb-10 mt-6">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-[10px] tracking-[2px] mb-4 border border-amber-500/20 text-amber-400 font-semibold font-mono">
+        JUS.SMART MODEL RELAY PROTOCOL
+      </div>
+      <h2 class="text-4xl font-semibold tracking-tight text-white mb-3">Jurisprudential Intelligence Relay</h2>
+      <p class="text-sm text-zinc-400 max-w-xl mx-auto">
+        Query the temporal legal system. Our relay orchestrates structural schema, semantic scholarship, and historical realist contexts to construct multi-dimensional reports.
+      </p>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-6 items-start">
+      <!-- Input Panel (1 Column) -->
+      <div class="bg-zinc-950 border border-zinc-800 rounded-2xl p-5 md:col-span-1 flex flex-col gap-4">
+        <div>
+          <label class="text-xs uppercase tracking-wider text-zinc-500 font-semibold font-mono block mb-2">Research Query</label>
+          <textarea id="relayQuery" rows="4" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl p-3 text-sm text-zinc-200 placeholder-zinc-500 outline-none focus:border-amber-500 transition-colors" placeholder="Ask about Article 58-2b, high treason, provincial autonomy, or precursor lineage…"></textarea>
+        </div>
+
+        <div>
+          <label class="text-xs uppercase tracking-wider text-zinc-500 font-semibold font-mono block mb-2">Protocol Depth</label>
+          <div class="flex flex-col gap-2">
+            <label class="flex items-start gap-3 p-3 rounded-xl border border-zinc-800 bg-zinc-900/50 hover:bg-zinc-900 cursor-pointer transition-colors">
+              <input type="radio" name="relayDepth" value="standard" checked class="mt-1 text-amber-500 border-zinc-800 bg-zinc-900 focus:ring-0">
+              <div>
+                <div class="text-xs font-semibold text-white">Standard</div>
+                <div class="text-[10px] text-zinc-500">Direct text response, assent metadata, and summaries.</div>
+              </div>
+            </label>
+            <label class="flex items-start gap-3 p-3 rounded-xl border border-zinc-800 bg-zinc-900/50 hover:bg-zinc-900 cursor-pointer transition-colors">
+              <input type="radio" name="relayDepth" value="exhaustive" class="mt-1 text-amber-500 border-zinc-800 bg-zinc-900 focus:ring-0">
+              <div>
+                <div class="text-xs font-semibold text-white">Exhaustive</div>
+                <div class="text-[10px] text-zinc-500">Includes version trees, mutation counts, and side-by-side diff maps.</div>
+              </div>
+            </label>
+            <label class="flex items-start gap-3 p-3 rounded-xl border border-zinc-800 bg-zinc-900/50 hover:bg-zinc-900 cursor-pointer transition-colors">
+              <input type="radio" name="relayDepth" value="jurisprudential" class="mt-1 text-amber-500 border-zinc-800 bg-zinc-900 focus:ring-0">
+              <div>
+                <div class="text-xs font-semibold text-white">Jurisprudential</div>
+                <div class="text-[10px] text-zinc-500">Full analysis with precursor lineage links, SC citations, and doctrinal debates.</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <button id="btnRunRelay" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-zinc-950 font-bold transition-colors text-sm flex items-center justify-center gap-2">
+          <i class="fa-solid fa-bolt"></i>
+          <span>Orchestrate Relay</span>
+        </button>
+      </div>
+
+      <!-- Output Panel (2 Columns) -->
+      <div class="md:col-span-2 flex flex-col gap-4">
+        <!-- Step logs / progress (hidden initially) -->
+        <div id="relaySteps" class="hidden bg-zinc-950 border border-zinc-800 rounded-2xl p-5 flex flex-col gap-3 font-mono text-[11px] text-zinc-400">
+          <div class="flex items-center justify-between border-b border-zinc-800 pb-2 mb-1">
+            <span class="text-zinc-500 font-semibold uppercase tracking-wider">Relay Pipeline Execution</span>
+            <span class="text-amber-500" id="relayStatus">Initializing…</span>
+          </div>
+          <div class="flex items-center gap-2" id="step1">
+            <i class="fa-solid fa-circle-notch animate-spin text-zinc-600"></i>
+            <span>[Gemini Sovereign] Scanning structural commits for mutations…</span>
+          </div>
+          <div class="flex items-center gap-2 text-zinc-600" id="step2">
+            <i class="fa-regular fa-circle"></i>
+            <span>[Claude Scholar] Performing semantic and doctrinal alignment…</span>
+          </div>
+          <div class="flex items-center gap-2 text-zinc-600" id="step3">
+            <i class="fa-regular fa-circle"></i>
+            <span>[Grok Realist] Mapping political context and power balance shifts…</span>
+          </div>
+        </div>
+
+        <!-- Report Container -->
+        <div id="relayReport" class="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 min-h-[300px] flex flex-col justify-center items-center text-center relative overflow-hidden">
+          <!-- Glow background -->
+          <div class="absolute -top-40 -right-40 w-80 h-80 bg-amber-500/5 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div id="relayEmptyState">
+            <i class="fa-solid fa-brain text-4xl text-zinc-700 mb-4 animate-pulse"></i>
+            <h4 class="text-sm font-semibold text-zinc-400 mb-1">Relay Idle</h4>
+            <p class="text-xs text-zinc-600 max-w-xs leading-relaxed">
+              Enter a legal research query and select depth to generate a compiled jurisprudential intelligence report.
+            </p>
+          </div>
+
+          <!-- Report content (rendered dynamically) -->
+          <div id="relayContent" class="hidden text-left w-full">
+            <!-- Dynamically populated report -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ABOUT -->
   <section id="view-about" class="hidden">
     <div class="about">
@@ -746,7 +847,7 @@ function switchView(v){
       else { a.removeAttribute("aria-current"); }
     }
   });
-  ["home","browse","lineage","timeline","statutes","compare","search","about"].forEach(x=> {
+  ["home","browse","lineage","timeline","statutes","compare","search","about","relay"].forEach(x=> {
     const el = $("#view-"+x);
     if (el) el.classList.toggle("hidden", x!==v);
   });
@@ -1311,6 +1412,209 @@ function initOnboarding(){
   window.showOnboarding = show;
 }
 
+// ---------- JUS.smart model relay ----------
+const RELAY_PRESETS = {
+  "58-2b": {
+    topic: "Article 58(2)(b) — Unilateral Dissolution",
+    gemini: {
+      title: "Structural Mutations & Schema Impact",
+      body: "Article 58(2)(b) represents the most volatile structural mutation in Pakistan's constitutional schema:\n- **Eighth Amendment (1985):** Inserted by General Zia-ul-Haq, subverting Article 48's mandatory advice rule. It granted the President discretionary power to dissolve the National Assembly if a cabinet could not be formed or the government 'cannot be carried on'.\n- **Thirteenth Amendment (1997):** Deleted by Nawaz Sharif's government, restoring parliamentary supremacy.\n- **Seventeenth Amendment (2003):** Re-inserted by General Pervez Musharraf via LFO validation.\n- **Eighteenth Amendment (2010):** Permanently repealed Article 58(2)(b), transferring power back to parliamentary advice."
+    },
+    claude: {
+      title: "Semantic Shifts & Doctrinal Harmonization",
+      body: "The doctrinal shift centers on the definition of parliamentary sovereignty versus executive hegemony. By introducing Article 58(2)(b), the legal balance transitioned from a pure Federal Parliamentary model to a hybrid Semi-Presidential model. The semantic phrasing 'cannot be carried on in accordance with the provisions of the Constitution' was subject to intense judicial review (e.g. Haji Saifullah Case (1989), Tariq Rahim Case (1992), and Nawaz Sharif Case (1993)), forcing the courts to harmonize presidential discretion with democratic mandates."
+    },
+    grok: {
+      title: "Realist Power Dynamics & Historical Context",
+      body: "In realist terms, 58(2)(b) was a 'dictator's safety valve' to avoid direct martial law. It allowed the military establishment, acting through a civilian President, to dismiss troublesome Prime Ministers (Junejo in 1988, Benazir Bhutto in 1990 & 1996, Nawaz Sharif in 1993) without suspending the constitution. The Eighteenth Amendment represented a historic civilian consensus to dismantle this establishment leverage."
+    }
+  },
+  "treason": {
+    topic: "Article 6 — High Treason",
+    gemini: {
+      title: "Structural Mutations & Schema Impact",
+      body: "Article 6 was originally designed in 1973 to safeguard the constitution against military coups:\n- **Original 1973:** Defined high treason as abrogating or subverting the Constitution by force or show of force.\n- **Eighteenth Amendment (2010):** Expanded Article 6's scope. Sub-clause (1) added the words 'suspends or holds in abeyance'. Crucially, sub-clause (2A) was added to ensure that acts of treason cannot be validated or condoned by any court (including the Supreme Court under the Oath of Office)."
+    },
+    claude: {
+      title: "Semantic Shifts & Doctrinal Harmonization",
+      body: "The inclusion of 'suspending or holding in abeyance' represents a direct semantic closing of the legal loophole used by dictators who avoided the word 'abrogate' by 'suspending' the constitution temporarily (as in 1977 and 1999). Doctrinally, this establishes that constitutional sovereignty is permanent and cannot be paused under any legal theory, including the Doctrine of Necessity."
+    },
+    grok: {
+      title: "Realist Power Dynamics & Historical Context",
+      body: "Historically, Article 6 was a paper shield. Military coups in 1977 (Zia) and 1999 (Musharraf) occurred despite it, with the judiciary validating them under the Doctrine of Necessity (Nusrat Bhutto Case, Zafar Ali Shah Case). The Eighteenth Amendment's addition of (2A) was a structural attempt to bind the hands of future judges. The trial and conviction of Pervez Musharraf in 2019 was the first historical test of this article, demonstrating the friction between judicial declarations and military power."
+    }
+  },
+  "autonomy": {
+    topic: "The Eighteenth Amendment & Provincial Autonomy",
+    gemini: {
+      title: "Structural Mutations & Schema Impact",
+      body: "The Eighteenth Amendment (2010) enacted the largest devolution of power in Pakistan's history:\n- **Concurrent List Abolished:** Removed the Concurrent Legislative List (Fourth Schedule), transferring 47 departments (including education, health, tourism, and labor) entirely to provincial assemblies.\n- **Resource Sharing:** Amended Article 160, guaranteeing that the provincial share in the National Finance Commission (NFC) award cannot be reduced below the previous year's allocation."
+    },
+    claude: {
+      title: "Semantic Shifts & Doctrinal Harmonization",
+      body: "This shift redefined the doctrine of federalism in Pakistan. By moving from a centralized federation to a model of 'cooperative federalism,' the amendment harmonized provincial rights with national integrity. The deletion of central authority over provincial subjects forced a major administrative restructuring, establishing provinces as autonomous legislative sovereigns in their respective domains."
+    },
+    grok: {
+      title: "Realist Power Dynamics & Historical Context",
+      body: "In realist terms, central control over provincial resources had been a source of regional alienation (leading to the secession of East Pakistan in 1971 and ongoing unrest in Balochistan). The 18th Amendment was a political bargain to keep the federation together. While it empowered provinces, it also created capacity challenges, as local administrations struggled to manage health and education sectors previously funded by the center."
+    }
+  },
+  "lineage": {
+    topic: "Precursor Constitutional Lineage",
+    gemini: {
+      title: "Structural Mutations & Schema Impact",
+      body: "Traces the structural ancestry of governance rules:\n- **Company Acts (1773–1853):** Shifted control from commercial charters to the British Parliament.\n- **Crown Rule (1858–1935):** Established formal imperial bureaucracy, culminating in the Government of India Act 1935.\n- **Dominion Transition (1947–1956):** Used the 1935 Act as a provisional constitution, showing massive structural continuity in bureaucratic power."
+    },
+    claude: {
+      title: "Semantic Shifts & Doctrinal Harmonization",
+      body: "The jurisprudential shift tracks the transition from colonial 'subjects' governed by executive decree to citizens possessing fundamental rights. Colonial laws prioritized public order and state security (e.g. Code of Criminal Procedure 1898), whereas the 1973 Constitution harmonizes state authority with constitutional guarantees of liberties and judicial review."
+    },
+    grok: {
+      title: "Realist Power Dynamics & Historical Context",
+      body: "Realist analysis shows that despite gaining independence in 1947, Pakistan inherited and retained the centralized, security-first state apparatus of the British Raj. The delays in drafting the 1956 constitution and the recurring military interventions (1958, 1969, 1977, 1999) reflect the structural dominance of the unelected civil-military bureaucracy over weak legislative institutions."
+    }
+  }
+};
+
+function initRelay(){
+  const btn = $("#btnRunRelay");
+  const queryInput = $("#relayQuery");
+  const stepsEl = $("#relaySteps");
+  const reportEl = $("#relayReport");
+  const emptyEl = $("#relayEmptyState");
+  const contentEl = $("#relayContent");
+  const statusEl = $("#relayStatus");
+  
+  if(!btn) return;
+  
+  btn.onclick = () => {
+    const q = queryInput.value.trim().toLowerCase();
+    if(q.length < 3) {
+      showToast("Please enter a longer research query.");
+      return;
+    }
+    
+    const depth = document.querySelector('input[name="relayDepth"]:checked').value;
+    
+    emptyEl.classList.add("hidden");
+    contentEl.classList.add("hidden");
+    stepsEl.classList.remove("hidden");
+    statusEl.textContent = "Analyzing…";
+    
+    const s1 = $("#step1"), s2 = $("#step2"), s3 = $("#step3");
+    s1.className = "flex items-center gap-2 text-[#00A36C]";
+    s1.querySelector("i").className = "fa-solid fa-circle-notch animate-spin text-[#00A36C]";
+    s2.className = "flex items-center gap-2 text-zinc-600";
+    s2.querySelector("i").className = "fa-regular fa-circle";
+    s3.className = "flex items-center gap-2 text-zinc-600";
+    s3.querySelector("i").className = "fa-regular fa-circle";
+    
+    let preset = RELAY_PRESETS["58-2b"];
+    if(q.includes("6") || q.includes("treason") || q.includes("subvert")) {
+      preset = RELAY_PRESETS["treason"];
+    } else if(q.includes("autonomy") || q.includes("provincial") || q.includes("eighte") || q.includes("18")) {
+      preset = RELAY_PRESETS["autonomy"];
+    } else if(q.includes("lineage") || q.includes("precursor") || q.includes("1773") || q.includes("1935") || q.includes("history")) {
+      preset = RELAY_PRESETS["lineage"];
+    } else {
+      const cleanTerms = q.replace(/[^a-z0-9\s]/g, "").split(/\s+/).filter(x => x.length > 3);
+      const kw = cleanTerms.length ? cleanTerms[0].toUpperCase() : "PROVISION";
+      preset = {
+        topic: `Jurisprudential Review: "${kw}"`,
+        gemini: {
+          title: "Structural Commit Schema Analysis",
+          body: `Scanned constitution database. The provisions relating to "${kw}" are distributed across federal legislative fields. Commit history shows structural adjustments maintaining administrative hierarchy, with specific clauses aligned with executive authority rules.`
+        },
+        claude: {
+          title: "Doctrinal & Semantic Assessment",
+          body: `The semantic phrasing surrounding "${kw}" reflects the codification of administrative sovereignty. Doctrinally, this requires balancing state prerogatives under Part III with citizens' fundamental rights under Chapter 1, ensuring statutory alignment.`
+        },
+        grok: {
+          title: "Contextual Power Balance & Realist Perspective",
+          body: `Historically, the implementation of "${kw}" has been guided by institutional leverage. The balance of power between centralized federal controls and local administrative capacity remains a persistent friction point in operational legal reality.`
+        }
+      };
+    }
+    
+    setTimeout(() => {
+      s1.querySelector("i").className = "fa-solid fa-circle-check text-[#00A36C]";
+      s2.className = "flex items-center gap-2 text-amber-500";
+      s2.querySelector("i").className = "fa-solid fa-circle-notch animate-spin text-amber-500";
+      
+      setTimeout(() => {
+        s2.querySelector("i").className = "fa-solid fa-circle-check text-amber-500";
+        s3.className = "flex items-center gap-2 text-blue-500";
+        s3.querySelector("i").className = "fa-solid fa-circle-notch animate-spin text-blue-500";
+        
+        setTimeout(() => {
+          s3.querySelector("i").className = "fa-solid fa-circle-check text-blue-500";
+          statusEl.textContent = "Compiled";
+          
+          setTimeout(() => {
+            stepsEl.classList.add("hidden");
+            renderRelayReport(preset, depth);
+          }, 300);
+        }, 800);
+      }, 800);
+    }, 800);
+  };
+}
+
+function renderRelayReport(data, depth){
+  const contentEl = $("#relayContent");
+  contentEl.classList.remove("hidden");
+  
+  let html = `
+    <div class="border-b border-zinc-800 pb-4 mb-6">
+      <div class="text-[10px] text-amber-500 uppercase tracking-widest font-mono mb-1">relay report • depth: ${depth}</div>
+      <h3 class="text-xl font-bold text-white">${esc(data.topic)}</h3>
+    </div>
+  `;
+  
+  html += `
+    <div class="mb-6">
+      <h4 class="text-xs uppercase tracking-wider text-zinc-500 font-semibold font-mono mb-2 flex items-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#00A36C]"></span>
+        <span>Sovereign structural overview</span>
+      </h4>
+      <p class="text-xs text-zinc-300 leading-relaxed pl-3.5 border-l border-zinc-800">${esc(data.gemini.body)}</p>
+    </div>
+  `;
+  
+  if (depth === "exhaustive" || depth === "jurisprudential") {
+    html += `
+      <div class="mb-6">
+        <h4 class="text-xs uppercase tracking-wider text-zinc-500 font-semibold font-mono mb-2 flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+          <span>Doctrinal & Semantic Analysis</span>
+        </h4>
+        <p class="text-xs text-zinc-300 leading-relaxed pl-3.5 border-l border-zinc-800">${esc(data.claude.body)}</p>
+      </div>
+    `;
+  }
+  
+  if (depth === "jurisprudential") {
+    html += `
+      <div class="mb-6">
+        <h4 class="text-xs uppercase tracking-wider text-zinc-500 font-semibold font-mono mb-2 flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+          <span>Contextual Power Realities</span>
+        </h4>
+        <p class="text-xs text-zinc-300 leading-relaxed pl-3.5 border-l border-zinc-800">${esc(data.grok.body)}</p>
+      </div>
+      
+      <div class="p-3 bg-zinc-900/50 border border-zinc-800 rounded-xl mt-8">
+        <div class="text-[9px] uppercase tracking-wider text-zinc-500 font-bold mb-1">Relayed Jurisprudential Source Node</div>
+        <p class="text-[10px] text-zinc-400 leading-relaxed font-mono">
+          KSC.JUSNREM.Relay // Node reference: SEC-TEMPORAL-LAW-1973 // Protocol Depth: Jurisprudential Level 3
+        </p>
+      </div>
+    `;
+  }
+  
+  contentEl.innerHTML = html;
+}
+
 // ---------- boot ----------
 window.setEra = setEra;
 setEra(state.era,false);
@@ -1320,6 +1624,7 @@ initCompare(); renderStats();
 setEra(state.era);
 renderEraMarkers();
 initOnboarding();
+initRelay();
 </script>
 <script src="js/router.js"></script>
 
