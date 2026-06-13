@@ -250,12 +250,28 @@ footer a{color:var(--green-2)}
   <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
     <!-- Logo -->
     <a href="#home" class="flex items-center gap-3">
-      <div class="w-8 h-8 bg-white rounded flex items-center justify-center">
-        <span class="text-zinc-950 font-bold text-xl tracking-tighter">KSC</span>
-      </div>
+      <svg class="w-8 h-8 flex-none" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="logo-grey" x1="20" y1="20" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#f4f4f5" />
+            <stop offset="30%" stop-color="#a1a1aa" />
+            <stop offset="70%" stop-color="#52525b" />
+            <stop offset="100%" stop-color="#27272a" />
+          </linearGradient>
+          <linearGradient id="logo-white" x1="30" y1="80" x2="70" y2="20" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="60%" stop-color="#ffffff" />
+            <stop offset="100%" stop-color="#e4e4e7" />
+          </linearGradient>
+        </defs>
+        <path d="M 26 24 H 46 C 54 24 54 36 46 36 H 40 V 62 C 40 70 46 72 50 68 L 72 50" 
+              stroke="url(#logo-grey)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M 38 72 C 46 72 46 60 52 50 L 72 26" 
+              stroke="url(#logo-white)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
       <div>
         <div class="font-semibold tracking-tight text-white">KSC.JUSNREM</div>
-        <div class="text-[10px] text-zinc-500 -mt-1 uppercase tracking-wider">Constitutional Intelligence</div>
+        <div class="text-[9px] text-zinc-500 -mt-1 uppercase tracking-wider font-mono">Strategic Legal Intelligence</div>
       </div>
     </a>
 
@@ -723,9 +739,12 @@ footer a{color:var(--green-2)}
       <!-- Brand -->
       <div class="text-left">
         <div class="flex items-center gap-3 mb-4">
-          <div class="w-7 h-7 bg-white rounded flex items-center justify-center">
-            <span class="text-zinc-950 font-bold text-lg tracking-tighter">KSC</span>
-          </div>
+          <svg class="w-7 h-7 flex-none" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 26 24 H 46 C 54 24 54 36 46 36 H 40 V 62 C 40 70 46 72 50 68 L 72 50" 
+                  stroke="url(#logo-grey)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M 38 72 C 46 72 46 60 52 50 L 72 26" 
+                  stroke="url(#logo-white)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
           <span class="font-semibold text-white tracking-tight">KSC.JUSNREM</span>
         </div>
         <p class="text-sm">Constitutional Intelligence Engine</p>
