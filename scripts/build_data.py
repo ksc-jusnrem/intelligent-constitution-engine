@@ -75,6 +75,32 @@ def main():
         print("Error: split_database.py not found in scripts/.")
         sys.exit(1)
 
+    # 5. Run compile_comparative.py
+    print("\n--- Step 5: Compiling Comparative Constitutional Index ---")
+    comparative_script = os.path.join("scripts", "compile_comparative.py")
+    if os.path.exists(comparative_script):
+        result = subprocess.run([sys.executable, comparative_script], capture_output=True, encoding="utf-8")
+        print(result.stdout)
+        if result.returncode != 0:
+            print(f"Error compiling comparative database:\n{result.stderr}")
+            sys.exit(1)
+    else:
+        print("Error: compile_comparative.py not found in scripts/.")
+        sys.exit(1)
+
+    # 6. Run compile_judgments.py
+    print("\n--- Step 6: Compiling Judgments Database ---")
+    judgments_script = os.path.join("scripts", "compile_judgments.py")
+    if os.path.exists(judgments_script):
+        result = subprocess.run([sys.executable, judgments_script], capture_output=True, encoding="utf-8")
+        print(result.stdout)
+        if result.returncode != 0:
+            print(f"Error compiling judgments database:\n{result.stderr}")
+            sys.exit(1)
+    else:
+        print("Error: compile_judgments.py not found in scripts/.")
+        sys.exit(1)
+
     print("====================================================")
     print("BUILD COMPLETE: All data artifacts successfully generated!")
     print("====================================================")

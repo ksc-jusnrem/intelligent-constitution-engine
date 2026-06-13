@@ -19,6 +19,10 @@
       "destination": "/data/$1"
     },
     {
+      "source": "/documentary-repository/(.*)",
+      "destination": "/documentary-repository/$1"
+    },
+    {
       "source": "/(.*)",
       "destination": "/src/$1"
     }

@@ -27,7 +27,7 @@
       }
       case "statutes":
         return state.statute ? state.statute + (state.section ? "-" + state.section : "") : "statutes";
-      case "timeline": case "lineage": case "compare": case "search": case "about": case "relay": case "cases":
+      case "timeline": case "lineage": case "compare": case "search": case "about": case "relay": case "cases": case "comparative": case "judgments":
         return state.view;
     }
     return "";
@@ -65,7 +65,7 @@
         switchView("timeline"); openTl(i);
       } else if((m = h.match(/^lin-(.+)$/))){
         openLin(m[1]);
-      } else if(["timeline","lineage","compare","search","about","statutes","browse","home","relay","cases"].indexOf(h) >= 0){
+      } else if(["timeline","lineage","compare","search","about","statutes","browse","home","relay","cases","comparative","judgments"].indexOf(h) >= 0){
         switchView(h);
       } else if(h === "time-machine") {
         switchView("browse");

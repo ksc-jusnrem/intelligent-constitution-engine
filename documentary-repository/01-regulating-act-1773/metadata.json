@@ -1,0 +1,22 @@
+{
+  "id": "reg1773",
+  "name": "Regulating Act 1773",
+  "date": "1773-06-10",
+  "type": "precursor",
+  "era": "Company Rule — Precursor Statutes (1773–1853)",
+  "citation": "13 Geo. III c. 63",
+  "summary": "The first British statute to impose parliamentary regulation on the East India Company. It created the office of Governor-General of Bengal with a supervisory Council, established a Supreme Court at Calcutta, and began transforming the Company from a trading body into an instrument of British imperial governance.",
+  "key_provisions": [
+    "Governor-General of Bengal created; Warren Hastings appointed first incumbent",
+    "Council of Four — majority vote rules; Governor-General has casting vote",
+    "Supreme Court at Calcutta — three judges appointed by the Crown",
+    "Governors of Bombay and Madras subordinated to Bengal in war and peace",
+    "Company servants prohibited from receiving presents or engaging in private trade",
+    "Company required to lay all correspondence before the Secretary of State"
+  ],
+  "demise": "Substantially amended and superseded by Pitt's India Act 1784.",
+  "provenance": {
+    "source": "Parliament of Great Britain",
+    "retrieved": "2026-06-12"
+  }
+}

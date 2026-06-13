@@ -1,0 +1,22 @@
+{
+  "id": "pitts1784",
+  "name": "Pitt's India Act 1784",
+  "date": "1784-08-13",
+  "type": "precursor",
+  "era": "Company Rule — Precursor Statutes (1773–1853)",
+  "citation": "24 Geo. III Sess. 2 c. 25",
+  "summary": "Created the 'double government' system: a Crown Board of Control exercising paramount power over political, military, and revenue affairs, alongside the Company's Court of Directors which retained commercial functions. This architecture governed India until 1858.",
+  "key_provisions": [
+    "Board of Control — six members including two Cabinet ministers",
+    "Board has authority over all civil, military, and revenue dispatches",
+    "Secret Committee of three Directors for urgent dispatches",
+    "Governor-General appointed by Crown on Directors' nomination",
+    "Prohibition on offensive wars without Board approval",
+    "Corrupt acts of servants triable in English courts"
+  ],
+  "demise": "Superseded by the Government of India Act 1858.",
+  "provenance": {
+    "source": "Parliament of Great Britain",
+    "retrieved": "2026-06-12"
+  }
+}

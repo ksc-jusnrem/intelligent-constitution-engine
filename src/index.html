@@ -282,6 +282,8 @@ footer a{color:var(--green-2)}
       <a href="#time-machine" class="hover:text-white transition-colors">Time Machine</a>
       <a href="#amendments" class="hover:text-white transition-colors">Amendments</a>
       <a href="#cases" class="hover:text-white transition-colors">Cases</a>
+      <a href="#comparative" class="hover:text-white transition-colors">Comparative</a>
+      <a href="#judgments" class="hover:text-white transition-colors">Judgments</a>
       <a href="#statutes" class="hover:text-white transition-colors">Statutes</a>
       <a href="#compare" class="hover:text-white transition-colors">Compare</a>
       <a href="#search" class="hover:text-white transition-colors">Search</a>
@@ -317,6 +319,8 @@ footer a{color:var(--green-2)}
       <a href="#time-machine" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Time Machine</a>
       <a href="#amendments" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Amendments</a>
       <a href="#cases" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Cases</a>
+      <a href="#comparative" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Comparative</a>
+      <a href="#judgments" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Judgments</a>
       <a href="#statutes" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Statutes</a>
       <a href="#compare" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Compare</a>
       <a href="#search" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Search</a>
@@ -700,6 +704,59 @@ footer a{color:var(--green-2)}
     </div>
   </section>
 
+  <!-- COMPARATIVE CONSTITUTIONS -->
+  <section id="view-comparative" class="hidden">
+    <div class="max-w-4xl mx-auto text-center mb-10 mt-6">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-[10px] tracking-[2px] mb-4 border border-blue-500/20 text-blue-400 font-semibold font-mono">
+        COMPARATIVE CONSTITUTIONAL PORTAL
+      </div>
+      <h2 class="text-4xl font-semibold tracking-tight text-white mb-3">Global Constitutions Archive</h2>
+      <p class="text-sm text-zinc-400 max-w-xl mx-auto">
+        Access and search our digital library of 197 global constitutions. Compare constitutional framework designs across sovereign states.
+      </p>
+    </div>
+
+    <!-- Search and Filters -->
+    <div class="max-w-4xl mx-auto mb-8 flex flex-col sm:flex-row gap-4 items-center">
+      <div class="relative flex-1 w-full">
+        <input type="text" id="compSearchInput" placeholder="Search constitutions by country name or year..."
+          class="w-full pl-12 pr-4 py-3 border-2 border-zinc-800 focus:border-blue-500 rounded-xl text-sm bg-zinc-950 text-zinc-100 placeholder-zinc-500 outline-none transition-all">
+        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 text-base"></i>
+      </div>
+      <div class="flex-none flex items-center gap-2 font-mono text-xs text-zinc-500" id="compStats"></div>
+    </div>
+
+    <!-- Constitutions Grid -->
+    <div class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="compGrid"></div>
+  </section>
+
+  <!-- INTERACTIVE JUDGMENT LIBRARY -->
+  <section id="view-judgments" class="hidden">
+    <div class="max-w-7xl mx-auto text-center mb-10 mt-6">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-[10px] tracking-[2px] mb-4 border border-emerald-500/20 text-emerald-400 font-semibold font-mono">
+        INTERACTIVE JUDGMENT LIBRARY
+      </div>
+      <h2 class="text-4xl font-semibold tracking-tight text-white mb-3">Landmark Environmental & Climate Case Law</h2>
+      <p class="text-sm text-zinc-400 max-w-xl mx-auto">
+        Ingested review papers and detailed extracts of landmark High Court environmental decisions, mapped to constitutional fundamental rights.
+      </p>
+    </div>
+
+    <!-- Split View Layout -->
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+      <!-- Left Sidebar: Case Directory -->
+      <div class="lg:col-span-1 bg-zinc-950 border border-zinc-800 rounded-2xl p-4 flex flex-col gap-4">
+        <h3 class="text-sm font-bold uppercase tracking-wider text-zinc-400 pb-2 border-b border-zinc-800 flex items-center gap-2">
+          <i class="fa-solid fa-folder text-emerald-500"></i> Judgments Directory
+        </h3>
+        <div class="flex flex-col gap-2 max-h-[500px] overflow-y-auto pr-1" id="judgmentsList"></div>
+      </div>
+
+      <!-- Right Main Panel: Detail Viewer -->
+      <div class="lg:col-span-2 bg-[#fffdf8] border border-[#e3dcc9] rounded-2xl p-6 min-h-[600px] text-[#22281f] shadow-lg relative" id="judgmentViewer"></div>
+    </div>
+  </section>
+
   <!-- ABOUT -->
   <section id="view-about" class="hidden">
     <div class="about">
@@ -797,6 +854,8 @@ footer a{color:var(--green-2)}
 <script src="../data/lineage.js"></script>
 <script src="js/statutes.js"></script>
 <script src="js/cases.js"></script>
+<script src="../data/comparative.js"></script>
+<script src="../data/judgments.js"></script>
 <script>
 "use strict";
 const D = window.CONSTITUTION_DATA;
@@ -985,7 +1044,7 @@ function switchView(v){
       else { a.removeAttribute("aria-current"); }
     }
   });
-  ["home","browse","lineage","timeline","cases","statutes","compare","search","about","relay"].forEach(x=> {
+  ["home","browse","lineage","timeline","cases","comparative","judgments","statutes","compare","search","about","relay"].forEach(x=> {
     const el = $("#view-"+x);
     if (el) el.classList.toggle("hidden", x!==v);
   });
@@ -994,6 +1053,8 @@ function switchView(v){
     tb.style.display = (v==="browse"||v==="timeline"||v==="search") ? "" : "none";
   }
   if (v === "cases") renderCasesList();
+  if (v === "comparative") renderComparativeList();
+  if (v === "judgments") { renderJudgmentsList(); renderJudgmentDetail(); }
 }
 
 // ---------- browse: sidebar ----------
@@ -1930,6 +1991,199 @@ function initCases() {
   }
 }
 
+// ---------- comparative portal ----------
+function renderComparativeList() {
+  const q = ($("#compSearchInput").value || "").trim().toLowerCase();
+  const grid = $("#compGrid");
+  const stats = $("#compStats");
+  if (!grid || !window.COMPARATIVE_DATA) return;
+  
+  const filtered = window.COMPARATIVE_DATA.filter(c => {
+    if (!q) return true;
+    return c.country.toLowerCase().includes(q) || c.year.toString().includes(q);
+  });
+  
+  if (stats) {
+    stats.textContent = `${filtered.length} of ${window.COMPARATIVE_DATA.length} shown`;
+  }
+  
+  if (filtered.length === 0) {
+    grid.innerHTML = `
+      <div class="col-span-full text-center py-12 text-zinc-500">
+        <i class="fa-solid fa-earth-americas text-3xl mb-3 block text-zinc-700 animate-pulse"></i>
+        No global constitutions found matching your search.
+      </div>
+    `;
+    return;
+  }
+  
+  grid.innerHTML = filtered.map(c => `
+    <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-4 flex items-center justify-between gap-4 transition-all duration-300 hover:border-zinc-700">
+      <div class="min-w-0">
+        <div class="text-xs font-semibold text-white truncate" title="${esc(c.country)}">${esc(c.country)}</div>
+        <div class="text-[10px] text-zinc-500 font-mono mt-0.5">Year: ${c.year}${c.draft ? ' (Draft)' : ''}</div>
+      </div>
+      <a href="/documentary-repository/${esc(c.file)}" target="_blank"
+         class="px-2.5 py-1 text-[10px] font-mono rounded bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 text-zinc-300 hover:text-white transition-all flex items-center gap-1">
+        <i class="fa-solid fa-file-pdf text-rose-500"></i> PDF
+      </a>
+    </div>
+  `).join("");
+}
+
+function initComparative() {
+  const input = $("#compSearchInput");
+  if (input) {
+    let compTimer = null;
+    input.addEventListener("input", () => {
+      clearTimeout(compTimer);
+      compTimer = setTimeout(renderComparativeList, 150);
+    });
+  }
+}
+
+// ---------- interactive judgments library ----------
+let activeJudgmentId = "ihc_national_park_2022";
+let activeJudgmentTab = "review";
+
+function renderJudgmentsList() {
+  const container = $("#judgmentsList");
+  if (!container || !window.JUDGMENTS_DATA) return;
+  
+  container.innerHTML = window.JUDGMENTS_DATA.map(j => {
+    const isSel = j.id === activeJudgmentId;
+    return `
+      <button onclick="selectJudgment('${j.id}')"
+        class="text-left p-3.5 rounded-xl border transition-all flex flex-col gap-1 w-full ${isSel ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400 font-semibold' : 'bg-zinc-950/40 border-zinc-800/80 text-zinc-400 hover:border-zinc-700'}">
+        <div class="text-[9px] font-mono uppercase tracking-wider opacity-60">${esc(j.citation)}</div>
+        <div class="text-xs leading-snug truncate w-full">${esc(j.name)}</div>
+        <div class="text-[9px] font-mono text-zinc-500 mt-1">${esc(j.court)} (${j.date.slice(0,4)})</div>
+      </button>
+    `;
+  }).join("");
+}
+
+function selectJudgment(id) {
+  activeJudgmentId = id;
+  renderJudgmentsList();
+  renderJudgmentDetail();
+}
+
+function selectJudgmentTab(tab) {
+  activeJudgmentTab = tab;
+  renderJudgmentDetail();
+}
+
+function renderJudgmentDetail() {
+  const viewer = $("#judgmentViewer");
+  if (!viewer || !window.JUDGMENTS_DATA) return;
+  
+  const j = window.JUDGMENTS_DATA.find(x => x.id === activeJudgmentId);
+  if (!j) {
+    viewer.innerHTML = "<p class='muted-center'>No judgment loaded.</p>";
+    return;
+  }
+  
+  const articlesHtml = j.articles.map(artKey => {
+    const art = D.articles[artKey];
+    if (!art) return "";
+    return `<button onclick="goToCaseArticle('${artKey}')" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#123524] text-xs text-white font-mono hover:bg-[#2a6b4a] transition-all"><i class="fa-solid fa-scroll text-[9px] text-emerald-400"></i>Art. ${art.num}</button>`;
+  }).join(" ");
+  
+  const t = activeJudgmentTab;
+  const tabBtn = (name, label) => {
+    const cur = t === name;
+    return `<button onclick="selectJudgmentTab('${name}')"
+      class="px-3 py-1.5 text-xs font-semibold rounded-lg border transition-all ${cur ? 'bg-[#123524] text-white border-[#123524]' : 'bg-[#faf6ee] text-[#5a6055] border-[#e3dcc9] hover:bg-[#eef3ea]' }">${label}</button>`;
+  };
+  
+  let tabBodyHtml = "";
+  if (t === "review") {
+    tabBodyHtml = `
+      <div class="space-y-4">
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-[#5a6055] mb-1">Deciding Bench & Court</h4>
+          <p class="text-sm font-semibold">${esc(j.court)} — Decided by ${esc(j.judge)} on ${j.date}</p>
+        </div>
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-[#5a6055] mb-1">Case Holding Summary</h4>
+          <p class="text-sm italic leading-relaxed text-[#22281f] font-serif">${esc(j.factual_background)}</p>
+        </div>
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-[#5a6055] mb-2">Detailed Legal Decisions</h4>
+          <ul class="list-disc pl-5 space-y-2 text-sm leading-relaxed">
+            ${j.holdings.map(h => `<li>${esc(h)}</li>`).join("")}
+          </ul>
+        </div>
+      </div>
+    `;
+  } else if (t === "holdings") {
+    tabBodyHtml = `
+      <div class="space-y-4">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-[#5a6055] mb-2">Checklist of Key Precedents Established</h4>
+        <div class="space-y-3">
+          ${j.holdings.map((h, idx) => `
+            <div class="flex items-start gap-3 p-3 rounded-lg bg-[#faf6ee] border border-[#e3dcc9]">
+              <span class="flex items-center justify-center w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold mt-0.5 flex-none"><i class="fa-solid fa-check text-[10px]"></i></span>
+              <div>
+                <div class="text-[9px] uppercase tracking-wider font-mono font-bold text-zinc-500">Holdings #${idx+1}</div>
+                <p class="text-xs text-[#22281f] leading-relaxed font-serif mt-0.5">${esc(h)}</p>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+    `;
+  } else if (t === "extracts") {
+    tabBodyHtml = `
+      <div class="space-y-4">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-[#5a6055] mb-1">Extracted Text Paragraphs (from Original Court Transcripts)</h4>
+        <div class="p-4 rounded-xl bg-[#faf6ee] border border-[#e3dcc9] font-serif text-sm leading-loose whitespace-pre-wrap max-h-[400px] overflow-y-auto pr-2" style="font-family: var(--serif);">
+${esc(j.raw_extracts)}
+        </div>
+      </div>
+    `;
+  } else if (t === "commentary") {
+    tabBodyHtml = `
+      <div class="space-y-4">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-[#5a6055] mb-1">Strategic Legal Intelligence Analysis (KSC Review Note)</h4>
+        <div class="p-4 rounded-xl bg-[#faf6ee] border border-[#e3dcc9] font-serif text-sm leading-loose whitespace-pre-wrap max-h-[400px] overflow-y-auto pr-2" style="font-family: var(--serif);">
+${esc(j.commentary)}
+        </div>
+      </div>
+    `;
+  }
+  
+  viewer.innerHTML = `
+    <div class="reader-head mb-6 pb-4 border-b border-[#e3dcc9]">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div class="kicker text-[10px] uppercase font-bold tracking-widest text-[#5a6055] font-mono">${esc(j.court)} · ${esc(j.citation)}</div>
+        <div class="text-[10px] text-[#5a6055] font-mono font-bold">Decided: ${j.date}</div>
+      </div>
+      <h2 class="text-2xl font-serif text-[#22281f] leading-snug mt-2 mb-4" style="font-family: var(--serif);">${esc(j.name)}</h2>
+      
+      <!-- Affected Provisions -->
+      <div class="flex flex-wrap items-center gap-2 mt-2">
+        <span class="text-[10px] uppercase tracking-wider text-zinc-500 font-bold font-mono">Fundamental Rights Affected:</span>
+        <div class="flex flex-wrap gap-1.5">${articlesHtml}</div>
+      </div>
+    </div>
+    
+    <!-- Tab Controls -->
+    <div class="flex flex-wrap gap-2 mb-6 border-b border-[#e3dcc9] pb-4">
+      ${tabBtn("review", "Review & Holdings")}
+      ${tabBtn("holdings", "Key Decisions Checklist")}
+      ${tabBtn("extracts", "Extracted Transcripts")}
+      ${tabBtn("commentary", "KSC Intelligence Review")}
+    </div>
+    
+    <!-- Tab Body -->
+    <div class="judgment-tab-content">
+      ${tabBodyHtml}
+    </div>
+  `;
+}
+
 // ---------- boot ----------
 window.setEra = setEra;
 setEra(state.era,false);
@@ -1943,7 +2197,13 @@ initRelay();
 window.goToCaseArticle = goToCaseArticle;
 window.goToCaseAmendment = goToCaseAmendment;
 window.renderCasesList = renderCasesList;
+window.selectJudgment = selectJudgment;
+window.selectJudgmentTab = selectJudgmentTab;
+window.renderComparativeList = renderComparativeList;
+window.renderJudgmentsList = renderJudgmentsList;
+window.renderJudgmentDetail = renderJudgmentDetail;
 initCases();
+initComparative();
 </script>
 <script src="js/router.js"></script>
 
