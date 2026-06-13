@@ -9,6 +9,12 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
+.skip-link{
+  position:absolute; top:-100px; left:0; z-index:9999;
+  background:#123524; color:#fff; padding:8px 16px;
+  font-size:14px; border-radius:0 0 6px 0; transition:top .12s ease;
+}
+.skip-link:focus{ top:0; outline:2px solid var(--gold); }
 :root{
   --green:#123524; --green-2:#1d4d36; --green-3:#2a6b4a;
   --gold:#c9a648; --gold-soft:#e8d5a3;
@@ -37,19 +43,56 @@ nav button:hover{color:var(--ivory)}
 nav button.active{color:var(--gold-soft);border-bottom-color:var(--gold)}
 
 /* ---------- time machine bar ---------- */
-.timebar{background:var(--paper);border-bottom:1px solid var(--line);padding:.6rem 1.25rem;position:sticky;top:97px;z-index:40}
+.timebar{background:#09090b;border-bottom:1px solid #27272a;padding:.8rem 1.25rem;position:sticky;top:64px;z-index:40}
 .timebar-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;gap:.9rem;flex-wrap:wrap}
-.timebar label{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-soft);white-space:nowrap}
-.timebar input[type=range]{flex:1;min-width:180px;accent-color:var(--green-2)}
+.timebar label{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:#a1a1aa;white-space:nowrap}
+.timebar input[type=range]{
+  flex:1;
+  min-width:180px;
+  -webkit-appearance:none;
+  appearance:none;
+  background:#27272a;
+  height:6px;
+  border-radius:999px;
+  outline:none;
+}
+.timebar input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  appearance:none;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:var(--gold);
+  cursor:pointer;
+  transition:transform .1s ease, background .1s ease;
+  border:2px solid #09090b;
+}
+.timebar input[type=range]::-webkit-slider-thumb:hover{
+  transform:scale(1.2);
+  background:var(--gold-soft);
+}
+.timebar input[type=range]::-moz-range-thumb{
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:var(--gold);
+  cursor:pointer;
+  transition:transform .1s ease, background .1s ease;
+  border:2px solid #09090b;
+}
+.timebar input[type=range]::-moz-range-thumb:hover{
+  transform:scale(1.2);
+  background:var(--gold-soft);
+}
 .era-chip{font-family:var(--serif);background:var(--green);color:var(--gold-soft);padding:.25rem .8rem;border-radius:999px;font-size:.82rem;white-space:nowrap;cursor:pointer;border:none}
-.era-date{font-family:var(--mono);font-size:.72rem;color:var(--ink-soft);white-space:nowrap}
+.era-date{font-family:var(--mono);font-size:.72rem;color:#a1a1aa;white-space:nowrap}
 
 main{max-width:1300px;margin:0 auto;padding:1.25rem}
 .hidden{display:none!important}
 
 /* ---------- browse (shared by constitution + statutes) ---------- */
 .browse{display:grid;grid-template-columns:300px 1fr;gap:1.25rem;align-items:start}
-.sidebar{background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden;position:sticky;top:160px;max-height:calc(100vh - 180px);display:flex;flex-direction:column}
+.sidebar{background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden;position:sticky;top:160px;max-height:calc(100vh - 180px);display:flex;flex-direction:column;color:var(--ink)}
 .sidebar input{margin:.7rem;padding:.5rem .75rem;border:1px solid var(--line);border-radius:8px;font-size:.85rem;background:var(--ivory);outline:none}
 .sidebar input:focus{border-color:var(--green-3)}
 .art-list{overflow-y:auto;flex:1}
@@ -60,7 +103,7 @@ main{max-width:1300px;margin:0 auto;padding:1.25rem}
 .art-num{font-family:var(--mono);font-size:.72rem;color:var(--green-2);min-width:2.6rem;font-weight:700}
 .art-title{color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
-.reader{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:2rem 2.4rem;min-height:400px}
+.reader{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:2rem 2.4rem;min-height:400px;color:var(--ink)}
 .reader-head{border-bottom:2px solid var(--gold);padding-bottom:1rem;margin-bottom:1.4rem}
 .reader-head .kicker{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--green-2);font-weight:700}
 .reader-head h2{font-family:var(--serif);font-size:1.7rem;line-height:1.25;margin:.2rem 0 .5rem}
@@ -145,7 +188,7 @@ main{max-width:1300px;margin:0 auto;padding:1.25rem}
 .cmp-controls .fld{display:flex;flex-direction:column;gap:.25rem}
 .cmp-controls label{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-soft)}
 .cmp-controls select{padding:.45rem .6rem;border:1px solid var(--line);border-radius:8px;background:var(--ivory);font-size:.85rem;max-width:330px}
-.diff-pane{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:2rem 2.4rem}
+.diff-pane{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:2rem 2.4rem;color:var(--ink)}
 .diff-body{font-family:var(--serif);font-size:1rem;line-height:1.9;white-space:pre-wrap}
 .diff-body del{background:var(--red-bg);color:var(--red);text-decoration:line-through;padding:0 .12em;border-radius:3px}
 .diff-body ins{background:var(--add-bg);color:var(--add);text-decoration:none;padding:0 .12em;border-radius:3px}
@@ -190,8 +233,10 @@ footer a{color:var(--green-2)}
 </head>
 <body>
 
+<a href="#reader" class="skip-link">Skip to article</a>
+
 <!-- Navbar -->
-<nav class="bg-zinc-950 border-b border-zinc-800 sticky top-0 z-50">
+<nav class="bg-zinc-950 border-b border-zinc-800 sticky top-0 z-50" aria-label="Main Navigation">
   <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
     <!-- Logo -->
     <a href="#home" class="flex items-center gap-3">
@@ -205,7 +250,7 @@ footer a{color:var(--green-2)}
     </a>
 
     <!-- Navigation Links -->
-    <div class="hidden md:flex items-center gap-8 text-sm" id="nav-links">
+    <div class="hidden md:flex items-center gap-8 text-sm" id="nav-links" role="navigation" aria-label="Main navigation">
       <a href="#home" class="text-[#00A36C] hover:text-white transition-colors">Home</a>
       <a href="#lineage" class="hover:text-white transition-colors">Lineage</a>
       <a href="#time-machine" class="hover:text-white transition-colors">Time Machine</a>
@@ -213,7 +258,10 @@ footer a{color:var(--green-2)}
       <a href="#statutes" class="hover:text-white transition-colors">Statutes</a>
       <a href="#compare" class="hover:text-white transition-colors">Compare</a>
       <a href="#search" class="hover:text-white transition-colors">Search</a>
-      <a href="about.html" class="hover:text-white transition-colors">About</a>
+      <a href="about.html" class="hover:text-white transition-colors mr-1">About</a>
+      <button id="openHelpBtn" class="text-zinc-400 hover:text-white transition-colors flex items-center justify-center animate-pulse" title="How to use the engine">
+        <i class="fa-regular fa-circle-question text-lg"></i>
+      </button>
     </div>
 
     <!-- External Ecosystem Links -->
@@ -244,16 +292,28 @@ footer a{color:var(--green-2)}
       <a href="#compare" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Compare</a>
       <a href="#search" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white">Search</a>
       <a href="about.html" class="hover:text-white">About</a>
+      <button id="openHelpBtnMobile" class="text-left text-zinc-400 hover:text-white flex items-center gap-2 pt-2 border-t border-zinc-900">
+        <i class="fa-regular fa-circle-question text-base"></i>
+        <span>Help & Guide</span>
+      </button>
     </div>
   </div>
 </nav>
 
 <div class="timebar" id="timebar" style="display: none;">
-  <div class="timebar-inner">
-    <label>Constitution as of</label>
-    <input type="range" id="eraSlider" min="0" max="24" value="24">
-    <button class="era-chip" id="eraChip" title="Jump to this amendment in the timeline"></button>
-    <span class="era-date" id="eraDate"></span>
+  <div class="timebar-inner max-w-7xl mx-auto flex flex-col md:flex-row md:items-center gap-3 w-full">
+    <div class="flex items-center gap-2 flex-none">
+      <label class="text-zinc-400 font-medium">Constitution as of</label>
+    </div>
+    <div class="flex-1 min-w-[200px] flex flex-col gap-1 relative">
+      <input type="range" id="eraSlider" min="0" max="24" value="24" class="w-full cursor-pointer"
+        aria-label="Constitution era — select amendment version">
+      <div class="hidden md:flex relative h-4 mt-1" id="eraMarkers"></div>
+    </div>
+    <div class="flex items-center gap-3 flex-none">
+      <button class="era-chip" id="eraChip" title="Jump to this amendment in the timeline"></button>
+      <span class="era-date text-zinc-400" id="eraDate"></span>
+    </div>
   </div>
 </div>
 
@@ -400,7 +460,7 @@ footer a{color:var(--green-2)}
       <input type="text" id="artFilter" placeholder="Filter articles… (e.g. 6, judiciary)">
       <div class="art-list" id="artList"></div>
     </aside>
-    <article class="reader" id="reader"></article>
+    <article class="reader" id="reader" tabindex="-1" aria-live="polite" aria-atomic="false"></article>
   </section>
 
   <!-- LINEAGE -->
@@ -423,13 +483,13 @@ footer a{color:var(--green-2)}
 
   <!-- STATUTES -->
   <section id="view-statutes" class="hidden">
-    <div class="stat-tabs" id="statTabs"></div>
+    <div class="stat-tabs" id="statTabs" role="tablist" aria-label="Statutes selector"></div>
     <div class="browse">
       <aside class="sidebar">
         <input type="text" id="secFilter" placeholder="Filter sections… (e.g. 302, theft)">
         <div class="art-list" id="secList"></div>
       </aside>
-      <article class="reader" id="secReader"></article>
+      <article class="reader" id="secReader" tabindex="-1" aria-live="polite" aria-atomic="false"></article>
     </div>
   </section>
 
@@ -439,10 +499,29 @@ footer a{color:var(--green-2)}
       <div class="fld"><label>Article</label><select id="cmpArt"></select></div>
       <div class="fld"><label>From version</label><select id="cmpA"></select></div>
       <div class="fld"><label>To version</label><select id="cmpB"></select></div>
+      <div class="fld"><label>Layout Mode</label><select id="cmpLayout"><option value="inline">Inline Diff</option><option value="split">Side-by-Side Split</option></select></div>
     </div>
     <div class="diff-pane">
-      <div class="diff-legend"><span><ins>added text</ins></span><span><del>removed text</del></span></div>
+      <div class="diff-legend flex justify-between items-center mb-4 text-xs text-zinc-400">
+        <div class="flex gap-4">
+          <span><ins class="bg-[#e3f2e6] text-[#1d6b3a] px-1.5 py-0.5 rounded no-underline">added text</ins></span>
+          <span><del class="bg-[#fbe9e6] text-[#9c3328] px-1.5 py-0.5 rounded line-through">removed text</del></span>
+        </div>
+        <span id="diffStats" class="font-mono text-zinc-500"></span>
+      </div>
+      <!-- Inline view container -->
       <div class="diff-body" id="diffBody"></div>
+      <!-- Split view container (initially hidden) -->
+      <div id="diffSplitBody" class="hidden grid md:grid-cols-2 gap-8 text-left">
+        <div>
+          <div class="text-xs uppercase tracking-wider text-zinc-500 font-mono mb-2 border-b border-zinc-800 pb-1">Original Version</div>
+          <div class="diff-body text-zinc-300" id="diffLeftBody"></div>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-wider text-zinc-500 font-mono mb-2 border-b border-zinc-800 pb-1">Modified Version</div>
+          <div class="diff-body text-zinc-300" id="diffRightBody"></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -626,9 +705,20 @@ function setEra(i, rerender){
   const c = D.commits[state.era];
   $("#eraChip").textContent = commitLabel(state.era);
   $("#eraDate").textContent = c.date + " · assent: " + c.president;
+  slider.setAttribute("aria-valuetext", commitLabel(state.era));
   if(rerender){ renderArtList(); renderReader(); if(state.view==="search") runSearch(); }
 }
-slider.addEventListener("input", e=>setEra(e.target.value));
+let eraRenderTimer;
+slider.addEventListener("input", e=>{
+  // lightweight UI + screen-reader feedback on every tick
+  setEra(e.target.value, false);
+  // debounce the heavy re-render until the user pauses dragging
+  clearTimeout(eraRenderTimer);
+  eraRenderTimer = setTimeout(()=>{
+    renderArtList(); renderReader();
+    if(state.view==="search") runSearch();
+  }, 120);
+});
 $("#eraChip").addEventListener("click", ()=>{ switchView("timeline"); openTl(state.era); });
 
 // ---------- navigation ----------
@@ -639,8 +729,11 @@ function switchView(v){
     if (href && href.startsWith("#")) {
       const viewName = href.slice(1);
       const mappedView = viewName === "time-machine" ? "browse" : (viewName === "amendments" ? "timeline" : viewName);
-      a.classList.toggle("text-[#00A36C]", mappedView === v);
-      a.classList.toggle("text-white", mappedView !== v);
+      const isActive = mappedView === v;
+      a.classList.toggle("text-[#00A36C]", isActive);
+      a.classList.toggle("text-white", !isActive);
+      if(isActive){ a.setAttribute("aria-current","page"); }
+      else { a.removeAttribute("aria-current"); }
     }
   });
   ["home","browse","lineage","timeline","statutes","compare","search","about"].forEach(x=> {
@@ -660,8 +753,13 @@ function renderArtList(){
   for(const key of artKeys){
     const a = D.articles[key];
     const label = key==="preamble" ? "Preamble" : "Art "+a.num;
-    if(q && !(String(a.num).toLowerCase().includes(q) || a.title.toLowerCase().includes(q) || label.toLowerCase().includes(q))) continue;
     const v = versionAt(key, state.era);
+    if(q && !(
+      String(a.num).toLowerCase().includes(q) ||
+      a.title.toLowerCase().includes(q) ||
+      label.toLowerCase().includes(q) ||
+      (v && v.text && v.text.toLowerCase().includes(q))
+    )) continue;
     const div = document.createElement("div");
     div.className = "art-item" + (key===state.article?" sel":"") + (v?"":" ghost");
     div.innerHTML = `<span class="art-num">${key==="preamble"?"§":a.num}</span><span class="art-title">${esc(a.title)}</span>`;
@@ -806,7 +904,7 @@ const STAT = window.STATUTES || [];
 function curStatute(){ return STAT.find(s=>s.id===state.statute) || STAT[0]; }
 function renderStatTabs(){
   $("#statTabs").innerHTML = STAT.map(s=>
-    `<button class="stat-tab ${s.id===state.statute?"active":""}" data-s="${s.id}">${esc(s.name)}</button>`).join("");
+    `<button class="stat-tab ${s.id===state.statute?"active":""}" role="tab" aria-selected="${s.id===state.statute?"true":"false"}" data-s="${s.id}">${esc(s.name)}</button>`).join("");
   document.querySelectorAll(".stat-tab").forEach(t=>t.onclick=()=>{
     state.statute=t.dataset.s; state.section=null;
     renderStatTabs(); renderSecList(); renderSecReader();
@@ -818,7 +916,7 @@ function renderSecList(){
   if(state.section===null && st.sections.length) state.section = st.sections[0].num;
   const frag = document.createDocumentFragment();
   for(const s of st.sections){
-    if(q && !(s.num.toLowerCase().includes(q) || s.title.toLowerCase().includes(q))) continue;
+    if(q && !(s.num.toLowerCase().includes(q) || s.title.toLowerCase().includes(q) || s.text.toLowerCase().includes(q))) continue;
     const div = document.createElement("div");
     div.className = "art-item" + (s.num===state.section?" sel":"");
     div.innerHTML = `<span class="art-num">${esc(s.num)}</span><span class="art-title">${esc(s.title)}</span>`;
@@ -848,7 +946,7 @@ function openSection(statuteId, num){
 }
 
 // ---------- compare ----------
-const selArt=$("#cmpArt"), selA=$("#cmpA"), selB=$("#cmpB");
+const selArt=$("#cmpArt"), selA=$("#cmpA"), selB=$("#cmpB"), selLayout=$("#cmpLayout");
 function initCompare(){
   selArt.innerHTML = artKeys.map(k=>{
     const a=D.articles[k];
@@ -856,7 +954,10 @@ function initCompare(){
     return `<option value="${k}">${esc(lab.length>60?lab.slice(0,57)+"…":lab)} (${a.versions.length} ver)</option>`;
   }).join("");
   selArt.value="article-001";
-  selArt.onchange=fillVersions; selA.onchange=renderCompare; selB.onchange=renderCompare;
+  selArt.onchange=fillVersions;
+  selA.onchange=renderCompare;
+  selB.onchange=renderCompare;
+  if(selLayout) selLayout.onchange=renderCompare;
   fillVersions();
 }
 function fillVersions(){
@@ -871,8 +972,71 @@ function renderCompare(){
   const vs=D.articles[selArt.value].versions;
   const va=vs.find(v=>v.commit==+selA.value), vb=vs.find(v=>v.commit==+selB.value);
   if(!va||!vb) return;
-  if(va.commit===vb.commit){ $("#diffBody").innerHTML="<p class='omit'>Same version selected on both sides — pick two different versions to see changes.</p>"; return; }
-  $("#diffBody").innerHTML = renderDiff(va.text, vb.text);
+
+  const layout = selLayout ? selLayout.value : "inline";
+  const bodyInline = $("#diffBody");
+  const bodySplit = $("#diffSplitBody");
+  const leftPane = $("#diffLeftBody");
+  const rightPane = $("#diffRightBody");
+  const statsEl = $("#diffStats");
+
+  if(va.commit===vb.commit){
+    const msg = "<p class='omit'>Same version selected on both sides — pick two different versions to see changes.</p>";
+    if(bodyInline) bodyInline.innerHTML = msg;
+    if(leftPane) leftPane.innerHTML = "";
+    if(rightPane) rightPane.innerHTML = "";
+    if(bodyInline) bodyInline.classList.remove("hidden");
+    if(bodySplit) bodySplit.classList.add("hidden");
+    if(statsEl) statsEl.textContent = "";
+    return;
+  }
+
+  // Calculate word insertions/deletions stats
+  const sizeGuard = 36000000;
+  const wordCount = tokenize(va.text).length * tokenize(vb.text).length;
+  if(wordCount > sizeGuard){
+    const msg = "<p class='omit'>Text too large for word diff — showing new version.</p>";
+    if(bodyInline) bodyInline.innerHTML = msg + esc(vb.text);
+    if(leftPane) leftPane.innerHTML = esc(va.text);
+    if(rightPane) rightPane.innerHTML = msg + esc(vb.text);
+    if(statsEl) statsEl.textContent = "Text too large for stats";
+  } else {
+    const words = diffWords(va.text, vb.text);
+    const wordsOnly = t => t.split(/\s+/).filter(x => x.length).length;
+    const dels = words.filter(([op]) => op === "-").reduce((sum, [_, t]) => sum + wordsOnly(t), 0);
+    const insCount = words.filter(([op]) => op === "+").reduce((sum, [_, t]) => sum + wordsOnly(t), 0);
+    
+    if(statsEl) {
+      statsEl.innerHTML = `<span class="text-rose-500 font-semibold">-${dels} words</span> · <span class="text-emerald-500 font-semibold">+${insCount} words</span>`;
+    }
+
+    if(layout === "split"){
+      if(bodyInline) bodyInline.classList.add("hidden");
+      if(bodySplit) bodySplit.classList.remove("hidden");
+      
+      const leftHTML = words.map(([op, t]) => {
+        const e = esc(t);
+        return op === "=" ? e : op === "-" ? `<del>${e}</del>` : "";
+      }).join("");
+      
+      const rightHTML = words.map(([op, t]) => {
+        const e = esc(t);
+        return op === "=" ? e : op === "+" ? `<ins>${e}</ins>` : "";
+      }).join("");
+      
+      if(leftPane) leftPane.innerHTML = leftHTML;
+      if(rightPane) rightPane.innerHTML = rightHTML;
+    } else {
+      if(bodySplit) bodySplit.classList.add("hidden");
+      if(bodyInline) bodyInline.classList.remove("hidden");
+      
+      const inlineHTML = words.map(([op, t]) => {
+        const e = esc(t);
+        return op === "=" ? e : op === "-" ? `<del>${e}</del>` : `<ins>${e}</ins>`;
+      }).join("");
+      if(bodyInline) bodyInline.innerHTML = inlineHTML;
+    }
+  }
 }
 function openCompare(key, ca, cb){
   switchView("compare");
@@ -974,13 +1138,169 @@ function renderStats(){
     <div class="stat"><b>${nsec}</b><span>Statute sections</span></div>`;
 }
 
+// ---------- era markers ----------
+function renderEraMarkers(){
+  const markersEl = $("#eraMarkers");
+  if(!markersEl) return;
+  const totalCommits = D.commits.length;
+  const points = [
+    { idx: 0, label: "1973 Original" },
+    { idx: 1, label: "1st" },
+    { idx: 8, label: "8th" },
+    { idx: 15, label: "18th" },
+    { idx: 21, label: "24th" },
+    { idx: totalCommits - 1, label: "Present" }
+  ];
+  markersEl.innerHTML = points.map(pt => {
+    const pct = (pt.idx / (totalCommits - 1)) * 100;
+    let style = `position: absolute; cursor: pointer; font-size: 9px;`;
+    if (pt.idx === 0) {
+      style += ` left: 0;`;
+    } else if (pt.idx === totalCommits - 1) {
+      style += ` right: 0;`;
+    } else {
+      style += ` left: ${pct}%; transform: translateX(-50%);`;
+    }
+    return `<span class="hover:text-zinc-200 transition-colors" style="${style}" onclick="setEra(${pt.idx})">${pt.label}</span>`;
+  }).join("");
+}
+
+// ---------- onboarding modal ----------
+function initOnboarding(){
+  const modal = $("#onboardingModal");
+  const closeBtn = $("#closeOnboardingBtn");
+  const startBtn = $("#startEngineBtn");
+  const openHelpBtn = $("#openHelpBtn");
+  const openHelpBtnMobile = $("#openHelpBtnMobile");
+  const dontShow = $("#dontShowAgain");
+  
+  if(!modal) return;
+  
+  function show(){
+    modal.classList.remove("pointer-events-none");
+    modal.classList.remove("opacity-0");
+    modal.querySelector(".transform").classList.remove("scale-95");
+    modal.querySelector(".transform").classList.add("scale-100");
+  }
+  
+  function hide(){
+    modal.classList.add("pointer-events-none");
+    modal.classList.add("opacity-0");
+    modal.querySelector(".transform").classList.remove("scale-100");
+    modal.querySelector(".transform").classList.add("scale-95");
+    if(dontShow && dontShow.checked){
+      localStorage.setItem("onboarding_shown", "true");
+    }
+  }
+  
+  if(closeBtn) closeBtn.onclick = hide;
+  if(startBtn) startBtn.onclick = hide;
+  if(openHelpBtn) openHelpBtn.onclick = show;
+  if(openHelpBtnMobile) openHelpBtnMobile.onclick = () => {
+    document.getElementById('mobile-menu').classList.add('hidden');
+    show();
+  };
+  
+  // Close on backdrop click
+  modal.onclick = (e) => {
+    if(e.target === modal) hide();
+  };
+  
+  // Show on first load if not dismissed
+  if(!localStorage.getItem("onboarding_shown")){
+    setTimeout(show, 800);
+  }
+  
+  window.showOnboarding = show;
+}
+
 // ---------- boot ----------
+window.setEra = setEra;
 setEra(state.era,false);
 renderArtList(); renderReader(); renderTimeline(); renderLineage();
 renderStatTabs(); renderSecList(); renderSecReader();
 initCompare(); renderStats();
 setEra(state.era);
+renderEraMarkers();
+initOnboarding();
 </script>
 <script src="js/router.js"></script>
+
+<!-- Onboarding Modal -->
+<div id="onboardingModal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+  <div class="bg-zinc-950 border border-zinc-800 rounded-3xl p-8 max-w-2xl w-full mx-4 shadow-2xl transform scale-95 transition-transform duration-300 relative overflow-hidden">
+    <!-- Glow effect -->
+    <div class="absolute -top-40 -left-40 w-80 h-80 bg-[#1d4d36]/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-40 -right-40 w-80 h-80 bg-[#c9a648]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <!-- Close button -->
+    <button id="closeOnboardingBtn" class="absolute top-6 right-6 text-zinc-500 hover:text-white transition-colors">
+      <i class="fa-solid fa-xmark text-xl"></i>
+    </button>
+
+    <!-- Content -->
+    <div class="relative z-10 text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 text-[10px] tracking-[2px] mb-4 border border-white/10 text-zinc-400">
+        CONSTITUTIONAL CYBERNETICS
+      </div>
+      
+      <h2 class="text-3xl font-semibold tracking-tight text-white mb-3">
+        Welcome to the Intelligence Engine
+      </h2>
+      
+      <p class="text-sm text-zinc-400 max-w-md mx-auto mb-8">
+        This system transforms the Constitution of Pakistan into a version-controlled, auditable, and time-travelable code base.
+      </p>
+
+      <!-- Pillars grid -->
+      <div class="grid md:grid-cols-3 gap-6 text-left mb-8">
+        <!-- Pillar 1 -->
+        <div class="p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-white/10 transition-colors">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mb-3">
+            <i class="fa-solid fa-clock-rotate-left text-amber-500 text-lg"></i>
+          </div>
+          <h4 class="text-sm font-semibold text-white mb-1">Time Machine</h4>
+          <p class="text-xs text-zinc-400 leading-relaxed">
+            Use the slider to travel through time and read the Constitution as it stood at any amendment.
+          </p>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div class="p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-white/10 transition-colors">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-3">
+            <i class="fa-solid fa-code-compare text-emerald-500 text-lg"></i>
+          </div>
+          <h4 class="text-sm font-semibold text-white mb-1">Compare Diff</h4>
+          <p class="text-xs text-zinc-400 leading-relaxed">
+            Compare any two historical versions of an article side-by-side with word-level changes.
+          </p>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div class="p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-white/10 transition-colors">
+          <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-3">
+            <i class="fa-solid fa-book-bookmark text-blue-500 text-lg"></i>
+          </div>
+          <h4 class="text-sm font-semibold text-white mb-1">Statute Library</h4>
+          <p class="text-xs text-zinc-400 leading-relaxed">
+            Access codified statutes like PPC and CrPC linked directly to constitutional provisions.
+          </p>
+        </div>
+      </div>
+
+      <!-- Call to action -->
+      <div class="flex items-center justify-between border-t border-zinc-800 pt-6">
+        <label class="flex items-center gap-2 text-xs text-zinc-500 cursor-pointer">
+          <input type="checkbox" id="dontShowAgain" class="rounded border-zinc-800 bg-zinc-900 text-emerald-600 focus:ring-0">
+          <span>Don't show this again</span>
+        </label>
+        
+        <button id="startEngineBtn" class="px-6 py-3 rounded-xl bg-white text-zinc-950 font-semibold hover:bg-zinc-200 transition-colors text-sm">
+          Begin Auditing
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
